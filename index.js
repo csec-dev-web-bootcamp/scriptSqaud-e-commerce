@@ -6,9 +6,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const mockuers = [
-    {id: 1, username: "nati", displayName: "Nati"},
-    {id: 2, username: "aman", displayName: "Aman"},
-    {id: 3, username: "abel", displayName: "Abel"},
+    {id: 1, username: "", displayName: ""},
+    {id: 2, username: "", displayName: ""},
+    {id: 3, username: "", displayName: ""},
 ]
 
 app.get("/", (request, response) => {
