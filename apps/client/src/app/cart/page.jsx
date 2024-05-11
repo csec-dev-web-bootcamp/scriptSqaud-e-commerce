@@ -5,7 +5,8 @@ import { Button } from "@app/client/components/ui/button";
 
 function Cart() {
   const cartData = useCart((state) => state.cartProducts);
-    
+  const addAmount = useCart((state) => state.addProductAmount);
+ const minusAmount = useCart((state) => state.minusProductAmount)
   return (
     <div className="container ">
       <h1 className="text-5xl m-5 p-4 border-b border-b-slate-500">Cart</h1>
@@ -13,7 +14,7 @@ function Cart() {
         <div
           
           key={product.id}
-          class="flex  flex-col items-center m-10 bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl  sm:flex-row sm:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex  flex-col items-center m-10 bg-white border-b border-gray-200   md:flex-row md:max-w-xl  sm:flex-row sm:max-w-xl  dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
         >
           <div className="flex mr-20 w-96">
             <img
@@ -34,9 +35,9 @@ function Cart() {
             {product.price}
           </p>
           <div className=" ml-2 mr-10 flex flex-row justify-between items-center">
-            <p className="mr-3">-</p>
-            <Input className="w-10" type="text" placeholder="1" />
-            <p className="ml-3">+</p>
+            <button className="mr-3" onClick={()=>minusAmount(product.id)}>-</button>
+            <p>{product.amount}</p>
+            <button className="ml-3" onClick={() => addAmount(product.id)}>+</button>
           </div>
         </div>
       ))}

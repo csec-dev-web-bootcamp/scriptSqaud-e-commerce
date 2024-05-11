@@ -6,11 +6,15 @@ export const useCart = create((set) => ({
   addToCart: (product) =>
     set((state) => {
       const currentState = JSON.parse(JSON.stringify(state));
-      currentState.cartProducts.push({
+      const newProduct = {
         ...product,
         totalPrice: product.price,
         amount: 1,
-      });
+      }
+      const inCartProduct = currentState.cartProducts.find((data) => data.id == newProduct.id)
+      
+      if (!inCartProduct)
+        currentState.cartProducts.push(newProduct);
 
       return currentState;
     }),

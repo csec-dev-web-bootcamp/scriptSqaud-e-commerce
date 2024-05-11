@@ -29,7 +29,7 @@ export default function SideCart() {
   function delCart(id) {
     removeFromCart(id);
   }
-  console.log(cartData);
+  
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -61,14 +61,16 @@ export default function SideCart() {
         ))}
 
         <SheetFooter>
-            <div className="flex flex-col items-center w-full m-5">
-          <SheetClose asChild>
-              <Button className=" flex m-3 border p-3 text-sm w-64 justify-center  text-slate-100 font-bold rounded-md bg-gray-500">
-                <Link href="/cart">View Cart</Link>
-              </Button>
-          </SheetClose>
-              <Button className="flex w-64 ">Checkout</Button>
-            </div>
+          <div className="flex flex-col items-center w-full m-5">
+            <SheetClose asChild>
+              <Link href="/cart">
+                <Button className=" flex m-3 border p-3 text-sm w-64 justify-center  text-slate-100 font-bold rounded-md bg-gray-500">
+                  View Cart
+                </Button>
+              </Link>
+            </SheetClose>
+            <Button className="flex w-64 ">Checkout</Button>
+          </div>
         </SheetFooter>
       </SheetContent>
     </Sheet>
