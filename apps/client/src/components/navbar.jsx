@@ -34,8 +34,10 @@ export default function NavBar() {
           <SideCart />
         </MenubarTrigger>
         <MenubarMenu>
-          <MenubarTrigger>Check Out</MenubarTrigger>
-          
+          <MenubarTrigger>
+            {" "}
+            <Link href="/checkout"> Checkout</Link>
+          </MenubarTrigger>
         </MenubarMenu>
       </MenubarMenu>
     </Menubar>
