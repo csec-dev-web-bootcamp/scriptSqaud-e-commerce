@@ -5,7 +5,6 @@ import Image from "next/image";
 function CheckOut() {
   const cartData = useCart((state) => state.cartProducts);
   const total = cartData.map((data) => data.price).reduce((total, val)=> (total + val), 0)
-  console.log(total)
   return (
     <div classNameName=" ">
       <div className="grid gap-5 sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-22">
