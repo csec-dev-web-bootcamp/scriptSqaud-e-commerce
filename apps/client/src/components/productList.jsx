@@ -2,6 +2,8 @@
 import { useCart } from "../data/state";
 import productData from "../data/products";
 import { Button } from "./ui/button";
+import Link from "next/link";
+
 
 
 
@@ -25,11 +27,12 @@ const ProductsPage = ( { products }) => {
                         className="  flex flex-col m-2 justify-center border border-slate-200 rounded-md p-2"
                     >
                         {/* Import and use the image for each product */}
-                        <img src={product.image} alt="" className="w-64 h-20 transition duration-300 transform hover:scale-110" />
-                        <p>${product.price}</p>
-                        <h2>{product.name}</h2>
-                        <p className=" font-thin text-sm">{product.description}</p>
-                        
+                         <Link href={`/detail/${product.id}`}>
+                          <img src={product.image} alt="" className="w-64 h-20 transition duration-300 transform hover:scale-110" />
+                          <p>${product.price}</p>
+                          <h2>{product.name}</h2>
+                          <p className=" font-thin text-sm">{product.description}</p>
+                         </Link >
                         <Button onClick={()=> setCart(product.id)} className="p-2">Add To Cart</Button>
 
                         {/* Add more product information */}
@@ -38,7 +41,7 @@ const ProductsPage = ( { products }) => {
             </ul>
         </div>
     );
-};
+
 
 export default ProductsPage;
 

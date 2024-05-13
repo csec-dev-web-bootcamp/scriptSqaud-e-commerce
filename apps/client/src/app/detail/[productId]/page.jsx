@@ -29,10 +29,7 @@ function ProductDetail(props) {
               <p className="text-gray-800 text-xl font-bold">
                 ${product[0]?.price}
               </p>
-              <p className="text-gray-400 text-xl">
-                <strike>$16</strike>{" "}
-                <span className="text-sm ml-1">Tax included</span>
-              </p>
+              
             </div>
 
             <div className="flex space-x-2 mt-4">

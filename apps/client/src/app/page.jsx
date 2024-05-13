@@ -1,5 +1,5 @@
 
-// import Cart from "../components/
+
 
 import Cart from "../components/Cart";
 import ProductsPage from "../components/productList";
@@ -14,12 +14,10 @@ const DATA = [
 ]
 
 
-
-
 // import NavBar from "../components/navbar";
 
-
 export default function Page() {
+
     
   
     return (
@@ -30,3 +28,4 @@ export default function Page() {
         </main>
     );
 };
+
