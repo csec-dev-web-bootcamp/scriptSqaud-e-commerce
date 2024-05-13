@@ -1,9 +1,14 @@
-"use client";
+"use client"
 import { useCart } from "../data/state";
-import { productData } from "../data/product";
+import productData from "../data/products";
 import { Button } from "./ui/button";
 
-const ProductsPage = ({ products }) => {
+
+
+const ProductsPage = ( { products }) => {
+
+    
+ 
     const addToCart = useCart((state) => state.addToCart);
     function setCart(id) {
       const product = products.filter((songs) => songs.id == id)
@@ -12,19 +17,20 @@ const ProductsPage = ({ products }) => {
     }
     return (
         <div>
-            <h1>Products</h1>
-            <ul className=" grid grid-cols-3 ">
-                {products?.map((product) => (
+            <h1>Latest Products</h1>
+            <ul className=" grid grid-cols-4 ">
+                 {productData.map((product) => (
                     <li
                         key={product.id}
                         className="  flex flex-col m-2 justify-center border border-slate-200 rounded-md p-2"
                     >
                         {/* Import and use the image for each product */}
-                        <img src={product.image} alt="" />
+                        <img src={product.image} alt="" className="w-64 h-20 transition duration-300 transform hover:scale-110" />
+                        <p>${product.price}</p>
                         <h2>{product.name}</h2>
-                        <p>{product.description}</p>
-                        <p>Price: {product.price}</p>
-                        <Button onClick={()=> setCart(product.id)}>Add To Cart</Button>
+                        <p className=" font-thin text-sm">{product.description}</p>
+                        
+                        <Button onClick={()=> setCart(product.id)} className="p-2">Add To Cart</Button>
 
                         {/* Add more product information */}
                     </li>
@@ -35,3 +41,4 @@ const ProductsPage = ({ products }) => {
 };
 
 export default ProductsPage;
+
