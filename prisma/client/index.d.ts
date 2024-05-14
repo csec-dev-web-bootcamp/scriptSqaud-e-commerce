@@ -1955,9 +1955,9 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     role?: boolean
-    profile?: boolean | User$profileArgs<ExtArgs>
     orders?: boolean | User$ordersArgs<ExtArgs>
     payment?: boolean | User$paymentArgs<ExtArgs>
+    profile?: boolean | User$profileArgs<ExtArgs>
     reviews?: boolean | User$reviewsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
@@ -1972,9 +1972,9 @@ export namespace Prisma {
 
 
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    profile?: boolean | User$profileArgs<ExtArgs>
     orders?: boolean | User$ordersArgs<ExtArgs>
     payment?: boolean | User$paymentArgs<ExtArgs>
+    profile?: boolean | User$profileArgs<ExtArgs>
     reviews?: boolean | User$reviewsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -1983,9 +1983,9 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      profile: Prisma.$ProfilePayload<ExtArgs> | null
       orders: Prisma.$OrderPayload<ExtArgs>[]
       payment: Prisma.$Payment_detailPayload<ExtArgs>[]
+      profile: Prisma.$ProfilePayload<ExtArgs> | null
       reviews: Prisma.$ReviewsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -2359,11 +2359,11 @@ export namespace Prisma {
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    profile<T extends User$profileArgs<ExtArgs> = {}>(args?: Subset<T, User$profileArgs<ExtArgs>>): Prisma__ProfileClient<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
-
     orders<T extends User$ordersArgs<ExtArgs> = {}>(args?: Subset<T, User$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     payment<T extends User$paymentArgs<ExtArgs> = {}>(args?: Subset<T, User$paymentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Payment_detailPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    profile<T extends User$profileArgs<ExtArgs> = {}>(args?: Subset<T, User$profileArgs<ExtArgs>>): Prisma__ProfileClient<$Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
     reviews<T extends User$reviewsArgs<ExtArgs> = {}>(args?: Subset<T, User$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewsPayload<ExtArgs>, T, 'findMany'> | Null>;
 
@@ -2699,21 +2699,6 @@ export namespace Prisma {
   }
 
   /**
-   * User.profile
-   */
-  export type User$profileArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Profile
-     */
-    select?: ProfileSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProfileInclude<ExtArgs> | null
-    where?: ProfileWhereInput
-  }
-
-  /**
    * User.orders
    */
   export type User$ordersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2751,6 +2736,21 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Payment_detailScalarFieldEnum | Payment_detailScalarFieldEnum[]
+  }
+
+  /**
+   * User.profile
+   */
+  export type User$profileArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Profile
+     */
+    select?: ProfileSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProfileInclude<ExtArgs> | null
+    where?: ProfileWhereInput
   }
 
   /**
@@ -4802,8 +4802,8 @@ export namespace Prisma {
     description?: boolean
     cloudId?: boolean
     categoryId?: boolean
-    category?: boolean | CategoryDefaultArgs<ExtArgs>
     orderDetail?: boolean | Product$orderDetailArgs<ExtArgs>
+    category?: boolean | CategoryDefaultArgs<ExtArgs>
     reviews?: boolean | Product$reviewsArgs<ExtArgs>
     _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["product"]>
@@ -4821,8 +4821,8 @@ export namespace Prisma {
 
 
   export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    category?: boolean | CategoryDefaultArgs<ExtArgs>
     orderDetail?: boolean | Product$orderDetailArgs<ExtArgs>
+    category?: boolean | CategoryDefaultArgs<ExtArgs>
     reviews?: boolean | Product$reviewsArgs<ExtArgs>
     _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -4831,8 +4831,8 @@ export namespace Prisma {
   export type $ProductPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Product"
     objects: {
-      category: Prisma.$CategoryPayload<ExtArgs>
       orderDetail: Prisma.$Order_detailPayload<ExtArgs>[]
+      category: Prisma.$CategoryPayload<ExtArgs>
       reviews: Prisma.$ReviewsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -5209,9 +5209,9 @@ export namespace Prisma {
   export interface Prisma__ProductClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    category<T extends CategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CategoryDefaultArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
-
     orderDetail<T extends Product$orderDetailArgs<ExtArgs> = {}>(args?: Subset<T, Product$orderDetailArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Order_detailPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    category<T extends CategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CategoryDefaultArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     reviews<T extends Product$reviewsArgs<ExtArgs> = {}>(args?: Subset<T, Product$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewsPayload<ExtArgs>, T, 'findMany'> | Null>;
 
@@ -5802,8 +5802,8 @@ export namespace Prisma {
     rating?: boolean
     userId?: boolean
     productId?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     product?: boolean | ProductDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["reviews"]>
 
   export type ReviewsSelectScalar = {
@@ -5816,16 +5816,16 @@ export namespace Prisma {
 
 
   export type ReviewsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     product?: boolean | ProductDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
 
   export type $ReviewsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Reviews"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
       product: Prisma.$ProductPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -6198,9 +6198,9 @@ export namespace Prisma {
   export interface Prisma__ReviewsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
-
     product<T extends ProductDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductDefaultArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -7760,8 +7760,8 @@ export namespace Prisma {
     time?: boolean
     userId?: boolean
     orderId?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     order?: boolean | OrderDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["payment_detail"]>
 
   export type Payment_detailSelectScalar = {
@@ -7775,16 +7775,16 @@ export namespace Prisma {
 
 
   export type Payment_detailInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     order?: boolean | OrderDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
 
   export type $Payment_detailPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Payment_detail"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
       order: Prisma.$OrderPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -8158,9 +8158,9 @@ export namespace Prisma {
   export interface Prisma__Payment_detailClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
-
     order<T extends OrderDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OrderDefaultArgs<ExtArgs>>): Prisma__OrderClient<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -11482,9 +11482,9 @@ export namespace Prisma {
     email?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
-    profile?: XOR<ProfileNullableRelationFilter, ProfileWhereInput> | null
     orders?: OrderListRelationFilter
     payment?: Payment_detailListRelationFilter
+    profile?: XOR<ProfileNullableRelationFilter, ProfileWhereInput> | null
     reviews?: ReviewsListRelationFilter
   }
 
@@ -11494,9 +11494,9 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
-    profile?: ProfileOrderByWithRelationInput
     orders?: OrderOrderByRelationAggregateInput
     payment?: Payment_detailOrderByRelationAggregateInput
+    profile?: ProfileOrderByWithRelationInput
     reviews?: ReviewsOrderByRelationAggregateInput
   }
 
@@ -11509,9 +11509,9 @@ export namespace Prisma {
     name?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
-    profile?: XOR<ProfileNullableRelationFilter, ProfileWhereInput> | null
     orders?: OrderListRelationFilter
     payment?: Payment_detailListRelationFilter
+    profile?: XOR<ProfileNullableRelationFilter, ProfileWhereInput> | null
     reviews?: ReviewsListRelationFilter
   }, "id" | "id" | "email">
 
@@ -11639,8 +11639,8 @@ export namespace Prisma {
     description?: StringFilter<"Product"> | string
     cloudId?: StringNullableFilter<"Product"> | string | null
     categoryId?: StringFilter<"Product"> | string
-    category?: XOR<CategoryRelationFilter, CategoryWhereInput>
     orderDetail?: Order_detailListRelationFilter
+    category?: XOR<CategoryRelationFilter, CategoryWhereInput>
     reviews?: ReviewsListRelationFilter
   }
 
@@ -11653,8 +11653,8 @@ export namespace Prisma {
     description?: SortOrder
     cloudId?: SortOrderInput | SortOrder
     categoryId?: SortOrder
-    category?: CategoryOrderByWithRelationInput
     orderDetail?: Order_detailOrderByRelationAggregateInput
+    category?: CategoryOrderByWithRelationInput
     reviews?: ReviewsOrderByRelationAggregateInput
   }
 
@@ -11670,8 +11670,8 @@ export namespace Prisma {
     description?: StringFilter<"Product"> | string
     cloudId?: StringNullableFilter<"Product"> | string | null
     categoryId?: StringFilter<"Product"> | string
-    category?: XOR<CategoryRelationFilter, CategoryWhereInput>
     orderDetail?: Order_detailListRelationFilter
+    category?: XOR<CategoryRelationFilter, CategoryWhereInput>
     reviews?: ReviewsListRelationFilter
   }, "id" | "id">
 
@@ -11714,8 +11714,8 @@ export namespace Prisma {
     rating?: IntFilter<"Reviews"> | number
     userId?: StringFilter<"Reviews"> | string
     productId?: StringFilter<"Reviews"> | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
     product?: XOR<ProductRelationFilter, ProductWhereInput>
+    user?: XOR<UserRelationFilter, UserWhereInput>
   }
 
   export type ReviewsOrderByWithRelationInput = {
@@ -11724,8 +11724,8 @@ export namespace Prisma {
     rating?: SortOrder
     userId?: SortOrder
     productId?: SortOrder
-    user?: UserOrderByWithRelationInput
     product?: ProductOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type ReviewsWhereUniqueInput = Prisma.AtLeast<{
@@ -11738,8 +11738,8 @@ export namespace Prisma {
     rating?: IntFilter<"Reviews"> | number
     userId?: StringFilter<"Reviews"> | string
     productId?: StringFilter<"Reviews"> | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
     product?: XOR<ProductRelationFilter, ProductWhereInput>
+    user?: XOR<UserRelationFilter, UserWhereInput>
   }, "id" | "id" | "userId_productId">
 
   export type ReviewsOrderByWithAggregationInput = {
@@ -11842,8 +11842,8 @@ export namespace Prisma {
     time?: DateTimeFilter<"Payment_detail"> | Date | string
     userId?: StringFilter<"Payment_detail"> | string
     orderId?: StringFilter<"Payment_detail"> | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
     order?: XOR<OrderRelationFilter, OrderWhereInput>
+    user?: XOR<UserRelationFilter, UserWhereInput>
   }
 
   export type Payment_detailOrderByWithRelationInput = {
@@ -11853,8 +11853,8 @@ export namespace Prisma {
     time?: SortOrder
     userId?: SortOrder
     orderId?: SortOrder
-    user?: UserOrderByWithRelationInput
     order?: OrderOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type Payment_detailWhereUniqueInput = Prisma.AtLeast<{
@@ -11867,8 +11867,8 @@ export namespace Prisma {
     currency?: StringFilter<"Payment_detail"> | string
     time?: DateTimeFilter<"Payment_detail"> | Date | string
     userId?: StringFilter<"Payment_detail"> | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
     order?: XOR<OrderRelationFilter, OrderWhereInput>
+    user?: XOR<UserRelationFilter, UserWhereInput>
   }, "id" | "id" | "orderId">
 
   export type Payment_detailOrderByWithAggregationInput = {
@@ -12062,9 +12062,9 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.UserRole
-    profile?: ProfileCreateNestedOneWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
     payment?: Payment_detailCreateNestedManyWithoutUserInput
+    profile?: ProfileCreateNestedOneWithoutUserInput
     reviews?: ReviewsCreateNestedManyWithoutUserInput
   }
 
@@ -12074,9 +12074,9 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.UserRole
-    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
     payment?: Payment_detailUncheckedCreateNestedManyWithoutUserInput
+    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     reviews?: ReviewsUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -12086,9 +12086,9 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    profile?: ProfileUpdateOneWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
     payment?: Payment_detailUpdateManyWithoutUserNestedInput
+    profile?: ProfileUpdateOneWithoutUserNestedInput
     reviews?: ReviewsUpdateManyWithoutUserNestedInput
   }
 
@@ -12098,9 +12098,9 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
     payment?: Payment_detailUncheckedUpdateManyWithoutUserNestedInput
+    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     reviews?: ReviewsUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -12223,8 +12223,8 @@ export namespace Prisma {
     image?: string | null
     description: string
     cloudId?: string | null
-    category: CategoryCreateNestedOneWithoutProductInput
     orderDetail?: Order_detailCreateNestedManyWithoutProductInput
+    category: CategoryCreateNestedOneWithoutProductInput
     reviews?: ReviewsCreateNestedManyWithoutProductInput
   }
 
@@ -12249,8 +12249,8 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     cloudId?: NullableStringFieldUpdateOperationsInput | string | null
-    category?: CategoryUpdateOneRequiredWithoutProductNestedInput
     orderDetail?: Order_detailUpdateManyWithoutProductNestedInput
+    category?: CategoryUpdateOneRequiredWithoutProductNestedInput
     reviews?: ReviewsUpdateManyWithoutProductNestedInput
   }
 
@@ -12303,8 +12303,8 @@ export namespace Prisma {
     id?: string
     comment?: string | null
     rating: number
-    user: UserCreateNestedOneWithoutReviewsInput
     product: ProductCreateNestedOneWithoutReviewsInput
+    user: UserCreateNestedOneWithoutReviewsInput
   }
 
   export type ReviewsUncheckedCreateInput = {
@@ -12319,8 +12319,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     comment?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: IntFieldUpdateOperationsInput | number
-    user?: UserUpdateOneRequiredWithoutReviewsNestedInput
     product?: ProductUpdateOneRequiredWithoutReviewsNestedInput
+    user?: UserUpdateOneRequiredWithoutReviewsNestedInput
   }
 
   export type ReviewsUncheckedUpdateInput = {
@@ -12425,8 +12425,8 @@ export namespace Prisma {
     amount: number
     currency: string
     time?: Date | string
-    user: UserCreateNestedOneWithoutPaymentInput
     order: OrderCreateNestedOneWithoutPaymentDetailInput
+    user: UserCreateNestedOneWithoutPaymentInput
   }
 
   export type Payment_detailUncheckedCreateInput = {
@@ -12443,8 +12443,8 @@ export namespace Prisma {
     amount?: IntFieldUpdateOperationsInput | number
     currency?: StringFieldUpdateOperationsInput | string
     time?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutPaymentNestedInput
     order?: OrderUpdateOneRequiredWithoutPaymentDetailNestedInput
+    user?: UserUpdateOneRequiredWithoutPaymentNestedInput
   }
 
   export type Payment_detailUncheckedUpdateInput = {
@@ -12651,11 +12651,6 @@ export namespace Prisma {
     not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
   }
 
-  export type ProfileNullableRelationFilter = {
-    is?: ProfileWhereInput | null
-    isNot?: ProfileWhereInput | null
-  }
-
   export type OrderListRelationFilter = {
     every?: OrderWhereInput
     some?: OrderWhereInput
@@ -12666,6 +12661,11 @@ export namespace Prisma {
     every?: Payment_detailWhereInput
     some?: Payment_detailWhereInput
     none?: Payment_detailWhereInput
+  }
+
+  export type ProfileNullableRelationFilter = {
+    is?: ProfileWhereInput | null
+    isNot?: ProfileWhereInput | null
   }
 
   export type ReviewsListRelationFilter = {
@@ -12815,15 +12815,15 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type CategoryRelationFilter = {
-    is?: CategoryWhereInput
-    isNot?: CategoryWhereInput
-  }
-
   export type Order_detailListRelationFilter = {
     every?: Order_detailWhereInput
     some?: Order_detailWhereInput
     none?: Order_detailWhereInput
+  }
+
+  export type CategoryRelationFilter = {
+    is?: CategoryWhereInput
+    isNot?: CategoryWhereInput
   }
 
   export type SortOrderInput = {
@@ -13164,12 +13164,6 @@ export namespace Prisma {
     id?: SortOrder
   }
 
-  export type ProfileCreateNestedOneWithoutUserInput = {
-    create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
-    connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
-    connect?: ProfileWhereUniqueInput
-  }
-
   export type OrderCreateNestedManyWithoutUserInput = {
     create?: XOR<OrderCreateWithoutUserInput, OrderUncheckedCreateWithoutUserInput> | OrderCreateWithoutUserInput[] | OrderUncheckedCreateWithoutUserInput[]
     connectOrCreate?: OrderCreateOrConnectWithoutUserInput | OrderCreateOrConnectWithoutUserInput[]
@@ -13184,17 +13178,17 @@ export namespace Prisma {
     connect?: Payment_detailWhereUniqueInput | Payment_detailWhereUniqueInput[]
   }
 
+  export type ProfileCreateNestedOneWithoutUserInput = {
+    create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
+    connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
+    connect?: ProfileWhereUniqueInput
+  }
+
   export type ReviewsCreateNestedManyWithoutUserInput = {
     create?: XOR<ReviewsCreateWithoutUserInput, ReviewsUncheckedCreateWithoutUserInput> | ReviewsCreateWithoutUserInput[] | ReviewsUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ReviewsCreateOrConnectWithoutUserInput | ReviewsCreateOrConnectWithoutUserInput[]
     createMany?: ReviewsCreateManyUserInputEnvelope
     connect?: ReviewsWhereUniqueInput | ReviewsWhereUniqueInput[]
-  }
-
-  export type ProfileUncheckedCreateNestedOneWithoutUserInput = {
-    create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
-    connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
-    connect?: ProfileWhereUniqueInput
   }
 
   export type OrderUncheckedCreateNestedManyWithoutUserInput = {
@@ -13211,6 +13205,12 @@ export namespace Prisma {
     connect?: Payment_detailWhereUniqueInput | Payment_detailWhereUniqueInput[]
   }
 
+  export type ProfileUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
+    connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
+    connect?: ProfileWhereUniqueInput
+  }
+
   export type ReviewsUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<ReviewsCreateWithoutUserInput, ReviewsUncheckedCreateWithoutUserInput> | ReviewsCreateWithoutUserInput[] | ReviewsUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ReviewsCreateOrConnectWithoutUserInput | ReviewsCreateOrConnectWithoutUserInput[]
@@ -13224,16 +13224,6 @@ export namespace Prisma {
 
   export type EnumUserRoleFieldUpdateOperationsInput = {
     set?: $Enums.UserRole
-  }
-
-  export type ProfileUpdateOneWithoutUserNestedInput = {
-    create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
-    connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
-    upsert?: ProfileUpsertWithoutUserInput
-    disconnect?: ProfileWhereInput | boolean
-    delete?: ProfileWhereInput | boolean
-    connect?: ProfileWhereUniqueInput
-    update?: XOR<XOR<ProfileUpdateToOneWithWhereWithoutUserInput, ProfileUpdateWithoutUserInput>, ProfileUncheckedUpdateWithoutUserInput>
   }
 
   export type OrderUpdateManyWithoutUserNestedInput = {
@@ -13264,6 +13254,16 @@ export namespace Prisma {
     deleteMany?: Payment_detailScalarWhereInput | Payment_detailScalarWhereInput[]
   }
 
+  export type ProfileUpdateOneWithoutUserNestedInput = {
+    create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
+    connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
+    upsert?: ProfileUpsertWithoutUserInput
+    disconnect?: ProfileWhereInput | boolean
+    delete?: ProfileWhereInput | boolean
+    connect?: ProfileWhereUniqueInput
+    update?: XOR<XOR<ProfileUpdateToOneWithWhereWithoutUserInput, ProfileUpdateWithoutUserInput>, ProfileUncheckedUpdateWithoutUserInput>
+  }
+
   export type ReviewsUpdateManyWithoutUserNestedInput = {
     create?: XOR<ReviewsCreateWithoutUserInput, ReviewsUncheckedCreateWithoutUserInput> | ReviewsCreateWithoutUserInput[] | ReviewsUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ReviewsCreateOrConnectWithoutUserInput | ReviewsCreateOrConnectWithoutUserInput[]
@@ -13276,16 +13276,6 @@ export namespace Prisma {
     update?: ReviewsUpdateWithWhereUniqueWithoutUserInput | ReviewsUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ReviewsUpdateManyWithWhereWithoutUserInput | ReviewsUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ReviewsScalarWhereInput | ReviewsScalarWhereInput[]
-  }
-
-  export type ProfileUncheckedUpdateOneWithoutUserNestedInput = {
-    create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
-    connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
-    upsert?: ProfileUpsertWithoutUserInput
-    disconnect?: ProfileWhereInput | boolean
-    delete?: ProfileWhereInput | boolean
-    connect?: ProfileWhereUniqueInput
-    update?: XOR<XOR<ProfileUpdateToOneWithWhereWithoutUserInput, ProfileUpdateWithoutUserInput>, ProfileUncheckedUpdateWithoutUserInput>
   }
 
   export type OrderUncheckedUpdateManyWithoutUserNestedInput = {
@@ -13314,6 +13304,16 @@ export namespace Prisma {
     update?: Payment_detailUpdateWithWhereUniqueWithoutUserInput | Payment_detailUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: Payment_detailUpdateManyWithWhereWithoutUserInput | Payment_detailUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: Payment_detailScalarWhereInput | Payment_detailScalarWhereInput[]
+  }
+
+  export type ProfileUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
+    connectOrCreate?: ProfileCreateOrConnectWithoutUserInput
+    upsert?: ProfileUpsertWithoutUserInput
+    disconnect?: ProfileWhereInput | boolean
+    delete?: ProfileWhereInput | boolean
+    connect?: ProfileWhereUniqueInput
+    update?: XOR<XOR<ProfileUpdateToOneWithWhereWithoutUserInput, ProfileUpdateWithoutUserInput>, ProfileUncheckedUpdateWithoutUserInput>
   }
 
   export type ReviewsUncheckedUpdateManyWithoutUserNestedInput = {
@@ -13386,17 +13386,17 @@ export namespace Prisma {
     deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
   }
 
-  export type CategoryCreateNestedOneWithoutProductInput = {
-    create?: XOR<CategoryCreateWithoutProductInput, CategoryUncheckedCreateWithoutProductInput>
-    connectOrCreate?: CategoryCreateOrConnectWithoutProductInput
-    connect?: CategoryWhereUniqueInput
-  }
-
   export type Order_detailCreateNestedManyWithoutProductInput = {
     create?: XOR<Order_detailCreateWithoutProductInput, Order_detailUncheckedCreateWithoutProductInput> | Order_detailCreateWithoutProductInput[] | Order_detailUncheckedCreateWithoutProductInput[]
     connectOrCreate?: Order_detailCreateOrConnectWithoutProductInput | Order_detailCreateOrConnectWithoutProductInput[]
     createMany?: Order_detailCreateManyProductInputEnvelope
     connect?: Order_detailWhereUniqueInput | Order_detailWhereUniqueInput[]
+  }
+
+  export type CategoryCreateNestedOneWithoutProductInput = {
+    create?: XOR<CategoryCreateWithoutProductInput, CategoryUncheckedCreateWithoutProductInput>
+    connectOrCreate?: CategoryCreateOrConnectWithoutProductInput
+    connect?: CategoryWhereUniqueInput
   }
 
   export type ReviewsCreateNestedManyWithoutProductInput = {
@@ -13432,14 +13432,6 @@ export namespace Prisma {
     set?: string | null
   }
 
-  export type CategoryUpdateOneRequiredWithoutProductNestedInput = {
-    create?: XOR<CategoryCreateWithoutProductInput, CategoryUncheckedCreateWithoutProductInput>
-    connectOrCreate?: CategoryCreateOrConnectWithoutProductInput
-    upsert?: CategoryUpsertWithoutProductInput
-    connect?: CategoryWhereUniqueInput
-    update?: XOR<XOR<CategoryUpdateToOneWithWhereWithoutProductInput, CategoryUpdateWithoutProductInput>, CategoryUncheckedUpdateWithoutProductInput>
-  }
-
   export type Order_detailUpdateManyWithoutProductNestedInput = {
     create?: XOR<Order_detailCreateWithoutProductInput, Order_detailUncheckedCreateWithoutProductInput> | Order_detailCreateWithoutProductInput[] | Order_detailUncheckedCreateWithoutProductInput[]
     connectOrCreate?: Order_detailCreateOrConnectWithoutProductInput | Order_detailCreateOrConnectWithoutProductInput[]
@@ -13452,6 +13444,14 @@ export namespace Prisma {
     update?: Order_detailUpdateWithWhereUniqueWithoutProductInput | Order_detailUpdateWithWhereUniqueWithoutProductInput[]
     updateMany?: Order_detailUpdateManyWithWhereWithoutProductInput | Order_detailUpdateManyWithWhereWithoutProductInput[]
     deleteMany?: Order_detailScalarWhereInput | Order_detailScalarWhereInput[]
+  }
+
+  export type CategoryUpdateOneRequiredWithoutProductNestedInput = {
+    create?: XOR<CategoryCreateWithoutProductInput, CategoryUncheckedCreateWithoutProductInput>
+    connectOrCreate?: CategoryCreateOrConnectWithoutProductInput
+    upsert?: CategoryUpsertWithoutProductInput
+    connect?: CategoryWhereUniqueInput
+    update?: XOR<XOR<CategoryUpdateToOneWithWhereWithoutProductInput, CategoryUpdateWithoutProductInput>, CategoryUncheckedUpdateWithoutProductInput>
   }
 
   export type ReviewsUpdateManyWithoutProductNestedInput = {
@@ -13496,24 +13496,16 @@ export namespace Prisma {
     deleteMany?: ReviewsScalarWhereInput | ReviewsScalarWhereInput[]
   }
 
-  export type UserCreateNestedOneWithoutReviewsInput = {
-    create?: XOR<UserCreateWithoutReviewsInput, UserUncheckedCreateWithoutReviewsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutReviewsInput
-    connect?: UserWhereUniqueInput
-  }
-
   export type ProductCreateNestedOneWithoutReviewsInput = {
     create?: XOR<ProductCreateWithoutReviewsInput, ProductUncheckedCreateWithoutReviewsInput>
     connectOrCreate?: ProductCreateOrConnectWithoutReviewsInput
     connect?: ProductWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutReviewsNestedInput = {
+  export type UserCreateNestedOneWithoutReviewsInput = {
     create?: XOR<UserCreateWithoutReviewsInput, UserUncheckedCreateWithoutReviewsInput>
     connectOrCreate?: UserCreateOrConnectWithoutReviewsInput
-    upsert?: UserUpsertWithoutReviewsInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReviewsInput, UserUpdateWithoutReviewsInput>, UserUncheckedUpdateWithoutReviewsInput>
   }
 
   export type ProductUpdateOneRequiredWithoutReviewsNestedInput = {
@@ -13522,6 +13514,14 @@ export namespace Prisma {
     upsert?: ProductUpsertWithoutReviewsInput
     connect?: ProductWhereUniqueInput
     update?: XOR<XOR<ProductUpdateToOneWithWhereWithoutReviewsInput, ProductUpdateWithoutReviewsInput>, ProductUncheckedUpdateWithoutReviewsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutReviewsNestedInput = {
+    create?: XOR<UserCreateWithoutReviewsInput, UserUncheckedCreateWithoutReviewsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReviewsInput
+    upsert?: UserUpsertWithoutReviewsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReviewsInput, UserUpdateWithoutReviewsInput>, UserUncheckedUpdateWithoutReviewsInput>
   }
 
   export type UserCreateNestedOneWithoutOrdersInput = {
@@ -13648,24 +13648,16 @@ export namespace Prisma {
     update?: XOR<XOR<Track_orderUpdateToOneWithWhereWithoutOrderInput, Track_orderUpdateWithoutOrderInput>, Track_orderUncheckedUpdateWithoutOrderInput>
   }
 
-  export type UserCreateNestedOneWithoutPaymentInput = {
-    create?: XOR<UserCreateWithoutPaymentInput, UserUncheckedCreateWithoutPaymentInput>
-    connectOrCreate?: UserCreateOrConnectWithoutPaymentInput
-    connect?: UserWhereUniqueInput
-  }
-
   export type OrderCreateNestedOneWithoutPaymentDetailInput = {
     create?: XOR<OrderCreateWithoutPaymentDetailInput, OrderUncheckedCreateWithoutPaymentDetailInput>
     connectOrCreate?: OrderCreateOrConnectWithoutPaymentDetailInput
     connect?: OrderWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutPaymentNestedInput = {
+  export type UserCreateNestedOneWithoutPaymentInput = {
     create?: XOR<UserCreateWithoutPaymentInput, UserUncheckedCreateWithoutPaymentInput>
     connectOrCreate?: UserCreateOrConnectWithoutPaymentInput
-    upsert?: UserUpsertWithoutPaymentInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPaymentInput, UserUpdateWithoutPaymentInput>, UserUncheckedUpdateWithoutPaymentInput>
   }
 
   export type OrderUpdateOneRequiredWithoutPaymentDetailNestedInput = {
@@ -13674,6 +13666,14 @@ export namespace Prisma {
     upsert?: OrderUpsertWithoutPaymentDetailInput
     connect?: OrderWhereUniqueInput
     update?: XOR<XOR<OrderUpdateToOneWithWhereWithoutPaymentDetailInput, OrderUpdateWithoutPaymentDetailInput>, OrderUncheckedUpdateWithoutPaymentDetailInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutPaymentNestedInput = {
+    create?: XOR<UserCreateWithoutPaymentInput, UserUncheckedCreateWithoutPaymentInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPaymentInput
+    upsert?: UserUpsertWithoutPaymentInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPaymentInput, UserUpdateWithoutPaymentInput>, UserUncheckedUpdateWithoutPaymentInput>
   }
 
   export type OrderCreateNestedOneWithoutOrderDetailInput = {
@@ -13892,23 +13892,6 @@ export namespace Prisma {
     _max?: NestedEnumStatusFilter<$PrismaModel>
   }
 
-  export type ProfileCreateWithoutUserInput = {
-    id?: string
-    phone: string
-    address: string
-  }
-
-  export type ProfileUncheckedCreateWithoutUserInput = {
-    id?: string
-    phone: string
-    address: string
-  }
-
-  export type ProfileCreateOrConnectWithoutUserInput = {
-    where: ProfileWhereUniqueInput
-    create: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
-  }
-
   export type OrderCreateWithoutUserInput = {
     id?: string
     address: string
@@ -13965,6 +13948,23 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ProfileCreateWithoutUserInput = {
+    id?: string
+    phone: string
+    address: string
+  }
+
+  export type ProfileUncheckedCreateWithoutUserInput = {
+    id?: string
+    phone: string
+    address: string
+  }
+
+  export type ProfileCreateOrConnectWithoutUserInput = {
+    where: ProfileWhereUniqueInput
+    create: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
+  }
+
   export type ReviewsCreateWithoutUserInput = {
     id?: string
     comment?: string | null
@@ -13987,29 +13987,6 @@ export namespace Prisma {
   export type ReviewsCreateManyUserInputEnvelope = {
     data: ReviewsCreateManyUserInput | ReviewsCreateManyUserInput[]
     skipDuplicates?: boolean
-  }
-
-  export type ProfileUpsertWithoutUserInput = {
-    update: XOR<ProfileUpdateWithoutUserInput, ProfileUncheckedUpdateWithoutUserInput>
-    create: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
-    where?: ProfileWhereInput
-  }
-
-  export type ProfileUpdateToOneWithWhereWithoutUserInput = {
-    where?: ProfileWhereInput
-    data: XOR<ProfileUpdateWithoutUserInput, ProfileUncheckedUpdateWithoutUserInput>
-  }
-
-  export type ProfileUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type ProfileUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
   }
 
   export type OrderUpsertWithWhereUniqueWithoutUserInput = {
@@ -14065,6 +14042,29 @@ export namespace Prisma {
     time?: DateTimeFilter<"Payment_detail"> | Date | string
     userId?: StringFilter<"Payment_detail"> | string
     orderId?: StringFilter<"Payment_detail"> | string
+  }
+
+  export type ProfileUpsertWithoutUserInput = {
+    update: XOR<ProfileUpdateWithoutUserInput, ProfileUncheckedUpdateWithoutUserInput>
+    create: XOR<ProfileCreateWithoutUserInput, ProfileUncheckedCreateWithoutUserInput>
+    where?: ProfileWhereInput
+  }
+
+  export type ProfileUpdateToOneWithWhereWithoutUserInput = {
+    where?: ProfileWhereInput
+    data: XOR<ProfileUpdateWithoutUserInput, ProfileUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ProfileUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ProfileUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
   }
 
   export type ReviewsUpsertWithWhereUniqueWithoutUserInput = {
@@ -14218,21 +14218,6 @@ export namespace Prisma {
     categoryId?: StringFilter<"Product"> | string
   }
 
-  export type CategoryCreateWithoutProductInput = {
-    id?: string
-    categoryName: string
-  }
-
-  export type CategoryUncheckedCreateWithoutProductInput = {
-    id?: string
-    categoryName: string
-  }
-
-  export type CategoryCreateOrConnectWithoutProductInput = {
-    where: CategoryWhereUniqueInput
-    create: XOR<CategoryCreateWithoutProductInput, CategoryUncheckedCreateWithoutProductInput>
-  }
-
   export type Order_detailCreateWithoutProductInput = {
     id?: string
     subTotal: number
@@ -14259,6 +14244,21 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type CategoryCreateWithoutProductInput = {
+    id?: string
+    categoryName: string
+  }
+
+  export type CategoryUncheckedCreateWithoutProductInput = {
+    id?: string
+    categoryName: string
+  }
+
+  export type CategoryCreateOrConnectWithoutProductInput = {
+    where: CategoryWhereUniqueInput
+    create: XOR<CategoryCreateWithoutProductInput, CategoryUncheckedCreateWithoutProductInput>
+  }
+
   export type ReviewsCreateWithoutProductInput = {
     id?: string
     comment?: string | null
@@ -14281,27 +14281,6 @@ export namespace Prisma {
   export type ReviewsCreateManyProductInputEnvelope = {
     data: ReviewsCreateManyProductInput | ReviewsCreateManyProductInput[]
     skipDuplicates?: boolean
-  }
-
-  export type CategoryUpsertWithoutProductInput = {
-    update: XOR<CategoryUpdateWithoutProductInput, CategoryUncheckedUpdateWithoutProductInput>
-    create: XOR<CategoryCreateWithoutProductInput, CategoryUncheckedCreateWithoutProductInput>
-    where?: CategoryWhereInput
-  }
-
-  export type CategoryUpdateToOneWithWhereWithoutProductInput = {
-    where?: CategoryWhereInput
-    data: XOR<CategoryUpdateWithoutProductInput, CategoryUncheckedUpdateWithoutProductInput>
-  }
-
-  export type CategoryUpdateWithoutProductInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    categoryName?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type CategoryUncheckedUpdateWithoutProductInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    categoryName?: StringFieldUpdateOperationsInput | string
   }
 
   export type Order_detailUpsertWithWhereUniqueWithoutProductInput = {
@@ -14332,6 +14311,27 @@ export namespace Prisma {
     price?: IntFilter<"Order_detail"> | number
   }
 
+  export type CategoryUpsertWithoutProductInput = {
+    update: XOR<CategoryUpdateWithoutProductInput, CategoryUncheckedUpdateWithoutProductInput>
+    create: XOR<CategoryCreateWithoutProductInput, CategoryUncheckedCreateWithoutProductInput>
+    where?: CategoryWhereInput
+  }
+
+  export type CategoryUpdateToOneWithWhereWithoutProductInput = {
+    where?: CategoryWhereInput
+    data: XOR<CategoryUpdateWithoutProductInput, CategoryUncheckedUpdateWithoutProductInput>
+  }
+
+  export type CategoryUpdateWithoutProductInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    categoryName?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CategoryUncheckedUpdateWithoutProductInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    categoryName?: StringFieldUpdateOperationsInput | string
+  }
+
   export type ReviewsUpsertWithWhereUniqueWithoutProductInput = {
     where: ReviewsWhereUniqueInput
     update: XOR<ReviewsUpdateWithoutProductInput, ReviewsUncheckedUpdateWithoutProductInput>
@@ -14348,33 +14348,6 @@ export namespace Prisma {
     data: XOR<ReviewsUpdateManyMutationInput, ReviewsUncheckedUpdateManyWithoutProductInput>
   }
 
-  export type UserCreateWithoutReviewsInput = {
-    id?: string
-    name: string
-    email: string
-    password: string
-    role?: $Enums.UserRole
-    profile?: ProfileCreateNestedOneWithoutUserInput
-    orders?: OrderCreateNestedManyWithoutUserInput
-    payment?: Payment_detailCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutReviewsInput = {
-    id?: string
-    name: string
-    email: string
-    password: string
-    role?: $Enums.UserRole
-    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
-    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
-    payment?: Payment_detailUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutReviewsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutReviewsInput, UserUncheckedCreateWithoutReviewsInput>
-  }
-
   export type ProductCreateWithoutReviewsInput = {
     id?: string
     name: string
@@ -14383,8 +14356,8 @@ export namespace Prisma {
     image?: string | null
     description: string
     cloudId?: string | null
-    category: CategoryCreateNestedOneWithoutProductInput
     orderDetail?: Order_detailCreateNestedManyWithoutProductInput
+    category: CategoryCreateNestedOneWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutReviewsInput = {
@@ -14404,37 +14377,31 @@ export namespace Prisma {
     create: XOR<ProductCreateWithoutReviewsInput, ProductUncheckedCreateWithoutReviewsInput>
   }
 
-  export type UserUpsertWithoutReviewsInput = {
-    update: XOR<UserUpdateWithoutReviewsInput, UserUncheckedUpdateWithoutReviewsInput>
+  export type UserCreateWithoutReviewsInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role?: $Enums.UserRole
+    orders?: OrderCreateNestedManyWithoutUserInput
+    payment?: Payment_detailCreateNestedManyWithoutUserInput
+    profile?: ProfileCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutReviewsInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role?: $Enums.UserRole
+    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
+    payment?: Payment_detailUncheckedCreateNestedManyWithoutUserInput
+    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutReviewsInput = {
+    where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutReviewsInput, UserUncheckedCreateWithoutReviewsInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutReviewsInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutReviewsInput, UserUncheckedUpdateWithoutReviewsInput>
-  }
-
-  export type UserUpdateWithoutReviewsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    profile?: ProfileUpdateOneWithoutUserNestedInput
-    orders?: OrderUpdateManyWithoutUserNestedInput
-    payment?: Payment_detailUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutReviewsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
-    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
-    payment?: Payment_detailUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProductUpsertWithoutReviewsInput = {
@@ -14456,8 +14423,8 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
     cloudId?: NullableStringFieldUpdateOperationsInput | string | null
-    category?: CategoryUpdateOneRequiredWithoutProductNestedInput
     orderDetail?: Order_detailUpdateManyWithoutProductNestedInput
+    category?: CategoryUpdateOneRequiredWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutReviewsInput = {
@@ -14472,14 +14439,47 @@ export namespace Prisma {
     orderDetail?: Order_detailUncheckedUpdateManyWithoutProductNestedInput
   }
 
+  export type UserUpsertWithoutReviewsInput = {
+    update: XOR<UserUpdateWithoutReviewsInput, UserUncheckedUpdateWithoutReviewsInput>
+    create: XOR<UserCreateWithoutReviewsInput, UserUncheckedCreateWithoutReviewsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutReviewsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutReviewsInput, UserUncheckedUpdateWithoutReviewsInput>
+  }
+
+  export type UserUpdateWithoutReviewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    orders?: OrderUpdateManyWithoutUserNestedInput
+    payment?: Payment_detailUpdateManyWithoutUserNestedInput
+    profile?: ProfileUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutReviewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
+    payment?: Payment_detailUncheckedUpdateManyWithoutUserNestedInput
+    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
+  }
+
   export type UserCreateWithoutOrdersInput = {
     id?: string
     name: string
     email: string
     password: string
     role?: $Enums.UserRole
-    profile?: ProfileCreateNestedOneWithoutUserInput
     payment?: Payment_detailCreateNestedManyWithoutUserInput
+    profile?: ProfileCreateNestedOneWithoutUserInput
     reviews?: ReviewsCreateNestedManyWithoutUserInput
   }
 
@@ -14489,8 +14489,8 @@ export namespace Prisma {
     email: string
     password: string
     role?: $Enums.UserRole
-    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     payment?: Payment_detailUncheckedCreateNestedManyWithoutUserInput
+    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
     reviews?: ReviewsUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -14580,8 +14580,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    profile?: ProfileUpdateOneWithoutUserNestedInput
     payment?: Payment_detailUpdateManyWithoutUserNestedInput
+    profile?: ProfileUpdateOneWithoutUserNestedInput
     reviews?: ReviewsUpdateManyWithoutUserNestedInput
   }
 
@@ -14591,8 +14591,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     payment?: Payment_detailUncheckedUpdateManyWithoutUserNestedInput
+    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
     reviews?: ReviewsUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -14662,33 +14662,6 @@ export namespace Prisma {
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
   }
 
-  export type UserCreateWithoutPaymentInput = {
-    id?: string
-    name: string
-    email: string
-    password: string
-    role?: $Enums.UserRole
-    profile?: ProfileCreateNestedOneWithoutUserInput
-    orders?: OrderCreateNestedManyWithoutUserInput
-    reviews?: ReviewsCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutPaymentInput = {
-    id?: string
-    name: string
-    email: string
-    password: string
-    role?: $Enums.UserRole
-    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
-    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
-    reviews?: ReviewsUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutPaymentInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutPaymentInput, UserUncheckedCreateWithoutPaymentInput>
-  }
-
   export type OrderCreateWithoutPaymentDetailInput = {
     id?: string
     address: string
@@ -14714,37 +14687,31 @@ export namespace Prisma {
     create: XOR<OrderCreateWithoutPaymentDetailInput, OrderUncheckedCreateWithoutPaymentDetailInput>
   }
 
-  export type UserUpsertWithoutPaymentInput = {
-    update: XOR<UserUpdateWithoutPaymentInput, UserUncheckedUpdateWithoutPaymentInput>
+  export type UserCreateWithoutPaymentInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role?: $Enums.UserRole
+    orders?: OrderCreateNestedManyWithoutUserInput
+    profile?: ProfileCreateNestedOneWithoutUserInput
+    reviews?: ReviewsCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutPaymentInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    role?: $Enums.UserRole
+    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
+    profile?: ProfileUncheckedCreateNestedOneWithoutUserInput
+    reviews?: ReviewsUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutPaymentInput = {
+    where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutPaymentInput, UserUncheckedCreateWithoutPaymentInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutPaymentInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutPaymentInput, UserUncheckedUpdateWithoutPaymentInput>
-  }
-
-  export type UserUpdateWithoutPaymentInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    profile?: ProfileUpdateOneWithoutUserNestedInput
-    orders?: OrderUpdateManyWithoutUserNestedInput
-    reviews?: ReviewsUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutPaymentInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
-    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
-    reviews?: ReviewsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type OrderUpsertWithoutPaymentDetailInput = {
@@ -14776,6 +14743,39 @@ export namespace Prisma {
     time?: DateTimeFieldUpdateOperationsInput | Date | string
     orderDetail?: Order_detailUncheckedUpdateManyWithoutOrderNestedInput
     trackOrder?: Track_orderUncheckedUpdateOneWithoutOrderNestedInput
+  }
+
+  export type UserUpsertWithoutPaymentInput = {
+    update: XOR<UserUpdateWithoutPaymentInput, UserUncheckedUpdateWithoutPaymentInput>
+    create: XOR<UserCreateWithoutPaymentInput, UserUncheckedCreateWithoutPaymentInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutPaymentInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutPaymentInput, UserUncheckedUpdateWithoutPaymentInput>
+  }
+
+  export type UserUpdateWithoutPaymentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    orders?: OrderUpdateManyWithoutUserNestedInput
+    profile?: ProfileUpdateOneWithoutUserNestedInput
+    reviews?: ReviewsUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutPaymentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
+    profile?: ProfileUncheckedUpdateOneWithoutUserNestedInput
+    reviews?: ReviewsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type OrderCreateWithoutOrderDetailInput = {

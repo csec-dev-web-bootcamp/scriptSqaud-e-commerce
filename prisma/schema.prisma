@@ -1,12 +1,6 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
-  output = "./client"
+  output   = "./client"
 }
 
 datasource db {
@@ -15,120 +9,112 @@ datasource db {
 }
 
 model User {
-  id            String @default(uuid()) @unique @id
-  name          String
-  email         String @unique
-  password      String
-  profile       Profile?
-  orders        Order[] 
-  payment       Payment_detail[]
-  reviews       Reviews[]
-  role     UserRole @default(CUSTOMER)
+  id       String           @id @unique @default(uuid())
+  name     String
+  email    String           @unique
+  password String
+  role     UserRole         @default(CUSTOMER)
+  orders   Order[]
+  payment  Payment_detail[]
+  profile  Profile?
+  reviews  Reviews[]
 }
 
 model Profile {
-  id            String @default(uuid()) @unique @id
-  phone         String @unique
-  address       String
-  user          User @relation(fields: [userId], references: [id])
-  userId        String  @unique 
+  id      String @id @unique @default(uuid())
+  phone   String @unique
+  address String
+  userId  String @unique
+  user    User   @relation(fields: [userId], references: [id])
 }
 
 model Category {
-  id            String @default(uuid()) @unique @id
-  categoryName  String @unique
-  product       Product[]
+  id           String    @id @unique @default(uuid())
+  categoryName String    @unique
+  product      Product[]
 }
 
 model Product {
-  id            String @default(uuid()) @unique @id
-  name          String  
-  stock         Int 
-  price         Int
-  image         String? 
-  description   String
-  cloudId       String? 
-
-  category      Category @relation(fields: [categoryId], references: [id])
-  categoryId    String
-  
-  orderDetail   Order_detail[]
-
-  reviews   Reviews[]
+  id          String         @id @unique @default(uuid())
+  name        String
+  stock       Int
+  price       Int
+  image       String?
+  description String
+  cloudId     String?
+  categoryId  String
+  orderDetail Order_detail[]
+  category    Category       @relation(fields: [categoryId], references: [id])
+  reviews     Reviews[]
 }
 
 model Reviews {
-  id            String @default(uuid()) @unique @id
-  comment       String?
-  rating        Int
-
-  userId        String
-  user          User @relation(fields: [userId], references: [id])
-
-  productId     String
-  product       Product @relation(fields: [productId], references: [id])
+  id        String  @id @unique @default(uuid())
+  comment   String?
+  rating    Int
+  userId    String
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  user      User    @relation(fields: [userId], references: [id])
 
   @@unique([userId, productId])
 }
 
 model Order {
-  id            String @default(uuid()) @unique @id
-  userId        String 
-  user          User  @relation(fields: [userId], references: [id], onDelete: Cascade)
-  orderDetail   Order_detail[]
-  paymentDetail Payment_detail? 
-  trackOrder    Track_order?
+  id            String          @id @unique @default(uuid())
+  userId        String
   address       String
   total         Int
-  time          DateTime @default(now())
+  time          DateTime        @default(now())
+  user          User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orderDetail   Order_detail[]
+  paymentDetail Payment_detail?
+  trackOrder    Track_order?
 }
 
 model Payment_detail {
-  id            String @default(uuid()) @unique @id
-  amount        Int
-  currency      String
-  time          DateTime @default(now())
-  userId        String
-  user          User @relation(fields: [userId], references: [id])
-  orderId       String @unique
-  order         Order @relation(fields: [orderId], references: [id])
+  id       String   @id @unique @default(uuid())
+  amount   Int
+  currency String
+  time     DateTime @default(now())
+  userId   String
+  orderId  String   @unique
+  order    Order    @relation(fields: [orderId], references: [id])
+  user     User     @relation(fields: [userId], references: [id])
 }
 
 model Order_detail {
-  id            String @default(uuid()) @unique @id
-  orderId       String
-  order         Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  productId     String 
-  product       Product  @relation(fields: [productId], references: [id])
-  subTotal      Int
-  quantity      Int
-  price         Int
+  id        String  @id @unique @default(uuid())
+  orderId   String
+  productId String
+  subTotal  Int
+  quantity  Int
+  price     Int
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id])
 }
 
 model Track_order {
-  id            String @default(uuid()) @unique @id
-  orderId       String @unique
-  order         Order @relation(fields: [orderId], references: [id])
-  address       String
-  status        Status @default(PREPARING)
+  id      String @id @unique @default(uuid())
+  orderId String @unique
+  address String
+  status  Status @default(PREPARING)
+  order   Order  @relation(fields: [orderId], references: [id])
 }
 
 model Post {
   id      Int     @id @default(autoincrement())
   title   String
-  content String? @db.Text
+  content String?
 }
-
 
 enum UserRole {
   ADMIN    @map("admin")
   CUSTOMER @map("customer")
 }
 
-
 enum Status {
   PREPARING
   SHIPPED
   DELIVERD
 }
-
