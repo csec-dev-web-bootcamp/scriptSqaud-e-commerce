@@ -8,6 +8,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+<<<<<<< HEAD
 model User {
   id       String           @id @unique @default(uuid())
   name     String
@@ -102,12 +103,15 @@ model Track_order {
   order   Order  @relation(fields: [orderId], references: [id])
 }
 
+=======
+>>>>>>> develop
 model Post {
   id      Int     @id @default(autoincrement())
   title   String
   content String?
 }
 
+<<<<<<< HEAD
 enum UserRole {
   ADMIN    @map("admin")
   CUSTOMER @map("customer")
@@ -118,3 +122,11 @@ enum Status {
   SHIPPED
   DELIVERD
 }
+=======
+model User {
+  id      Int     @id @default(autoincrement())
+  email   String  @unique
+  name    String? @db.Text
+  password String @db.Char(255)
+}
+>>>>>>> develop
