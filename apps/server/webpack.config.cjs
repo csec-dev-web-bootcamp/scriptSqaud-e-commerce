@@ -19,7 +19,7 @@ const config = {
   resolve: {
     alias: {
       "@lib/common": path.resolve(__dirname, "../../libs/common/src"),
-      "@/prisma/client": path.resolve(__dirname, "../../prisma/client"),
+      "@/prisma/client": path.resolve(__dirname, "../../src/helpers/prisma-client.js"),
     },
   },
   module: {

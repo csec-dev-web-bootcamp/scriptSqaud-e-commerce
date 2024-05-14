@@ -1,4 +1,4 @@
-import { formatZodError } from '../../../../libs/common/src/helpers/format-zod-error';
+import { formatZodError } from '@lib/common';
 import { HttpException } from '../helpers/http-exception';
 import { createProductSchema } from './products.validation';
 
