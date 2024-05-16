@@ -21,7 +21,7 @@ function Cart() {
   const total = cartData.map((data) => data.price * data.amount).reduce((total, val)=> (total + val), 0)
   console.log(total);
   return (
-    <div className="container ">
+    <div className="container h-full ">
       <h1 className="text-5xl m-5 p-4 border-b border-b-slate-500">Cart</h1>
       <div className="grid gap-5  xl:grid-cols-2 lg:grid-cols-2md:px-20  ">
         <div>
