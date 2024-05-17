@@ -32,11 +32,11 @@ exports.$Enums = {}
 
 /**
  * Prisma Client JS version: 5.13.0
- * Query Engine version: b9a39a7ee606c28e3455d0fd60e78c3ba82b1a2b
+ * Query Engine version: e9771e62de70f79a5e1c604a2d7c8e2a0a874b48
  */
 Prisma.prismaVersion = {
   client: "5.13.0",
-  engine: "b9a39a7ee606c28e3455d0fd60e78c3ba82b1a2b"
+  engine: "e9771e62de70f79a5e1c604a2d7c8e2a0a874b48"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -213,7 +213,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\ngirm\\Desktop\\scriptSqaud-e-commerce\\prisma\\client",
+      "value": "C:\\Users\\Admin\\Documents\\code\\bootcamp\\scriptSqaud-e-commerce\\prisma\\client",
       "fromEnvVar": null
     },
     "config": {
@@ -230,12 +230,11 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
-    "schemaEnvPath": "../../.env"
+    "rootEnvPath": null
   },
   "relativePath": "..",
   "clientVersion": "5.13.0",
-  "engineVersion": "b9a39a7ee606c28e3455d0fd60e78c3ba82b1a2b",
+  "engineVersion": "e9771e62de70f79a5e1c604a2d7c8e2a0a874b48",
   "datasourceNames": [
     "db"
   ],
@@ -249,8 +248,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id       String           @id @unique @default(uuid())\n  name     String\n  email    String           @unique\n  password String\n  role     UserRole         @default(CUSTOMER)\n  orders   Order[]\n  payment  Payment_detail[]\n  profile  Profile?\n  reviews  Reviews[]\n}\n\nmodel Profile {\n  id      String @id @unique @default(uuid())\n  phone   String @unique\n  address String\n  userId  String @unique\n  user    User   @relation(fields: [userId], references: [id])\n}\n\nmodel Category {\n  id           String    @id @unique @default(uuid())\n  categoryName String    @unique\n  product      Product[]\n}\n\nmodel Product {\n  id          String         @id @unique @default(uuid())\n  name        String\n  stock       Int\n  price       Int\n  image       String?\n  description String\n  cloudId     String?\n  categoryId  String\n  orderDetail Order_detail[]\n  category    Category       @relation(fields: [categoryId], references: [id])\n  reviews     Reviews[]\n}\n\nmodel Reviews {\n  id        String  @id @unique @default(uuid())\n  comment   String?\n  rating    Int\n  userId    String\n  productId String\n  product   Product @relation(fields: [productId], references: [id])\n  user      User    @relation(fields: [userId], references: [id])\n\n  @@unique([userId, productId])\n}\n\nmodel Order {\n  id            String          @id @unique @default(uuid())\n  userId        String\n  address       String\n  total         Int\n  time          DateTime        @default(now())\n  user          User            @relation(fields: [userId], references: [id], onDelete: Cascade)\n  orderDetail   Order_detail[]\n  paymentDetail Payment_detail?\n  trackOrder    Track_order?\n}\n\nmodel Payment_detail {\n  id       String   @id @unique @default(uuid())\n  amount   Int\n  currency String\n  time     DateTime @default(now())\n  userId   String\n  orderId  String   @unique\n  order    Order    @relation(fields: [orderId], references: [id])\n  user     User     @relation(fields: [userId], references: [id])\n}\n\nmodel Order_detail {\n  id        String  @id @unique @default(uuid())\n  orderId   String\n  productId String\n  subTotal  Int\n  quantity  Int\n  price     Int\n  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)\n  product   Product @relation(fields: [productId], references: [id])\n}\n\nmodel Track_order {\n  id      String @id @unique @default(uuid())\n  orderId String @unique\n  address String\n  status  Status @default(PREPARING)\n  order   Order  @relation(fields: [orderId], references: [id])\n}\n\nmodel Post {\n  id      Int     @id @default(autoincrement())\n  title   String\n  content String?\n}\n\nenum UserRole {\n  ADMIN    @map(\"admin\")\n  CUSTOMER @map(\"customer\")\n}\n\nenum Status {\n  PREPARING\n  SHIPPED\n  DELIVERD\n}\n",
-  "inlineSchemaHash": "9eee3d6109f284b2bb3cdb0c567817207ec9b3335b68811de6baa36c50fb2b89",
+  "inlineSchema": "generator client {\r\n  provider = \"prisma-client-js\"\r\n  output   = \"./client\"\r\n}\r\n\r\ndatasource db {\r\n  provider = \"postgresql\"\r\n  url      = env(\"DATABASE_URL\")\r\n}\r\n\r\nmodel User {\r\n  id       String           @id @unique @default(uuid())\r\n  name     String\r\n  email    String           @unique\r\n  password String\r\n  role     UserRole         @default(CUSTOMER)\r\n  orders   Order[]\r\n  payment  Payment_detail[]\r\n  profile  Profile?\r\n  reviews  Reviews[]\r\n}\r\n\r\nmodel Profile {\r\n  id      String @id @unique @default(uuid())\r\n  phone   String @unique\r\n  address String\r\n  userId  String @unique\r\n  user    User   @relation(fields: [userId], references: [id])\r\n}\r\n\r\nmodel Category {\r\n  id           String    @id @unique @default(uuid())\r\n  categoryName String    @unique\r\n  product      Product[]\r\n}\r\n\r\nmodel Product {\r\n  id          String         @id @unique @default(uuid())\r\n  name        String\r\n  stock       Int\r\n  price       Int\r\n  image       String?\r\n  description String\r\n  cloudId     String?\r\n  categoryId  String\r\n  orderDetail Order_detail[]\r\n  category    Category       @relation(fields: [categoryId], references: [id])\r\n  reviews     Reviews[]\r\n}\r\n\r\nmodel Reviews {\r\n  id        String  @id @unique @default(uuid())\r\n  comment   String?\r\n  rating    Int\r\n  userId    String\r\n  productId String\r\n  product   Product @relation(fields: [productId], references: [id])\r\n  user      User    @relation(fields: [userId], references: [id])\r\n\r\n  @@unique([userId, productId])\r\n}\r\n\r\nmodel Order {\r\n  id            String          @id @unique @default(uuid())\r\n  userId        String\r\n  address       String\r\n  total         Int\r\n  time          DateTime        @default(now())\r\n  user          User            @relation(fields: [userId], references: [id], onDelete: Cascade)\r\n  orderDetail   Order_detail[]\r\n  paymentDetail Payment_detail?\r\n  trackOrder    Track_order?\r\n}\r\n\r\nmodel Payment_detail {\r\n  id       String   @id @unique @default(uuid())\r\n  amount   Int\r\n  currency String\r\n  time     DateTime @default(now())\r\n  userId   String\r\n  orderId  String   @unique\r\n  order    Order    @relation(fields: [orderId], references: [id])\r\n  user     User     @relation(fields: [userId], references: [id])\r\n}\r\n\r\nmodel Order_detail {\r\n  id        String  @id @unique @default(uuid())\r\n  orderId   String\r\n  productId String\r\n  subTotal  Int\r\n  quantity  Int\r\n  price     Int\r\n  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)\r\n  product   Product @relation(fields: [productId], references: [id])\r\n}\r\n\r\nmodel Track_order {\r\n  id      String @id @unique @default(uuid())\r\n  orderId String @unique\r\n  address String\r\n  status  Status @default(PREPARING)\r\n  order   Order  @relation(fields: [orderId], references: [id])\r\n}\r\n\r\nmodel Post {\r\n  id      Int     @id @default(autoincrement())\r\n  title   String\r\n  content String?\r\n}\r\n\r\nenum UserRole {\r\n  ADMIN    @map(\"admin\")\r\n  CUSTOMER @map(\"customer\")\r\n}\r\n\r\nenum Status {\r\n  PREPARING\r\n  SHIPPED\r\n  DELIVERD\r\n}\r\n",
+  "inlineSchemaHash": "b3e32710f00c8cd0216a5f84b719e2972c5ce650bf3c8504cc4f3beedc176205",
   "copyEngine": true
 }
 config.dirname = '/'

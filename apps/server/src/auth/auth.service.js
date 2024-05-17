@@ -36,7 +36,8 @@ export async function loginUser(data) {
     throw new HttpException('User not found', 404);
   }
 
-  const valid = await argon2.verify(user.password, data.password);
+  // const valid = await argon2.verify(user.password, data.password);
+  const valid = user.password == data.password ? true : false;
 
   if (!valid) {
     throw new HttpException('Invalid password', 401);
