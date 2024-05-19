@@ -1,6 +1,6 @@
-import * as argon2 from 'argon2';
-import { HttpException } from '../helpers/http-exception';
-import prisma from '../helpers/prisma-client';
+import * as argon2 from "argon2";
+import { HttpException } from "../helpers/http-exception";
+import prisma from "../helpers/prisma-client";
 
 export async function createUser(data) {
   const userExist = await prisma.user.findFirst({
@@ -10,7 +10,7 @@ export async function createUser(data) {
   });
 
   if (userExist) {
-    throw new HttpException('User already exist with this Email', 409);
+    throw new HttpException("User already exist with this Email", 409);
   }
 
   const hash = await argon2.hash(data.password);
@@ -33,14 +33,14 @@ export async function loginUser(data) {
   });
 
   if (!user) {
-    throw new HttpException('User not found', 404);
+    throw new HttpException("User not found", 404);
   }
 
   // const valid = await argon2.verify(user.password, data.password);
   const valid = user.password == data.password ? true : false;
 
   if (!valid) {
-    throw new HttpException('Invalid password', 401);
+    throw new HttpException("Invalid password", 401);
   }
 
   return user;
@@ -52,7 +52,7 @@ export async function findUserById(id) {
   });
 
   if (!user) {
-    throw new HttpException('User not found', 404);
+    throw new HttpException("User not found", 404);
   }
 
   return user;

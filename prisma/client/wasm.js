@@ -17,11 +17,11 @@ exports.$Enums = {}
 
 /**
  * Prisma Client JS version: 5.13.0
- * Query Engine version: e9771e62de70f79a5e1c604a2d7c8e2a0a874b48
+ * Query Engine version: b9a39a7ee606c28e3455d0fd60e78c3ba82b1a2b
  */
 Prisma.prismaVersion = {
   client: "5.13.0",
-  engine: "e9771e62de70f79a5e1c604a2d7c8e2a0a874b48"
+  engine: "b9a39a7ee606c28e3455d0fd60e78c3ba82b1a2b"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -119,82 +119,18 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.ProductScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description'
+};
+
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
   email: 'email',
   password: 'password',
   role: 'role'
-};
-
-exports.Prisma.ProfileScalarFieldEnum = {
-  id: 'id',
-  phone: 'phone',
-  address: 'address',
-  userId: 'userId'
-};
-
-exports.Prisma.CategoryScalarFieldEnum = {
-  id: 'id',
-  categoryName: 'categoryName'
-};
-
-exports.Prisma.ProductScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  stock: 'stock',
-  price: 'price',
-  image: 'image',
-  description: 'description',
-  cloudId: 'cloudId',
-  categoryId: 'categoryId'
-};
-
-exports.Prisma.ReviewsScalarFieldEnum = {
-  id: 'id',
-  comment: 'comment',
-  rating: 'rating',
-  userId: 'userId',
-  productId: 'productId'
-};
-
-exports.Prisma.OrderScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  address: 'address',
-  total: 'total',
-  time: 'time'
-};
-
-exports.Prisma.Payment_detailScalarFieldEnum = {
-  id: 'id',
-  amount: 'amount',
-  currency: 'currency',
-  time: 'time',
-  userId: 'userId',
-  orderId: 'orderId'
-};
-
-exports.Prisma.Order_detailScalarFieldEnum = {
-  id: 'id',
-  orderId: 'orderId',
-  productId: 'productId',
-  subTotal: 'subTotal',
-  quantity: 'quantity',
-  price: 'price'
-};
-
-exports.Prisma.Track_orderScalarFieldEnum = {
-  id: 'id',
-  orderId: 'orderId',
-  address: 'address',
-  status: 'status'
-};
-
-exports.Prisma.PostScalarFieldEnum = {
-  id: 'id',
-  title: 'title',
-  content: 'content'
 };
 
 exports.Prisma.SortOrder = {
@@ -216,23 +152,9 @@ exports.UserRole = exports.$Enums.UserRole = {
   CUSTOMER: 'CUSTOMER'
 };
 
-exports.Status = exports.$Enums.Status = {
-  PREPARING: 'PREPARING',
-  SHIPPED: 'SHIPPED',
-  DELIVERD: 'DELIVERD'
-};
-
 exports.Prisma.ModelName = {
-  User: 'User',
-  Profile: 'Profile',
-  Category: 'Category',
   Product: 'Product',
-  Reviews: 'Reviews',
-  Order: 'Order',
-  Payment_detail: 'Payment_detail',
-  Order_detail: 'Order_detail',
-  Track_order: 'Track_order',
-  Post: 'Post'
+  User: 'User'
 };
 
 /**

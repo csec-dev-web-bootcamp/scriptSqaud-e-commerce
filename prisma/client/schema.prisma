@@ -3,118 +3,31 @@ generator client {
   output   = "./client"
 }
 
+// datasource db {
+//   provider = "postgresql"
+//   url      = env("DATABASE_URL")
+// }
+
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url        = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+model Product {
+  id          String  @id @default(uuid())
+  name        String
+  description String? @db.Text
 }
 
 model User {
-  id       String           @id @unique @default(uuid())
+  id       String   @id @default(uuid())
   name     String
-  email    String           @unique
+  email    String   @unique
   password String
-  role     UserRole         @default(CUSTOMER)
-  orders   Order[]
-  payment  Payment_detail[]
-  profile  Profile?
-  reviews  Reviews[]
-}
-
-model Profile {
-  id      String @id @unique @default(uuid())
-  phone   String @unique
-  address String
-  userId  String @unique
-  user    User   @relation(fields: [userId], references: [id])
-}
-
-model Category {
-  id           String    @id @unique @default(uuid())
-  categoryName String    @unique
-  product      Product[]
-}
-
-model Product {
-  id          String         @id @unique @default(uuid())
-  name        String
-  stock       Int
-  price       Int
-  image       String?
-  description String
-  cloudId     String?
-  categoryId  String
-  orderDetail Order_detail[]
-  category    Category       @relation(fields: [categoryId], references: [id])
-  reviews     Reviews[]
-}
-
-model Reviews {
-  id        String  @id @unique @default(uuid())
-  comment   String?
-  rating    Int
-  userId    String
-  productId String
-  product   Product @relation(fields: [productId], references: [id])
-  user      User    @relation(fields: [userId], references: [id])
-
-  @@unique([userId, productId])
-}
-
-model Order {
-  id            String          @id @unique @default(uuid())
-  userId        String
-  address       String
-  total         Int
-  time          DateTime        @default(now())
-  user          User            @relation(fields: [userId], references: [id], onDelete: Cascade)
-  orderDetail   Order_detail[]
-  paymentDetail Payment_detail?
-  trackOrder    Track_order?
-}
-
-model Payment_detail {
-  id       String   @id @unique @default(uuid())
-  amount   Int
-  currency String
-  time     DateTime @default(now())
-  userId   String
-  orderId  String   @unique
-  order    Order    @relation(fields: [orderId], references: [id])
-  user     User     @relation(fields: [userId], references: [id])
-}
-
-model Order_detail {
-  id        String  @id @unique @default(uuid())
-  orderId   String
-  productId String
-  subTotal  Int
-  quantity  Int
-  price     Int
-  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  product   Product @relation(fields: [productId], references: [id])
-}
-
-model Track_order {
-  id      String @id @unique @default(uuid())
-  orderId String @unique
-  address String
-  status  Status @default(PREPARING)
-  order   Order  @relation(fields: [orderId], references: [id])
-}
-
-model Post {
-  id      Int     @id @default(autoincrement())
-  title   String
-  content String?
+  role     UserRole @default(CUSTOMER)
 }
 
 enum UserRole {
   ADMIN    @map("admin")
   CUSTOMER @map("customer")
-}
-
-enum Status {
-  PREPARING
-  SHIPPED
-  DELIVERD
 }

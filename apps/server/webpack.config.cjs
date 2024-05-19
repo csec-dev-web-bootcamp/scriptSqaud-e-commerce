@@ -4,6 +4,25 @@ const path = require("path");
 const nodeExternals = require("webpack-node-externals");
 const isProduction = process.env.NODE_ENV == "production";
 
+const { spawn } = require("child_process");
+
+function OnFirstBuildDonePlugin() {
+  let isInitialBuild = true;
+  return {
+    apply: (compiler) => {
+      compiler.hooks.done.tap("OnFirstBuildDonePlugin", (compilation) => {
+        if (isInitialBuild) {
+          isInitialBuild = false;
+          spawn("nodemon dist/main.js --watch dist", {
+            stdio: "inherit",
+            shell: true,
+          });
+        }
+      });
+    },
+  };
+}
+
 const config = {
   entry: "./src/main.js",
   output: {
@@ -38,6 +57,7 @@ module.exports = () => {
     config.mode = "production";
   } else {
     config.mode = "development";
+    config.plugins = [OnFirstBuildDonePlugin()];
   }
   return config;
 };
