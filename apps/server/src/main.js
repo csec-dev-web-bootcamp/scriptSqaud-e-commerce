@@ -12,6 +12,8 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 app.get("/", (req, res) => {
+  const token = req.headers["jwt-token"]
+  console.log(token)
   return res.json({
     message: "Hello",
   });

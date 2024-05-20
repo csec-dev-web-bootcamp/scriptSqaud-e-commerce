@@ -12,7 +12,7 @@ const DATA = [
 // import NavBar from "../components/navbar";
 
 export default function Page() {
-  
+    
     return (
         <main  className="container">
             <Carousel data={DATA} />

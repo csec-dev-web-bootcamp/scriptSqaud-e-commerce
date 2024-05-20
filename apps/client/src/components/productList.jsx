@@ -7,9 +7,6 @@ import Carousel from "./DemoSlider";
 
 const ProductsPage = ( { products }) => {
 
-  
-      
- 
     const addToCart = useCart((state) => state.addToCart);
     function setCart(id) {
       const product = products.filter((songs) => songs.id == id)

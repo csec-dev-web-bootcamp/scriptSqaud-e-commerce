@@ -5,8 +5,10 @@ import { server_host } from "../constants/host.config";
 // import { getAuthentication } from "./auth/authentications";
 
 export default async function fetcher(pathname, options) {
+  const token = localStorage.getItem("jwt-token")
   const headers = {
     "Content-Type": "application/json",
+    "Authentication": "Bearer " + token,
     ...options?.headers,
   };
 
