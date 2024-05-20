@@ -4,7 +4,7 @@
 
 import ProductsPage from "../components/productList";
 
-import { productData } from "../data/products";
+import { productsData } from "../data/productdata";
 import Carousel from "../components/DemoSlider";
 
 const DATA = [
@@ -23,7 +23,7 @@ export default function Page() {
     return (
         <main  className="container">
             <Carousel data={DATA} />
-            <ProductsPage products ={productData}  />
+            <ProductsPage products ={productsData}  />
             {/* <Cart /> */}
         </main>
     );
