@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
+import { useRouter } from "next/navigation";
 import { Button } from "@app/client/components/ui/button";
 import {
   Form,
@@ -16,16 +16,18 @@ import {
 } from "@app/client/components/ui/form";
 import { Input } from "@app/client/components/ui/input";
 import Image from "next/image";
+import { login } from "@app/client/data/auth/auth";
 
 const formSchema = z.object({
   email: z.string().email({
     message: "Wrong email ",
   }),
-  password: z.string().min(8, {
+  password: z.string().min(4, {
     message: "Password must be 8 characters long",
   }),
 });
 function Login() {
+  const route = useRouter()
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -33,8 +35,16 @@ function Login() {
       Password: "",
     },
   });
-  function onSubmit(values) {
-    console.log(values);
+  async function onSubmit(values) {
+    // e.preventDefault()
+    const res = await login(values)
+    console.log({ res });
+    if (res?.error) {
+        alert("Email or Password not correct")
+        return
+    }
+    // alert(`You have successfully logged in`)
+    route.push("/")
   }
 
   return (

@@ -1,9 +1,9 @@
 
 
 
-import Cart from "../components/Cart";
+
 import ProductsPage from "../components/productList";
-import SideCart from "../components/sidecart";
+
 import { productData } from "../data/products";
 import Carousel from "../components/DemoSlider";
 

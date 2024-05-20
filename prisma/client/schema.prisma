@@ -1,6 +1,7 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "./client"
+  provider      = "prisma-client-js"
+  output        = "./client"
+  binaryTargets = ["native", "windows", "debian-openssl-1.1.x"]
 }
 
 // datasource db {
@@ -11,7 +12,6 @@ generator client {
 datasource db {
   provider  = "postgresql"
   url        = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
 }
 model Product {
   id          String  @id @default(uuid())
