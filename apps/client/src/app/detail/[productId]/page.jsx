@@ -1,12 +1,20 @@
+"use client"
 import { productData } from "@app/client/data/product";
+import { getOneProduct } from "@app/client/data/product.data";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 function ProductDetail(props) {
+
   const params = props.params;
-  const product = productData?.filter((data) => {
-    if (parseInt(data.id) === parseInt(params.productId)) console.log(data.id);
-    return parseInt(data.id) === parseInt(params.productId);
-  });
+  const [product, setProduct] = useState([])
+  useEffect(()=> {
+    setProduct(getOneProduct(params))
+  },[])
+  // const product = productData?.filter((data) => {
+  //   if (parseInt(data.id) === parseInt(params.productId)) console.log(data.id);
+  //   return parseInt(data.id) === parseInt(params.productId);
+  // });
 
   return (
     <div className="font-sans">
@@ -14,7 +22,7 @@ function ProductDetail(props) {
         <div className="grid items-start grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="w-full lg:sticky top-0 sm:flex gap-2">
             <Image
-              src={`/${product[0].image}`}
+              src={`/${product.image}`}
               width={500}
               height={500}
               alt="Picture of the author"
@@ -23,11 +31,11 @@ function ProductDetail(props) {
 
           <div>
             <h2 className="text-2xl font-extrabold text-gray-800">
-              {product[0]?.name}
+              {product?.name}
             </h2>
             <div className="flex flex-wrap gap-4 mt-4">
               <p className="text-gray-800 text-xl font-bold">
-                ${product[0]?.price}
+                ${product?.price}
               </p>
               
             </div>
@@ -117,22 +125,9 @@ function ProductDetail(props) {
               </h3>
               <ul className="space-y-3 list-disc mt-4 pl-4 text-sm text-gray-800">
                 <li>
-                  A pair of Nike shoes is a wardrobe essential because of its
-                  unparalleled versatility.
+                  {product.description}
                 </li>
-                <li>
-                  Available in a wide range of sizes, from extra small to extra
-                  large, and even catering to tall and petite sizes.
-                </li>
-                <li>
-                  Easy to care for, they can typically be wiped clean or gently
-                  machine-washed and air-dried.
-                </li>
-                <li>
-                  Personalize your Nike shoes with your own unique designs,
-                  whether it's custom paintwork, embroidery, or added
-                  accessories, to make them distinctly yours.
-                </li>
+               
               </ul>
             </div>
           </div>
