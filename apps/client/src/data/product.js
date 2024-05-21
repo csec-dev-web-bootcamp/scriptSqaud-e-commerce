@@ -1,3 +1,4 @@
+
 'use server';
 
 import fetcher from './fetcher';
@@ -28,3 +29,4 @@ export async function deleteProduct(id) {
     const res = await fetcher.get(`/products/${id}`);
     return res.data;
 }
+
