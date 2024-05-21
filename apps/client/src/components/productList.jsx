@@ -24,11 +24,11 @@ const ProductsPage = ( { products }) => {
                  {productData.map((product) => (
                     <li
                         key={product.id}
-                        className="  flex flex-col m-2 justify-center border border-slate-200 rounded-md p-2"
+                        className=" productcard flex flex-col m-2 justify-center border border-slate-200 rounded-md p-2"
                     >
                         {/* Import and use the image for each product */}
                          <Link href={`/detail/${product.id}`}>
-                          <img src={product.image} alt="" className="w-64 h-36 transition duration-300 transform hover:scale-110" />
+                          <img src={product.image} alt="" className="w-64 h-36 transition duration-300 transform hover:scale-125" />
                           <p>${product.price}</p>
                           <h2>{product.name}</h2>
                           <p className=" font-thin text-sm">{product.description}</p>
