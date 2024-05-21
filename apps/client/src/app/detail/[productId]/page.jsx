@@ -1,3 +1,4 @@
+"use client"
 import { productData } from "@app/client/data/product";
 import { getOneProduct } from "@app/client/data/product.data";
 import Image from "next/image";

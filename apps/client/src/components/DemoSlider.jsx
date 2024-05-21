@@ -29,9 +29,9 @@ const Carousel = ({ data }) => {
   }, [data.length]);
 
   return (
-    <div className="relative ">
+    <div className="relative m-0 ">
       {/* Carousel container */}
-      <div className="relative   w-full border overflow-hidden rounded-md" style={{"height": "40rem"}}>
+      <div className="relative   w-full border overflow-hidden " style={{"height": "40rem"}}>
         {/* Image container */}
         <div
           ref={carouselRef}
@@ -41,11 +41,11 @@ const Carousel = ({ data }) => {
           className="absolute flex h-full w-full transition-all duration-300"
         >
           {/* Map through data to render images */}
-          {data.map((v, i) => (
+          {data.map((v) => (
             <div
-              key={i}
+              key={v}
               className="relative h-full w-full bg-center bg-cover shrink-0"
-              style={{ backgroundImage: `url(${v.image})` }}
+              style={{ backgroundImage: `url(/${v})` }}
             >
               {/* New Collection text and Order Now button */}
               <div className="absolute mt-10 text-3xl w-full  p-10  text-white">
