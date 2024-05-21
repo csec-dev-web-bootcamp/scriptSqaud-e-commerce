@@ -27,7 +27,7 @@ model User {
 model Category {
   id        String      @id @default(uuid())
   name      String      @db.VarChar(255)
-  prioducts prioducts[]
+  prioducts products[]
 
   @@map("categories")
 }
@@ -39,7 +39,7 @@ model OrderItem {
   orderId    String?
   productId  String
   order      Order?    @relation(fields: [orderId], references: [id])
-  product    prioducts @relation(fields: [productId], references: [id])
+  product    products @relation(fields: [productId], references: [id])
 
   @@map("orderItems")
 }
@@ -58,7 +58,7 @@ model Order {
   @@map("orders")
 }
 
-model prioducts {
+model products {
   id          String      @id
   name        String      @db.VarChar(255)
   price       Float       @default(0)

@@ -1,25 +1,8 @@
-/*
-  Warnings:
+-- CreateEnum
+CREATE TYPE "UserRole" AS ENUM ('admin', 'customer', 'driver');
 
-  - You are about to drop the `Post` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `Product` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `User` table. If the table is not empty, all the data it contains will be lost.
-
-*/
 -- CreateEnum
 CREATE TYPE "PaymentStatus" AS ENUM ('PENDING', 'CANCELED', 'NOTPAID', 'PAID');
-
--- AlterEnum
-ALTER TYPE "UserRole" ADD VALUE 'driver';
-
--- DropTable
-DROP TABLE "Post";
-
--- DropTable
-DROP TABLE "Product";
-
--- DropTable
-DROP TABLE "User";
 
 -- CreateTable
 CREATE TABLE "users" (
@@ -35,17 +18,6 @@ CREATE TABLE "users" (
     "image" VARCHAR(255),
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "prioducts" (
-    "id" TEXT NOT NULL,
-    "name" VARCHAR(255) NOT NULL,
-    "price" DOUBLE PRECISION NOT NULL DEFAULT 0,
-    "description" TEXT,
-    "categoryId" TEXT,
-
-    CONSTRAINT "prioducts_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -80,17 +52,28 @@ CREATE TABLE "orders" (
     CONSTRAINT "orders_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "products" (
+    "id" TEXT NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "price" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "description" TEXT,
+    "categoryId" TEXT,
+
+    CONSTRAINT "products_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
-
--- AddForeignKey
-ALTER TABLE "prioducts" ADD CONSTRAINT "prioducts_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "categories"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "orderItems" ADD CONSTRAINT "orderItems_productId_fkey" FOREIGN KEY ("productId") REFERENCES "prioducts"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "orderItems" ADD CONSTRAINT "orderItems_orderId_fkey" FOREIGN KEY ("orderId") REFERENCES "orders"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "orderItems" ADD CONSTRAINT "orderItems_productId_fkey" FOREIGN KEY ("productId") REFERENCES "products"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "orders" ADD CONSTRAINT "orders_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "products" ADD CONSTRAINT "products_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "categories"("id") ON DELETE SET NULL ON UPDATE CASCADE;

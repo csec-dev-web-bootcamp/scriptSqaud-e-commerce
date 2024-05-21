@@ -17,11 +17,11 @@ exports.$Enums = {}
 
 /**
  * Prisma Client JS version: 5.13.0
- * Query Engine version: b9a39a7ee606c28e3455d0fd60e78c3ba82b1a2b
+ * Query Engine version: e9771e62de70f79a5e1c604a2d7c8e2a0a874b48
  */
 Prisma.prismaVersion = {
   client: "5.13.0",
-  engine: "b9a39a7ee606c28e3455d0fd60e78c3ba82b1a2b"
+  engine: "e9771e62de70f79a5e1c604a2d7c8e2a0a874b48"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -155,7 +155,7 @@ exports.Prisma.OrderScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.PrioductsScalarFieldEnum = {
+exports.Prisma.ProductsScalarFieldEnum = {
   id: 'id',
   name: 'name',
   price: 'price',
@@ -195,7 +195,7 @@ exports.Prisma.ModelName = {
   Category: 'Category',
   OrderItem: 'OrderItem',
   Order: 'Order',
-  prioducts: 'prioducts'
+  products: 'products'
 };
 
 /**
