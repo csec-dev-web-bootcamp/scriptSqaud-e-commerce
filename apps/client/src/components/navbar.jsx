@@ -1,67 +1,65 @@
+"use client"
 import Link from "next/link";
 import SideCart from "./sidecart";
 import Slide from "./slide";
-import {
-  Menubar,
-  MenubarCheckboxItem,
-  MenubarContent,
-  MenubarItem,
-  MenubarMenu,
-  MenubarRadioGroup,
-  MenubarRadioItem,
-  MenubarSeparator,
-  MenubarShortcut,
-  MenubarSub,
-  MenubarSubContent,
-  MenubarSubTrigger,
-  MenubarTrigger,
-} from "./ui/menubar";
+import { useState } from "react";
+import Profile from "./profile";
 
 export default function NavBar() {
-  return (
-    <Menubar className="p-8">
-      <MenubarMenu>
-        <MenubarTrigger className="text-md">
-          <Link href="/">Logo</Link>
-        </MenubarTrigger>
-      </MenubarMenu>
-      <MenubarMenu>
-        {/* <MenubarTrigger className="flex-shrink-0 flex items-center">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="py-2 px-4 rounded-md focus:outline-none focus:ring focus:ring-black"
-          />
-          <select
-            className="text-white hover:bg-gray-700 p-2 rounded-md bg-transparent border-none focus:outline-none"
-            id="category"
-          >
-            <option value="all">All category</option>
-            <option value="electronics">Electronics</option>
-            <option value="women-clothing">Women's Clothing</option>
-            <option value="men-clothing">Men's Clothing</option>
-          </select>
-          <button className="ml-2 bg-black text-white px-4 py-2 rounded-md  focus:outline-none ">
-            Search
-          </button>
-        </MenubarTrigger> */}
-      </MenubarMenu>
-      <MenubarMenu>
-        <Link href="/shop">
-          <MenubarTrigger className="text-md">Shop</MenubarTrigger>
-        </Link>
-      </MenubarMenu>
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
 
-      <MenubarMenu className="ml-6">
-        <MenubarTrigger className="text-md" >
+  const toggleProfile = () => {
+    setIsProfileOpen(!isProfileOpen);
+  };
+  return (
+    <div className=" flex  items-center border justify-between p-3">
+      
+        <div className="text-md">
+          <Link href="/">Logo</Link>
+        </div>
+       < div className="  flex items-center justify-center ">
+      <input
+        type="text"
+        className=" text-sm border  border-black pr-16  px-3 py-1  focus:outline-none"
+        placeholder="Search..."
+      
+      />
+      <select
+        className="border border-black text-sm py-1   focus:outline-none"
+        
+      >
+        <option value="">All Category</option>
+        <option value="category1">  women</option>
+        <option value="category2">men</option>
+        <option value="category3">electronic</option>
+      </select>
+      <button
+        className="bg-black hover:bg-black  text-white text-sm font-bold px-4 py-1   focus:outline-none"
+        
+      >
+        Search
+      </button>
+    </div>
+         <ul className="flex  font-thin text-xs space-x-3">
+         <li  onClick={toggleProfile} className="rounded items-center text-md">
+        <img src="/user (2).png" alt="user" className="h-3" />
+          <hl>Profile</hl>
+      {isProfileOpen && <Profile />}
+          </li>
+          <li className="text-md ">
+          <img src="/shopping-bag.png" alt="shop" className="h-3" />
+            <Link href="/shop">Shop</Link>
+            </li>
+    
+        <li className="text-md ml-6 " >
           <SideCart />
-        </MenubarTrigger>
-        <MenubarMenu>
-          <Link href="/checkout">
-            <MenubarTrigger className="text-md"> Checkout </MenubarTrigger>
-          </Link>
-        </MenubarMenu>
-      </MenubarMenu>
-    </Menubar>
+        </li>
+      <li className="text-md ">
+      <img src="/like.png" alt="user" className="h-3" />
+         <Link href="/checkout"> Orders </Link>
+          </li>
+      </ul>
+
+    </div>
   );
 }
