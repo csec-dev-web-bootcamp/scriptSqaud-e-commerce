@@ -125,6 +125,12 @@ exports.Prisma.ProductScalarFieldEnum = {
   description: 'description'
 };
 
+exports.Prisma.PostScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content'
+};
+
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -154,6 +160,7 @@ exports.UserRole = exports.$Enums.UserRole = {
 
 exports.Prisma.ModelName = {
   Product: 'Product',
+  Post: 'Post',
   User: 'User'
 };
 

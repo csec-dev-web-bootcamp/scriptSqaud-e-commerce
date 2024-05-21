@@ -3,7 +3,7 @@ import Image from "next/image";
 
 function ProductDetail(props) {
   const params = props.params;
-  const product = productData.filter((data) => {
+  const product = productData?.filter((data) => {
     if (parseInt(data.id) === parseInt(params.productId)) console.log(data.id);
     return parseInt(data.id) === parseInt(params.productId);
   });
@@ -14,7 +14,7 @@ function ProductDetail(props) {
         <div className="grid items-start grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="w-full lg:sticky top-0 sm:flex gap-2">
             <Image
-              src="/vintage.jpg"
+              src={`/${product[0].image}`}
               width={500}
               height={500}
               alt="Picture of the author"

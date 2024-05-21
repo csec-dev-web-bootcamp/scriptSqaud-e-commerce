@@ -29,9 +29,9 @@ const Carousel = ({ data }) => {
   }, [data.length]);
 
   return (
-    <div className="relative">
+    <div className="relative ">
       {/* Carousel container */}
-      <div className="relative h-72 w-full border overflow-hidden rounded-md">
+      <div className="relative   w-full border overflow-hidden rounded-md" style={{"height": "40rem"}}>
         {/* Image container */}
         <div
           ref={carouselRef}
@@ -48,7 +48,7 @@ const Carousel = ({ data }) => {
               style={{ backgroundImage: `url(${v.image})` }}
             >
               {/* New Collection text and Order Now button */}
-              <div className="absolute  w-full  p-10  text-white">
+              <div className="absolute mt-10 text-3xl w-full  p-10  text-white">
                 <h1 className="text-2xl font-semibold">Get up to 30% off <br />
                 New  Arrivals
                 </h1>
@@ -64,16 +64,16 @@ const Carousel = ({ data }) => {
         <button
           disabled={currentImg === 0}
           onClick={() => setCurrentImg((prev) => prev - 1)}
-          className={`border px-4 py-2 font-bold ${currentImg === 0 && 'opacity-50'}`}
+          className={`text-3xl px-4 py-2 font-bold ${currentImg === 0 && 'opacity-50'}`}
         >
-          {'<'}
+          &lt;
         </button>
         <button
           disabled={currentImg === data.length - 1}
           onClick={() => setCurrentImg((prev) => prev + 1)}
-          className={`border px-4 py-2 font-bold ${currentImg === data.length - 1 && 'opacity-50'}`}
+          className={`text-3xl px-4 py-2 font-bold ${currentImg === data.length - 1 && 'opacity-50'}`}
         >
-          {'>'}
+          &gt;
         </button>
       </div>
     </div>

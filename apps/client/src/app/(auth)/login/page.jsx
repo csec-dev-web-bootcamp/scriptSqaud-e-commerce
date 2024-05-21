@@ -16,16 +16,19 @@ import {
 } from "@app/client/components/ui/form";
 import { Input } from "@app/client/components/ui/input";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { get } from "http";
 
 const formSchema = z.object({
   email: z.string().email({
     message: "Wrong email ",
   }),
-  password: z.string().min(8, {
+  password: z.string().min(4, {
     message: "Password must be 8 characters long",
   }),
 });
 function Login() {
+  const router = useRouter()
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -34,7 +37,23 @@ function Login() {
     },
   });
   function onSubmit(values) {
-    console.log(values);
+    fetch('http://localhost:8000/auth/login', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(values),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message === 'success') {
+          localStorage.setItem('jwt-token', data.token)
+          console.log(localStorage.getItem('jwt-token'))
+          router.push('/')
+        } else {
+          alert(data.message)
+        }
+      })
   }
 
   return (

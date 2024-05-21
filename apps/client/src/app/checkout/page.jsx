@@ -6,8 +6,8 @@ function CheckOut() {
   const cartData = useCart((state) => state.cartProducts);
   const total = cartData.map((data) => data.price).reduce((total, val)=> (total + val), 0)
   return (
-    <div classNameName=" ">
-      <div className="grid gap-5 sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-22">
+    
+      <div className="grid gap-5 sm:px-10 lg:grid-cols-2 lg:px-20 h-full xl:px-22">
         <div className="px-4 pt-8">
           <p className="text-3xl font-medium">Order Summary</p>
           <p className="text-gray-400 border-b border-blue-100 py-3">
@@ -129,7 +129,7 @@ function CheckOut() {
           </button>
         </div>
       </div>
-    </div>
+    
   );
 }
 export default CheckOut;
