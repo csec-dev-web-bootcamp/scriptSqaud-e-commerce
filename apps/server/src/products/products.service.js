@@ -9,12 +9,12 @@ export async function createProduct(data) {
 }
 
 export async function getManyProducts(query) {
-  const products = await prisma.product.findMany();
+  const products = await prisma.products.findMany();
   return products;
 }
 
 export async function getOneProduct(id) {
-  const product = await prisma.product.findFirst({ where: { id } });
+  const product = await prisma.products.findFirst({ where: { id } });
   if (!product) {
     throw new HttpException('Product not found', 404);
   }
@@ -22,11 +22,11 @@ export async function getOneProduct(id) {
 }
 
 export async function updateProduct(id, data) {
-  const productExist = await prisma.product.findFirst({ where: { id } });
+  const productExist = await prisma.products.findFirst({ where: { id } });
   if (!productExist) {
     throw new HttpException('Product not found', 404);
   }
-  const product = await prisma.product.update({
+  const product = await prisma.products.update({
     where: { id },
     data: data,
   });
@@ -35,10 +35,10 @@ export async function updateProduct(id, data) {
 }
 
 export async function deleteProduct(id) {
-  const productExist = await prisma.product.findFirst({ where: { id } });
+  const productExist = await prisma.products.findFirst({ where: { id } });
   if (!productExist) {
     throw new HttpException('Product not found', 404);
   }
-  const product = await prisma.product.findFirst({ where: { id } });
+  const product = await prisma.products.findFirst({ where: { id } });
   return product;
 }

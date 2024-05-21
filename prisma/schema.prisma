@@ -25,20 +25,20 @@ model User {
 }
 
 model Category {
-  id        String      @id @default(uuid())
-  name      String      @db.VarChar(255)
-  prioducts products[]
+  id       String     @id @default(uuid())
+  name     String     @db.VarChar(255)
+  products products[]
 
   @@map("categories")
 }
 
 model OrderItem {
-  id         String    @id @default(uuid())
-  quantity   Int       @default(1)
-  totalPrice Float?    @default(0)
+  id         String   @id @default(uuid())
+  quantity   Int      @default(1)
+  totalPrice Float?   @default(0)
   orderId    String?
   productId  String
-  order      Order?    @relation(fields: [orderId], references: [id])
+  order      Order?   @relation(fields: [orderId], references: [id])
   product    products @relation(fields: [productId], references: [id])
 
   @@map("orderItems")
@@ -66,6 +66,7 @@ model products {
   categoryId  String?
   orderItems  OrderItem[]
   categories  Category?   @relation(fields: [categoryId], references: [id])
+  image       String      @db.VarChar(255)
 }
 
 enum UserRole {

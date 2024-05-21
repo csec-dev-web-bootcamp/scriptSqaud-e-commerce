@@ -16,29 +16,34 @@ import {
 } from "@app/client/components/ui/form";
 import { Input } from "@app/client/components/ui/input";
 import Image from "next/image";
+import { register } from "@app/client/data/auth/auth";
+import { useRouter } from "next/navigation";
 
 const formSchema = z
   .object({
-    username: z.string().min(2, {
+    firstName: z.string().min(2, {
+      message: "Username must be at least 2 characters.",
+    }),
+    lastName: z.string().min(2, {
       message: "Username must be at least 2 characters.",
     }),
     email: z.string().email({
       message: "Wrong email ",
     }),
-    street: z
-      .string()
-      .min(3, { message: "Wrong Street address " })
-      .max(50, { message: "String exceded 50 characters" }),
+    // street: z
+    //   .string()
+    //   .min(3, { message: "Wrong Street address " })
+    //   .max(50, { message: "String exceded 50 characters" }),
 
-    city: z
-      .string()
-      .min(3, { message: "Wrong Street address " })
-      .max(50, { message: "String exceded 50 characters" }),
-    state: z
-      .string()
-      .min(3, { message: "Wrong Street address " })
-      .max(50, { message: "String exceded 50 characters" }),
-    zip: z.string(),
+    // city: z
+    //   .string()
+    //   .min(3, { message: "Wrong Street address " })
+    //   .max(50, { message: "String exceded 50 characters" }),
+    // state: z
+    //   .string()
+    //   .min(3, { message: "Wrong Street address " })
+    //   .max(50, { message: "String exceded 50 characters" }),
+    // zip: z.string(),
 
     password: z.string().min(8, {
       message: "Password must be 8 characters long",
@@ -60,19 +65,30 @@ export default function ProfileForm() {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      firstName: "",
+      lastName: "",
       email: "",
-      street: "",
-      city: "",
-      state: "",
-      zip: "",
+      // street: "",
+      // city: "",
+      // state: "",
+      // zip: "",
       password: "",
-      confirmPassword: "",
+      // confirmPassword: "",
     },
   });
-
+  const route = useRouter()
   function onSubmit(values) {
-    console.log(values);
+    
+    const {confirmPassword, ...rest} = values
+    console.log(rest)
+    const res = register(rest)
+        console.log({ res });
+        if (res.error) {
+            alert(JSON.stringify(res.error))
+            return
+        }
+        alert(`You have successfully`)
+        route.push("/")
   }
 
   return (
@@ -86,10 +102,22 @@ export default function ProfileForm() {
           <form onSubmit={form.handleSubmit(onSubmit)} className="text-slate-600 font-semibold text-lg">
             <FormField
               control={form.control}
-              name="username"
+              name="firstName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel>First Name</FormLabel>
+                  <FormControl>
+                    <Input className="w-96"placeholder="" {...field} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+             <FormField
+              control={form.control}
+              name="lastName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Last Name</FormLabel>
                   <FormControl>
                     <Input className="w-96"placeholder="" {...field} />
                   </FormControl>
@@ -108,7 +136,7 @@ export default function ProfileForm() {
                 </FormItem>
               )}
             />
-            <FormField
+            {/* <FormField
               control={form.control}
               name="street"
               render={({ field }) => (
@@ -155,7 +183,7 @@ export default function ProfileForm() {
                   </FormControl>
                 </FormItem>
               )}
-            />
+            /> */}
             <FormField
               control={form.control}
               name="password"

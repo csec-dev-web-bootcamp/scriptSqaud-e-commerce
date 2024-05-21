@@ -7,10 +7,8 @@ import {
   updatePost,
 } from "./posts.service";
 import { createPostPipe, updatePostPipe } from "./post.pipe";
-import { middleware } from "../middlewares/role";
 
 const postsController = express.Router();
-postsController.use(middleware)
 postsController.get("/",  async (req, res) => {
   const posts = await getManyPosts();
   return res.json(posts);

@@ -11,7 +11,7 @@ const ProductsPage = ({ products }) => {
   }
   return (
     <div className="container">
-      <h1 className="text-xl font-semibold p-3">Latest Products</h1>
+      
       <ul className=" grid grid-cols-4 gap-2 mb-3">
         {products.map((product) => (
           <li

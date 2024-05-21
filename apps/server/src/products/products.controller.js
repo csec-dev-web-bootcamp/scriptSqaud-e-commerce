@@ -17,6 +17,7 @@ productsController.get(
   '/',
   asyncHandler(async (req, res) => {
     const products = await getManyProducts();
+    console.log(products)
     return res.json(products);
   }),
 );
