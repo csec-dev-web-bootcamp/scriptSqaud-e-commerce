@@ -1,2 +1,2 @@
-export * from './validations/post.validation'
-export * from './helpers/format-zod-error'
+export * from '../../../apps/server/src/posts/post.validation'
+export * from '../../../apps/server/src/constants/format-zod-error'

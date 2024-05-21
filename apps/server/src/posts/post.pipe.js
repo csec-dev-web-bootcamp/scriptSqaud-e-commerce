@@ -1,5 +1,6 @@
-import { createPostSchema, formatZodError } from "@lib/common";
-import { HttpException } from "../helpers/http-exception";
+import { createPostSchema } from "./post.validation"
+import {formatZodError } from "../constants/format-zod-error";
+import { HttpException } from "../constants/http-exception";
 
 export function createPostPipe(req, res, next) {
   const data = req.body;

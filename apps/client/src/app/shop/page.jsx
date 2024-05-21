@@ -1,12 +1,16 @@
 import ProductsPage from "@app/client/components/productList";
-import { productData } from "@app/client/data/product";
+
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@app/client/components/ui/collapsible";
+import { getManyProducts } from "../../data/product";
+const productData = await getManyProducts()
+
 
 function Shop() {
+  
   return (
     <div className="h-full  grid grid-cols-6 ">
       <div className="w-full m-8 mt-9 col-span-1">

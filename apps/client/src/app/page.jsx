@@ -1,22 +1,17 @@
 import ProductsPage from "../components/productList";
-import SideCart from "../components/sidecart";
-import { productData } from "../data/products";
+import { getManyProducts} from "../data/product";
 import Carousel from "../components/DemoSlider";
 
-const DATA = [
-    { image: '/cloth.jpg' },
-    { image: '/elec.jpg'},
-    { image: '/brand.webp'},
-  ]
-
-// import NavBar from "../components/navbar";
+const produc = await getManyProducts()
+const DATA = produc?.map((data) => data.image)
 
 export default function Page() {
-  
+    
     return (
-        <main  className="container">
+        <main  className="">
             <Carousel data={DATA} />
-            <ProductsPage products ={productData}  />
+            <h1 className="text-xl font-semibold p-3">Latest Products</h1>
+            <ProductsPage products ={produc}  />
             {/* <Cart /> */}
         </main>
     );
