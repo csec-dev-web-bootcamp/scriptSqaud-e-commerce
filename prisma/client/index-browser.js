@@ -16,11 +16,11 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 5.13.0
+ * Prisma Client JS version: 5.14.0
  * Query Engine version: e9771e62de70f79a5e1c604a2d7c8e2a0a874b48
  */
 Prisma.prismaVersion = {
-  client: "5.13.0",
+  client: "5.14.0",
   engine: "e9771e62de70f79a5e1c604a2d7c8e2a0a874b48"
 }
 
@@ -132,6 +132,13 @@ exports.Prisma.UserScalarFieldEnum = {
   image: 'image'
 };
 
+exports.Prisma.ProfileScalarFieldEnum = {
+  id: 'id',
+  phone: 'phone',
+  address: 'address',
+  userId: 'userId'
+};
+
 exports.Prisma.CategoryScalarFieldEnum = {
   id: 'id',
   name: 'name'
@@ -193,6 +200,7 @@ exports.PaymentStatus = exports.$Enums.PaymentStatus = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  Profile: 'Profile',
   Category: 'Category',
   OrderItem: 'OrderItem',
   Order: 'Order',

@@ -1,4 +1,3 @@
-import { Prisma } from '@repo/prisma-client';
 import prisma from '../helpers/prisma-client';
 
 export async function createCategory(data) {
