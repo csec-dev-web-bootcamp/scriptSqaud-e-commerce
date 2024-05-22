@@ -2,6 +2,8 @@ import "./globals.css";
 import { DataProvider } from "@app/client/components/admincomponent/globalcontext/DataContext";
 
 import Navigation from "@app/client/components/admincomponent/navigation/navigation";
+import { getManyCategories } from "@app/client/data/catagory.data";
+import { getManyProducts } from "@app/client/data/product.data";
 
 export const metadata = {
   title: "Create Next App",
@@ -10,10 +12,12 @@ export const metadata = {
 
 export default async function AdminLayout({ children }) {
   const products = await getManyProducts();
+  const categories = await getManyCategories();
+  console.log(categories)
   return (
     <div className="body_admin">
       <Navigation />
-      <DataProvider products={products} />
+      <DataProvider products={products} categories={categories} />
 
       <div className="body">
         <div>{children}</div>

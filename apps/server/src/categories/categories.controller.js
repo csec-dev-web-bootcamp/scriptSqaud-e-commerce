@@ -1,5 +1,5 @@
 import express from "express";
-import { createCategoryPipe, updateCategoryPipe } from "./categories.pipe";
+// import { createCategoryPipe, updateCategoryPipe } from "./categories.pipe";
 import {
   createCategory,
   deleteCategory,
@@ -15,7 +15,7 @@ categoriesController.get("/", async (eq, res) => {
   return res.json(categories);
 });
 
-categoriesController.post("/", createCategoryPipe, async (eq, res) => {
+categoriesController.post("/",  async (eq, res) => {
   const data = req.body;
   const category = await createCategory(data);
   return res.json(category);
@@ -27,7 +27,7 @@ categoriesController.get("/:id", async (eq, res) => {
   return res.json(category);
 });
 
-categoriesController.put("/:id", updateCategoryPipe, async (eq, res) => {
+categoriesController.put("/:id",  async (eq, res) => {
   const data = req.body;
   const { id } = req.params;
   const category = await updateCategory(id, data);

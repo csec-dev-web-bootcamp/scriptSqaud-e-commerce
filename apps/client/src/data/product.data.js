@@ -1,27 +1,33 @@
-"use server";
 
-import fetcher from "./fetcher";
+'use server';
 
-export async function getManyProducts(query) {
-  const res = await fetcher(`/products?${query ?? ""}`, {
-    method: "GET",
-    next: { tags: ["ProductS"], revalidate: 3600 },
-  });
-  if (!res.success) {
-    return res.error;
-  }
-  return res.data;
+import fetcher from './fetcher';
+import revalidate from './revalidate';
+
+export async function createProduct(data,) {
+    const product = fetcher.post('/products', data);
+    revalidate({ tags: ['PRODUCTS'] });
+    return product;
 }
 
-export async function getOneProduct(id) {
-  const res = await fetcher(`/products/${id}`, {
-    method: "GET",
-    next: { tags: [`ProductS:${id}`], revalidate: 3600 },
-  });
-  if (!res.success) {
-    return res.error;
-  }
-  return res.data;
+export async function getManyProducts() {
+    const res = await fetcher.get('/products');
+    return res.data;
 }
 
+export async function getOneProduct(id,) {
+    const res = await fetcher.get(`/products/${id}`);
+    return res.data;
+}
+
+export async function updateProduct(id, data) {
+    const res = await fetcher.put(`/products/${id}`, data);
+    
+    return res.data;
+}
+
+export async function deleteProduct(id) {
+    const res = await fetcher.get(`/products/${id}`);
+    return res.data;
+}
 

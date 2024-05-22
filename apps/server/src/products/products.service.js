@@ -2,7 +2,7 @@ import { HttpException } from '../constants/http-exception';
 import prisma from '../helpers/prisma-client';
 
 export async function createProduct(data) {
-  const product = await prisma.product.create({
+  const product = await prisma.products.create({
     data: data,
   });
   return product;

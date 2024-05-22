@@ -1,5 +1,6 @@
 "use client";
 import { UserData } from '@app/client/data/admindata/userdata';
+import { useEffect } from 'react';
 import { create } from "zustand";
 
 export const useGlobalState = create((set) => ({
@@ -7,27 +8,28 @@ export const useGlobalState = create((set) => ({
   categories: [],
   users: [],
   setProducts: (products) =>
-    set((state) => {
+    set(() => {
       return { products };
     }),
-  setCatagories: (products) =>
-    set((state) => {
-      return { products };
+  setCatagories: (categories) =>
+    set(() => {
+      return { categories };
     }),
-  setUsers: (products) =>
-    set((state) => {
-      return { products };
+  setUsers: (users) =>
+    set(() => {
+      return { users };
     }),
 }));
 
-export const DataProvider = ({ products }) => {
+export const DataProvider = ({ products, categories }) => {
   const globalState = useGlobalState();
   useEffect(() => {
-    globalState.setProduct(producs);
-    globalState.setProduct(producs);
-  }, [producs]);
+    globalState.setProducts(products);
+    globalState.setCatagories(categories)
+    
+  }, [products]);
 
   return <></>;
 };
 
-export default DataContext;
+

@@ -2,8 +2,9 @@
 
 import { useRouter } from 'next/navigation';
 import React, { useContext, useState } from 'react';
-import DataContext from '@app/client/components/admincomponent/globalcontext/DataContext';
+import DataContext, { useGlobalState } from '@app/client/components/admincomponent/globalcontext/DataContext';
 import EditcardModified from '@app/client/components/admincomponent/editcardmodified/editcardmod';
+import { createProduct } from '@app/client/data/product.data';
 
 
 export default function AddProduct() {
@@ -17,7 +18,9 @@ export default function AddProduct() {
     });
 
     const router = useRouter();
-    const { productdata, updateproductData } = useContext(DataContext);
+    // const { productdata, updateproductData } = useContext(DataContext);
+    const productdata = useGlobalState((state) => state.products)
+  const updateproductData = useGlobalState((state) => state.setProducts)
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -29,12 +32,13 @@ export default function AddProduct() {
         const newProductData = {
             id: newId,
             name: formData.name,
-            price: formData.prize,
+            price: parseFloat(formData.prize),
             description: formData.description,
             quantity: formData.quantity,
         };
 
         const updatedProductData = [...productdata, newProductData];
+        createProduct(newProductData)
         updateproductData(updatedProductData);
         router.back();
     };

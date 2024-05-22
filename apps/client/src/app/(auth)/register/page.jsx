@@ -18,6 +18,7 @@ import { Input } from "@app/client/components/ui/input";
 import Image from "next/image";
 import { register } from "@app/client/data/auth/auth";
 import { useRouter } from "next/navigation";
+import useMutation from "@app/client/hooks/use-mutation";
 
 const formSchema = z
   .object({
@@ -30,25 +31,10 @@ const formSchema = z
     email: z.string().email({
       message: "Wrong email ",
     }),
-    // street: z
-    //   .string()
-    //   .min(3, { message: "Wrong Street address " })
-    //   .max(50, { message: "String exceded 50 characters" }),
-
-    // city: z
-    //   .string()
-    //   .min(3, { message: "Wrong Street address " })
-    //   .max(50, { message: "String exceded 50 characters" }),
-    // state: z
-    //   .string()
-    //   .min(3, { message: "Wrong Street address " })
-    //   .max(50, { message: "String exceded 50 characters" }),
-    // zip: z.string(),
-
-    password: z.string().min(8, {
+    password: z.string().min(6, {
       message: "Password must be 8 characters long",
     }),
-    confirmPassword: z.string().min(8, {
+    confirmPassword: z.string().min(6, {
       message: "Password must be 8 characters long",
     }),
   })
@@ -68,38 +54,46 @@ export default function ProfileForm() {
       firstName: "",
       lastName: "",
       email: "",
-      // street: "",
-      // city: "",
-      // state: "",
-      // zip: "",
       password: "",
-      // confirmPassword: "",
     },
   });
-  const route = useRouter()
+  const route = useRouter();
+  const { isMutating, startMutation } = useMutation();
+
   function onSubmit(values) {
-    
-    const {confirmPassword, ...rest} = values
-    console.log(rest)
-    const res = register(rest)
-        console.log({ res });
-        if (res.error) {
-            alert(JSON.stringify(res.error))
-            return
-        }
-        alert(`You have successfully`)
-        route.push("/")
+    const { confirmPassword, ...rest } = values;
+    startMutation(async () => {
+      const res = await register(rest);
+      console.log({ res });
+      if (res.error) {
+        alert(JSON.stringify(res.error));
+        return;
+      }
+      alert(`You have successfully`);
+      route.push("/");
+    });
   }
 
   return (
     <div className="grid grid-cols-2">
       <div>
-        <Image className="w-full" width="500" height="100" src="/store.jpg" alt="register" />
+        <Image
+          className="w-full"
+          width="500"
+          height="100"
+          src="/store.jpg"
+          alt="register"
+        />
       </div>
       <div className="container w-full ">
-        <p className="mt-10 mb-4 font-semibold text-3xl text-blue-600 ">Create Account </p>
+        <p className="mt-10 mb-4 font-semibold text-3xl text-blue-600 ">
+          Create Account{" "}
+        </p>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="text-slate-600 font-semibold text-lg">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="text-slate-600 font-semibold text-lg"
+          >
             <FormField
               control={form.control}
               name="firstName"
@@ -107,19 +101,19 @@ export default function ProfileForm() {
                 <FormItem>
                   <FormLabel>First Name</FormLabel>
                   <FormControl>
-                    <Input className="w-96"placeholder="" {...field} />
+                    <Input className="w-96" placeholder="" {...field} />
                   </FormControl>
                 </FormItem>
               )}
             />
-             <FormField
+            <FormField
               control={form.control}
               name="lastName"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Last Name</FormLabel>
                   <FormControl>
-                    <Input className="w-96"placeholder="" {...field} />
+                    <Input className="w-96" placeholder="" {...field} />
                   </FormControl>
                 </FormItem>
               )}
@@ -128,11 +122,11 @@ export default function ProfileForm() {
               control={form.control}
               name="email"
               render={({ field }) => (
-                <FormItem >
-                  <FormLabel >Email</FormLabel>
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input className="w-96" placeholder="" {...field} />
-                  </FormControl>                 
+                  </FormControl>
                 </FormItem>
               )}
             />
@@ -191,7 +185,12 @@ export default function ProfileForm() {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input className="w-96" placeholder="" {...field} />
+                    <Input
+                      type="password"
+                      className="w-96"
+                      placeholder=""
+                      {...field}
+                    />
                   </FormControl>
                 </FormItem>
               )}
@@ -203,12 +202,19 @@ export default function ProfileForm() {
                 <FormItem>
                   <FormLabel>Confirm Password</FormLabel>
                   <FormControl>
-                    <Input className="w-96" placeholder="" {...field} />
+                    <Input
+                      type="password"
+                      className="w-96"
+                      placeholder=""
+                      {...field}
+                    />
                   </FormControl>
                 </FormItem>
               )}
             />
-            <Button className="mt-3  bg-blue-600 w-64 " type="submit">Submit</Button>
+            <Button className="mt-3  bg-blue-600 w-64 " type="submit">
+              Submit
+            </Button>
           </form>
         </Form>
       </div>

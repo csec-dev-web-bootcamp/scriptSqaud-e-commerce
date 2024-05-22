@@ -25,10 +25,10 @@ export default function RootLayout({ children }) {
           fontSans.variable
         )}
       >
-        <NavBar />
-        <main>{children}</main>
+        {/* <NavBar /> */}
+        {children}
 
-        <Footer />
+        {/* <Footer /> */}
       </body>
     </html>
   );

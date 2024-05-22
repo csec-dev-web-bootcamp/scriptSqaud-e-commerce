@@ -2,19 +2,22 @@
 
 import { useRouter } from 'next/navigation';
 import React, { useContext, useState } from 'react';
-import DataContext from '@app/client/components/admincomponent/globalcontext/DataContext';
+import DataContext, { useGlobalState } from '@app/client/components/admincomponent/globalcontext/DataContext';
 import EditCatagoryModified from '@app/client/components/admincomponent/editcatmod/editcatagorymodifies';
 
 export default function AddProduct() {
     const [formData, setFormData] = useState({
         name: '',
         description: '',
-        image: '',
-        preview: ''
+        // image: '',
+        // preview: ''
     });
 
     const router = useRouter();
-    const { categoryData, updateCatagoryData } = useContext(DataContext);
+    // const { categoryData, updateCatagoryData } = useContext(DataContext);
+    const categoryData = useGlobalState((state) => state.categories)
+    const updateCatagoryData = useGlobalState((state) => state.setCategories)
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();

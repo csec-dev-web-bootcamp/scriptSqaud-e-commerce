@@ -2,9 +2,44 @@ POST   http://localhost:8000/auth/register
 Content-Type: application/json
  
 {
-    "firstName": "lemma",
-    "lastName": "Tariku",
-    "email": "lematariu@gmail.com",
+    "firstName": "admin",
+    "lastName": "admin",
+    "email": "adminn@gmail.com",
+    "password":"tarikuuuu",
+    "role": "ADMIN"
+}
+###
+GET http://localhost:8000/category
+
+###
+POST   http://localhost:8000/auth/login
+Content-Type: application/json
+ 
+{
+    
+    "email": "adminn@gmail.com",
     "password":"tarikuuuu"
 }
+### 
+PUT    http://localhost:8000/products/7
+Content-Type: application/json
+ 
+{
+  "name": "Product 3",
+  "description": "Descr",
+  "price": 50.0
+ }
+###
+ 
+POST     http://localhost:8000/products
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNWFiYWIxNi1iMDhjLTQwMDItOTc1Zi03ZWI4MzM0NGRmZTUiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MTYzODAzMDIsImV4cCI6MTcxNjQ2NjcwMn0.s6knV-RBLdy_sPy94ANR6FLYCc-6OIGxMrA1scWo7Po
 
+{
+  "id": "1659",
+  "name": "Product 5",
+  "description": "Descr",
+  "price": 50.0,
+  "categoryId": "5",
+  "image": "test.jpg"
+}

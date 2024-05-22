@@ -17,7 +17,6 @@ productsController.get(
   '/',
   asyncHandler(async (req, res) => {
     const products = await getManyProducts();
-    console.log(products)
     return res.json(products);
   }),
 );
@@ -25,7 +24,7 @@ productsController.get(
 productsController.post(
   '/',
   authGuard,
-  roleGuard(['CUSTOMER', 'OWNER']),
+  roleGuard(['CUSTOMER', 'ADMIN']),
   createProductPipe,
   asyncHandler(async (req, res) => {
     const data = req.body;
@@ -49,6 +48,7 @@ productsController.put(
   updateProductPipe,
   asyncHandler(async (req, res) => {
     const data = req.body;
+    console.log(data)
     const { id } = req.params;
     const product = await updateProduct(id, data);
     return res.json(product);

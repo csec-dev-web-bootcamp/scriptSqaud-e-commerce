@@ -6,18 +6,22 @@ const roleRoutes = ["/admin"];
 
 const protectedRoutes = [...roleRoutes, "/profile", "/checkout", "/cart"];
 
-const authRoutes = ["/auth"];
+const authRoutes = ["/login"];
+
+const homeRoutes = ["/"];
 
 export async function middleware(request) {
   const pathname = request.nextUrl.pathname;
-  console.log(pathname);
   const cookieStore = cookies();
   const accessToken = cookieStore.get("accessToken")?.value;
+
   const authUser = accessToken ? jwtDecode(accessToken) : null;
 
   const isAuthPath = authRoutes.find((route) => pathname.startsWith(route));
 
   const isRolePath = roleRoutes.find((route) => pathname.startsWith(route));
+
+  const ishomePath = homeRoutes.find((route) => pathname === route);
 
   const isProtectedPath = protectedRoutes.find((route) =>
     pathname.startsWith(route)
@@ -37,7 +41,7 @@ export async function middleware(request) {
       return NextResponse.redirect(new URL("/", request.url));
     }
 
-    if (isAuthPath) {
+    if (isAuthPath || ishomePath) {
       if (roleRoutes.includes(userRolePath)) {
         return NextResponse.redirect(new URL(userRolePath, request.url));
       }

@@ -19,5 +19,6 @@ export function updateProductPipe(req, res, next) {
     throw new HttpException(formatZodError(result.error), 400);
   }
   req.body = result.data;
+  console.log(req.body)
   next();
 }

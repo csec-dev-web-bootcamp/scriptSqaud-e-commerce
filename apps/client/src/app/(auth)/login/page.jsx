@@ -18,6 +18,9 @@ import { Input } from "@app/client/components/ui/input";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { get } from "http";
+import { login } from "@app/client/data/auth/auth";
+import useMutation from "@app/client/hooks/use-mutation";
+import Link from "next/link";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -28,7 +31,8 @@ const formSchema = z.object({
   }),
 });
 function Login() {
-  const router = useRouter()
+  const router = useRouter();
+  const { isMutating, startMutation } = useMutation();
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -37,29 +41,15 @@ function Login() {
     },
   });
   function onSubmit(values) {
-    fetch('http://localhost:8000/auth/login', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify(values),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.message === 'success') {
-          localStorage.setItem('jwt-token', data.token)
-          console.log(localStorage.getItem('jwt-token'))
-          router.push('/')
-        } else {
-          alert(data.message)
-        }
-      })
+    startMutation(async () => {
+      await login(values);
+    });
   }
 
   return (
     <div
       className="bg-cover  bg-center h-screen"
-      style={{ "background-image": "url('/login.jpg')" }}
+      style={{ backgroundImage: "url('/login.jpg')" }}
     >
       <div className="py-48 px-24">
         <Form {...form} className="bg-white">
@@ -67,7 +57,9 @@ function Login() {
             onSubmit={form.handleSubmit(onSubmit)}
             className="text-slate-600 font-semibold text-lg border rounded-lg shadow-2xl bg-white w-fit p-10"
           >
-            <p className="mb-4 font-semibold text-3xl border-b-2 py-4 border-b-gray-500 ">Login </p>
+            <p className="mb-4 font-semibold text-3xl border-b-2 py-4 border-b-gray-500 ">
+              Login{" "}
+            </p>
             <FormField
               control={form.control}
               name="email"
@@ -94,11 +86,16 @@ function Login() {
               )}
             />
 
-            <Button className="mt-5 ml-10 text-gray-200 text-base bg-gray-600 w-64 " type="submit">
+            <Button
+              className="mt-5 ml-10 text-gray-200 text-base bg-gray-600 w-64 "
+              type="submit"
+              disabled={isMutating}
+            >
               Submit
             </Button>
           </form>
         </Form>
+        <Link href="/register">Register</Link>
       </div>
     </div>
   );
