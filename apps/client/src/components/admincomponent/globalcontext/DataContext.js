@@ -1,33 +1,33 @@
-"use client"
-import React, { createContext, useState } from 'react';
-import { CatagoryData } from '@app/client/data/admindata/catagoryData';
-import { productData } from '@app/client/data/product';
+"use client";
 import { UserData } from '@app/client/data/admindata/userdata';
+import { create } from "zustand";
 
-const DataContext = createContext();
+export const useGlobalState = create((set) => ({
+  products: [],
+  categories: [],
+  users: [],
+  setProducts: (products) =>
+    set((state) => {
+      return { products };
+    }),
+  setCatagories: (products) =>
+    set((state) => {
+      return { products };
+    }),
+  setUsers: (products) =>
+    set((state) => {
+      return { products };
+    }),
+}));
 
-export const DataProvider = ({ children }) => {
-  const [categoryData, setCatagoryData] = useState(CatagoryData);
+export const DataProvider = ({ products }) => {
+  const globalState = useGlobalState();
+  useEffect(() => {
+    globalState.setProduct(producs);
+    globalState.setProduct(producs);
+  }, [producs]);
 
-  const updateCatagoryData = (newData) => {
-    setCatagoryData(newData);
-  };
-  const [productdata, setproductdata] = useState(productData);
-
-  const updateproductData = (newData) => {
-    setproductdata(newData);
-  };
-
-  const [userdata, setUserData] = useState(UserData);
-
-  const updateUserData = (newData) => {
-    setUserData(newData);
-  };
-  return (
-    <DataContext.Provider value={{ categoryData,userdata, productdata,updateUserData,updateproductData,updateCatagoryData }}>
-      {children}
-    </DataContext.Provider>
-  );
+  return <></>;
 };
 
 export default DataContext;
