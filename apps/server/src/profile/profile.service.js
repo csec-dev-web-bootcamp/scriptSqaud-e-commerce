@@ -1,7 +1,7 @@
 import prisma from '../helpers/prisma-client';
 
   export const createProfile = async (userId, phone, address) => {
-    return await prisma.Profile.create({
+    return await prisma.profile.create({
         data: {
             userId: userId,
             phone: phone,
@@ -12,7 +12,7 @@ import prisma from '../helpers/prisma-client';
 };
 
 export const fetchprofile = async(userId) => {
-    return await prisma.Profile.findUnique({
+    return await prisma.profile.findUnique({
         where: {
             userId: userId
         }
@@ -20,7 +20,7 @@ export const fetchprofile = async(userId) => {
 };
 
 export const fetchProfileAddress = async(userId) => {
-    return await prisma.Profile.findUnique({
+    return await prisma.profile.findUnique({
         where: {
             userId: userId
         },
@@ -31,7 +31,7 @@ export const fetchProfileAddress = async(userId) => {
 };
 
 export const updateProfile = async (userId, profile) => {
-    return await prisma.Profile.update({
+    return await prisma.profile.update({
         where: {
             userId: userId
         },

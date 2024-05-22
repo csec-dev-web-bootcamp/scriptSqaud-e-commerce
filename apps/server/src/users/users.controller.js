@@ -1,11 +1,7 @@
 import express from 'express';
 import { authGuard } from '../auth/auth.guard';
 import { asyncHandler } from '../helpers/async-handler';
-import {
-  deleteUser,
-  getOneUser,
-  updateUser
-} from '../users/users.service';
+import { deleteUser, getOneUser,updateUser } from '../users/users.service';
 
 const usersController = express.Router();
 
@@ -17,7 +13,7 @@ usersController.get(
     return res.json(user);
   }),
 );
-usersController.put(
+usersController.patch(
   '/:id',
  
   asyncHandler(async (req, res) => {
