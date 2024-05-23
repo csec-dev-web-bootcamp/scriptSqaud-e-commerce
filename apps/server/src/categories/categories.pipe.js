@@ -1,4 +1,4 @@
-import { createCategorySchema } from "../categories/category.schema"
+import { createCategorySchema } from "./category.validation"
  import { formatZodError } from "../constants/format-zod-error";
 import { HttpException } from "../constants/http-exception";
 
