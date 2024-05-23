@@ -30,6 +30,7 @@
   "dependencies": {
     "@prisma/client": "^5.14.0",
     "argon2": "^0.40.1",
+    "axios": "^1.7.1",
     "dotenv": "^16.4.5",
     "init": "^0.1.2",
     "jsonwebtoken": "^9.0.2",

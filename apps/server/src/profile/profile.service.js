@@ -1,41 +1,57 @@
+import { HttpException } from '../constants/http-exception';
 import prisma from '../helpers/prisma-client';
 
-  export const createProfile = async (userId, phone, address) => {
-    return await prisma.profile.create({
-        data: {
-            userId: userId,
-            phone: phone,
-            address: address,
-        
-        }
-    });
-};
+export async function createProfile(data) {
+  const profile = await prisma.profile.create({
+    data: data,
+  });
+  return profile;
+}
 
-export const fetchprofile = async(userId) => {
-    return await prisma.profile.findUnique({
-        where: {
-            userId: userId
-        }
-    });
-};
+export async function getOneProfile(userId) {
+  const profile = await prisma.profile.findUnique({
+    where: { userId },
+  });
+  if (!profile) {
+    throw new HttpException('Profile not found', 404);
+  }
+  return profile;
+}
 
-export const fetchProfileAddress = async(userId) => {
-    return await prisma.profile.findUnique({
-        where: {
-            userId: userId
-        },
-        select: {
-            address: true
-        }
-    });
-};
+export async function updateProfile(userId, data) {
+  const profileExist = await prisma.profile.findUnique({
+    where: { userId },
+  });
+  if (!profileExist) {
+    throw new HttpException('Profile not found', 404);
+  }
+  const profile = await prisma.profile.update({
+    where: { userId },
+    data: data,
+  });
+  return profile;
+}
 
-export const updateProfile = async (userId, profile) => {
-    return await prisma.profile.update({
-        where: {
-            userId: userId
-        },
-        data: profile
-    });
-};
+export async function deleteProfile(userId) {
+  const profileExist = await prisma.profile.findUnique({
+    where: { userId },
+  });
+  if (!profileExist) {
+    throw new HttpException('Profile not found', 404);
+  }
+  const profile = await prisma.profile.delete({
+    where: { userId },
+  });
+  return profile;
+}
 
+export async function fetchProfileAddress(userId) {
+  const profile = await prisma.profile.findUnique({
+    where: { userId },
+    select: { address: true },
+  });
+  if (!profile) {
+    throw new HttpException('Profile not found', 404);
+  }
+  return profile;
+}

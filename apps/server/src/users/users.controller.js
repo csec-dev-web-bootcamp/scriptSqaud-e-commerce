@@ -13,7 +13,7 @@ usersController.get(
     return res.json(user);
   }),
 );
-usersController.patch(
+usersController.put(
   '/:id',
  
   asyncHandler(async (req, res) => {
