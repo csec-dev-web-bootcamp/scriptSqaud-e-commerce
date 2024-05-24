@@ -1,16 +1,12 @@
+import StarRating from "@app/client/components/starRating";
 import { getOneProduct } from "@app/client/data/product.data";
 import Image from "next/image";
 
 async function ProductDetail(props) {
   const params = props.params;
   const product =  await getOneProduct(params.productId)
-  console.log(product)
+ 
   
-  // const product = productData?.filter((data) => {
-  //   if (parseInt(data.id) === parseInt(params.productId)) console.log(data.id);
-  //   return parseInt(data.id) === parseInt(params.productId);
-  // });
-
   return (
     <div className="font-sans">
       <div className="p-6 lg:max-w-6xl max-w-2xl mx-auto">
@@ -20,7 +16,7 @@ async function ProductDetail(props) {
               src={`/${product?.image}`}
               width={500}
               height={500}
-              alt="Picture of the author"
+              alt="product"
             />
           </div>
 
@@ -35,49 +31,10 @@ async function ProductDetail(props) {
             </div>
 
             <div className="flex space-x-2 mt-4">
-              <svg
-                className="w-5 fill-gray-800"
-                viewBox="0 0 14 13"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-              </svg>
-              <svg
-                className="w-5 fill-gray-800"
-                viewBox="0 0 14 13"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-              </svg>
-              <svg
-                className="w-5 fill-gray-800"
-                viewBox="0 0 14 13"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-              </svg>
-              <svg
-                className="w-5 fill-gray-800"
-                viewBox="0 0 14 13"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-              </svg>
-              <svg
-                className="w-5 fill-[#CED5D8]"
-                viewBox="0 0 14 13"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-              </svg>
+             <StarRating />
             </div>
 
-            <div className="mt-8">
+            <div className="mt-4">
               <h3 className="text-lg font-bold text-gray-800">Sizes</h3>
               <div className="flex flex-wrap gap-4 mt-4">
                 <button
@@ -107,7 +64,7 @@ async function ProductDetail(props) {
               </div>
               <button
                 type="button"
-                className="w-full mt-4 px-4 py-3 bg-gray-800 hover:bg-gray-900 text-white font-semibold rounded"
+                className="w-full mt-4 px-4 py-3 bg-pink-950 hover:bg-slate-900 text-white font-semibold rounded"
               >
                 Add to cart
               </button>

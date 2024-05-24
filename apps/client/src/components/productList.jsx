@@ -9,7 +9,7 @@ const ProductsPage = ({ products }) => {
   
   return (
     <div className="   ">
-      <h1 className="text-3xl font-semibold p-10 ml-16 ">Latest Products</h1>
+      <h1 className="text-3xl text-pink-950 font-semibold p-10 ml-16 ">Latest Products</h1>
 
       <ul className="grid grid-cols-4 ml-24 align-middle gap-7 w-5/6  mb-3">
         {products.map((product) => (

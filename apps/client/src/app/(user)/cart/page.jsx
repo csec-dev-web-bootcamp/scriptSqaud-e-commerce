@@ -75,10 +75,10 @@ function Cart() {
         ))}
         </div>
 
-        <div className="container">
+        <div className="container h-screen">
           <p className="text-3xl ml-3 border-b-2 border-b-gray-400 rounded-t-md p-3 xl:mt-3 bg-blue-100">Order Summary</p>
           <Table>
-            <TableCaption><Button className="w-full py-5">Proceed To Checkout</Button></TableCaption>
+            <TableCaption><Button className="w-full bg-pink-950  h-full py-5">Proceed To Checkout</Button></TableCaption>
             <TableHeader>
               <TableRow>
                 <TableHead className="w-[100px] text-slate-800">data</TableHead>

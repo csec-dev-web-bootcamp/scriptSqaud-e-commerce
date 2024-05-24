@@ -43,16 +43,16 @@ const Carousel = ({ data }) => {
           {/* Map through data to render images */}
           {data.map((v) => (
             <div
-              key={v}
+              key={v.id}
               className="relative h-full w-full bg-center bg-cover shrink-0"
-              style={{ backgroundImage: `url(/${v})` }}
+              style={{ backgroundImage: `url(/${v.image})` }}
             >
               {/* New Collection text and Order Now button */}
               <div className="absolute mt-10 text-3xl w-full  p-10  text-white">
-                <h1 className="text-4xl font-semibold text-pink-900 mb-4">Member Exclusive!
+                <h1 className="text-4xl font-semibold text-slate-900 mb-4">Member Exclusive!
                 </h1>
                 <p className='text-xl mb-3  text-slate-700 font-semibold'>Sign up and get 10% off your first purchase</p>
-                <button className="mt-2 bg-pink-700 hover:bg-pink-950 text-gray-50 px-4 py-2 rounded-md">Join Now!</button>
+                <button className="mt-2 bg-pink-950 hover:bg-slate-900 text-gray-50 px-4 py-2 rounded-md">Join Now!</button>
               </div>
             </div>
           ))}

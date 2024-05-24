@@ -51,11 +51,11 @@ function Login() {
       className="bg-cover  bg-center h-screen"
       style={{ backgroundImage: "url('/login.jpg')" }}
     >
-      <div className="py-48 px-24">
-        <Form {...form} className="bg-white">
+      <div className="py-48 " style={{"padding-left":"60rem"}}>
+        <Form {...form} className="">
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="text-slate-600 font-semibold text-lg border rounded-lg shadow-2xl bg-white w-fit p-10"
+            className="text-white font-semibold text-lg  rounded-lg  w-fit p-10"
           >
             <p className="mb-4 font-semibold text-3xl border-b-2 py-4 border-b-gray-500 ">
               Login{" "}
@@ -87,15 +87,18 @@ function Login() {
             />
 
             <Button
-              className="mt-5 ml-10 text-gray-200 text-base bg-gray-600 w-64 "
+              className="mt-5 ml-16 text-white text-base  bg-pink-900 w-64 "
               type="submit"
               disabled={isMutating}
             >
               Submit
             </Button>
+            <div className="py-5">
+              If you don't have account
+              <Link href="/register" className="underline text-pink-700 ml-2 ">Register</Link>
+            </div>
           </form>
         </Form>
-        <Link href="/register">Register</Link>
       </div>
     </div>
   );

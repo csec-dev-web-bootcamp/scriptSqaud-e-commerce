@@ -1,10 +1,17 @@
 "use client"
+import { getManyProducts } from "../data/product.data";
+import { useCart } from "../data/state";
+import { useGlobalState } from "./admincomponent/globalcontext/DataContext";
+import StarRating from "./starRating";
 import { Button } from "./ui/button";
 
 function ProductCard({ product, width }) {
+  
+ 
+  const addToCart = useCart((state) => state.addToCart)
   function setCart(id) {
-    const product = products.filter((songs) => songs.id == id);
-    addToCart(product[0]);
+   
+    addToCart(product);
   }
   return (
     <div className={`group ${width} flex  flex-col p-5 overflow-hidden rounded-lg bg-gray-100 border border-gray-100 shadow-md`}>
@@ -30,31 +37,18 @@ function ProductCard({ product, width }) {
             <span className="text-xl font-bold text-slate-900">
               ${product.price}
             </span>
-            <span className="text-sm text-slate-900 line-through">
+            <span className="text-sm text-slate-900 ml-2 line-through">
               ${product.price}
             </span>
           </p>
         </div>
+      <StarRating />
       </div>
-
       <Button
         onClick={() => setCart(product.id)}
-        className="flex items-center justify-center rounded-md bg-slate-900 px-1 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
+        className="flex items-center justify-center rounded-md bg-pink-950 px-1 py-2.5 text-center text-sm font-medium text-white hover:bg-slate-900 focus:outline-none focus:ring-4 focus:ring-blue-300"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="mr-2 h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-          />
-        </svg>
+        
         Add to cart
       </Button>
     </div>

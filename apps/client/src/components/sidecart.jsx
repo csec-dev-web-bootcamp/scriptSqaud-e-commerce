@@ -1,7 +1,6 @@
 "use client";
 import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
+
 import {
   Sheet,
   SheetClose,
@@ -25,7 +24,7 @@ import Link from "next/link";
 
 export default function SideCart() {
   const cartData = useCart((state) => state.cartProducts);
-  const removeFromCart = useCart((state) => state.removeProductFromCart);
+  const removeFromCart = useCart((state) => state.removeFromCart);
   function delCart(id) {
     removeFromCart(id);
   }

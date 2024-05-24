@@ -17,8 +17,8 @@ Content-Type: application/json
  
 {
     
-    "email": "adminn@gmail.com",
-    "password":"tarikuuuu"
+    "email": "waquma@gmail.com",
+    "password":"12345678"
 }
 ### 
 PUT    http://localhost:8000/products/7
@@ -46,3 +46,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNWFiY
 
 ###
 GET http://localhost:8000/products/1
+
+###
+GET http://localhost:8000/users/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwNDZmZWEzZC1iMWU0LTRmNTQtOTk2Ny1hMzhlNDc2OGI1YTQiLCJyb2xlIjoiQ1VTVE9NRVIiLCJpYXQiOjE3MTY1NTIxNDcsImV4cCI6MTcxNjYzODU0N30.VgnA8Jgqzv8WA5UKN331PM590TNgfT-L9bVcMbrnX_c

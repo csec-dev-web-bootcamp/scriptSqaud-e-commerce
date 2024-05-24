@@ -124,7 +124,7 @@ function CheckOut() {
               <p className="text-2xl font-semibold text-gray-900">${total.toPrecision(4)}</p>
             </div>
           </div>
-          <button className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white">
+          <button className="mt-4 mb-8 w-full rounded-md bg-pink-950 px-6 py-3 font-medium text-white">
             Place Order
           </button>
         </div>
