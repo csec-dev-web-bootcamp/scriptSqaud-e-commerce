@@ -2,13 +2,13 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { jwtDecode } from "jwt-decode";
 
-const roleRoutes = ["/admin", "/dashboard" ];
+const roleRoutes = ["/admin" ];
 
 const protectedRoutes = ["./admin", "/profile", "/checkout", "/cart"];
 
 const authRoutes = ["/login"];
 
-const homeRoutes = ["/"];
+const homeRoutes = ["/dashboard"];
 
 export async function middleware(request) {
   const pathname = request.nextUrl.pathname;

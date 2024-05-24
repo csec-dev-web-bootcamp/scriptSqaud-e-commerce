@@ -11,7 +11,7 @@ export default function Page() {
       <Carousel data={DATA} />
       <div class="my-10">
         <div class="w-10/12 grid grid-cols-1 md:grid-cols-3 gap-6 mx-auto justify-center">
-          <div class="border border-primary rounded-sm px-3 py-6 flex justify-center items-center gap-5">
+          <div class="border border-slate-900 rounded-sm px-3 py-6 flex justify-center items-center gap-5">
             <img
               src="/icons/delivery-van.svg"
               alt="Delivery"
@@ -22,7 +22,7 @@ export default function Page() {
               <p class="text-gray-500 text-sm">Order over $200</p>
             </div>
           </div>
-          <div class="border border-primary rounded-sm px-3 py-6 flex justify-center items-center gap-5">
+          <div class="border border-slate-900 rounded-sm px-3 py-6 flex justify-center items-center gap-5">
             <img
               src="/icons/money-back.svg"
               alt="Delivery"
@@ -33,7 +33,7 @@ export default function Page() {
               <p class="text-gray-500 text-sm">30 days money returs</p>
             </div>
           </div>
-          <div class="border border-primary rounded-sm px-3 py-6 flex justify-center items-center gap-5">
+          <div class="border border-slate-900 rounded-sm px-3 py-6 flex justify-center items-center gap-5">
             <img
               src="/icons/service-hours.svg"
               alt="Delivery"

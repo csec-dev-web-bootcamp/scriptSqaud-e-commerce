@@ -1,4 +1,4 @@
-const Profile = () => {
+const ProfileCard = () => {
 
     
 const user = {
@@ -15,4 +15,4 @@ const user = {
   );
 }
 
-export default Profile;
+export default ProfileCard;

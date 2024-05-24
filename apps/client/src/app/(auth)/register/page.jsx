@@ -69,8 +69,7 @@ export default function ProfileForm() {
         alert(JSON.stringify(res.error));
         return;
       }
-      alert(`You have successfully`);
-      route.push("/");
+      route.push("/dashboard");
     });
   }
 
