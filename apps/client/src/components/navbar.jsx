@@ -14,7 +14,7 @@ export default function NavBar() {
   return (
     <div className=" flex top-0 bg-slate-50 m-0 items-center  justify-between p-3">
       <div className="text-md">
-        <Link href="/Dashboard">Logo</Link>
+        <Link href="/dashboard">Logo</Link>
       </div>
       <div className="  flex items-center justify-center ">
         <input

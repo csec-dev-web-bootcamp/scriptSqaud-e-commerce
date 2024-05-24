@@ -17,9 +17,9 @@ const ProductsPage = ({ products }) => {
         {products.map((product) => (
           <li
             key={product.id}
-            className=" flex flex-col w-fit justify-center rounded-md "
+            className=" flex flex-col w-fit ml-2 shadow-sm justify-center rounded-md "
           >
-            <div className="group  flex w-64 max-w-xs flex-col p-5 overflow-hidden rounded-lg bg-gray-300 border border-gray-100 shadow-md">
+            <div className="group  flex w-96 max-w-xs flex-col p-5 overflow-hidden rounded-lg bg-gray-100 border border-gray-100 shadow-md">
               <a
                 className="relative  mt-3 flex h-40 overflow-hidden rounded-xl"
                 href={`/shop/${product.id}`}
