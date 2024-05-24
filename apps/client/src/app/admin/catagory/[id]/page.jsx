@@ -5,15 +5,17 @@ import { useParams } from "next/navigation";
 import { productData } from "@app/client/data/product.data";
 import { useRouter } from "next/navigation";
 import React, { useContext } from "react";
-import DataContext, { useGlobalState } from "@app/client/components/admincomponent/globalcontext/DataContext";
+import DataContext, {
+  useGlobalState,
+} from "@app/client/components/admincomponent/globalcontext/DataContext";
 import EditCatagoryModified from "@app/client/components/admincomponent/editcatmod/editcatagorymodifies";
 
 export default function EditProduct() {
   const { id } = useParams();
 
   const [formData, setFormData] = useState({});
-  const productdata = useGlobalState((state) => state.categories  )
-  const updateproductData = useGlobalState((state) => state.setProducts)
+  const productdata = useGlobalState((state) => state.categories);
+  const updateproductData = useGlobalState((state) => state.setProducts);
   useEffect(() => {
     if (id) {
       const foundproduct = productdata.find((o) => o.id.toString() === id);
@@ -33,7 +35,6 @@ export default function EditProduct() {
     event.preventDefault();
 
     const newProductData = {
-      id: newId,
       name: formData.name,
       price: formData.prize,
       description: formData.description,

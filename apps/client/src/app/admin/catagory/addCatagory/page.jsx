@@ -22,12 +22,7 @@ export default function AddProduct() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        // Calculate the new ID
-        const lastId = categoryData.length > 0 ? categoryData[categoryData.length - 1].id : 0;
-        const newId = lastId + 1;
-
         const newProductData = {
-            id: newId,
             name: formData.name,
             description: formData.description,
         };

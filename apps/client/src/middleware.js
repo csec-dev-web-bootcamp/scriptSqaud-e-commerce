@@ -2,9 +2,9 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { jwtDecode } from "jwt-decode";
 
-const roleRoutes = ["/admin" ];
+const roleRoutes = ["/admin"];
 
-const protectedRoutes = ["./admin", "/profile", "/checkout", "/cart"];
+const protectedRoutes = ["/admin", "/profile", "/checkout", "/cart"];
 
 const authRoutes = ["/login"];
 
@@ -27,6 +27,7 @@ export async function middleware(request) {
     pathname.startsWith(route)
   );
 
+  console.log({ authUser, isRolePath, isAuthPath });
   if (authUser?.userId && authUser.role) {
     const userRolePath = `/${authUser.role.toLowerCase()}`;
 
@@ -41,12 +42,11 @@ export async function middleware(request) {
       return NextResponse.redirect(new URL("/", request.url));
     }
 
-    if (ishomePath && roleRoutes.includes(userRolePath)) {
+    if ((ishomePath || isAuthPath) && roleRoutes.includes(userRolePath)) {
       return NextResponse.redirect(new URL(userRolePath, request.url));
     } else if (isAuthPath) {
       return NextResponse.redirect(new URL("/dashboard", request.url));
     }
-
   } else if (isProtectedPath) {
     return NextResponse.redirect(new URL("/login", request.url));
   }

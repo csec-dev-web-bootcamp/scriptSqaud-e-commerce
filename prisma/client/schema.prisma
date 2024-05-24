@@ -59,7 +59,7 @@ model Order {
 }
 
 model products {
-  id          String      @id
+  id          String      @id @default(uuid())
   name        String      @db.VarChar(255)
   price       Float       @default(0)
   description String?

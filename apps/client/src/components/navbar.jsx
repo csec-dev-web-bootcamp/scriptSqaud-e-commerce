@@ -16,7 +16,7 @@ export default function NavBar({ session }) {
 
   return (
     <nav className=" flex flex-col top-0 bg-slate-50 m-0 items-center  justify-between ">
-      <div className="flex flex-row justify-between items-center w-full py-2">
+      <div className="flex flex-row justify-between  bg-orange-50 items-center w-full py-2">
         <div className="font-extrabold text-pink-950  text-xl mx-10">
           <Link href="/dashboard">SSECOMMERCE</Link>
         </div>
@@ -72,7 +72,7 @@ export default function NavBar({ session }) {
             Shop
           </a>
           <a
-            href="#"
+            href="/about"
             className="text-white font-semibold text-base p-4 hover:text-white hover:bg-slate-800 transition"
           >
             About us
