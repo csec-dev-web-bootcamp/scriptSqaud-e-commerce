@@ -21,12 +21,15 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body
         className={cn(
-          "min-h-screen h-screen bg-background font-sans antialiased ",
+          " min-h-screen bg-background font-sans antialiased ",
           fontSans.variable
         )}
       >
          <NavBar />
-        {children}
+        <main> 
+          { children } 
+          
+        </main>
        <Footer />
       </body>
     </html>

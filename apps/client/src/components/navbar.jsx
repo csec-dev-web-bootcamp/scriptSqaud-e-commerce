@@ -2,15 +2,18 @@
 import Link from "next/link";
 import SideCart from "./sidecart";
 import Slide from "./slide";
+import UserProfile from "./userProfile";
 import { useState } from "react";
-import Profile from "./profile";
+
 
 export default function NavBar() {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
+
   const toggleProfile = () => {
     setIsProfileOpen(!isProfileOpen);
   };
+  
   return (
     <div className=" flex  items-center border justify-between p-3">
       
@@ -41,12 +44,14 @@ export default function NavBar() {
       </button>
     </div>
          <ul className="flex  font-thin text-xs space-x-3">
-         <li  onClick={toggleProfile} className="rounded items-center text-md">
+         <li>
         <img src="/user (2).png" alt="user" className="h-3" />
-          <hl>Profile</hl>
-      {isProfileOpen && <Profile />}
+        <h1 onClick={toggleProfile} >
+        Profile
+      </h1>
+      {isProfileOpen && <UserProfile />}
           </li>
-          <li className="text-md ">
+          /*<li className="text-md ">
           <img src="/shopping-bag.png" alt="shop" className="h-3" />
             <Link href="/shop">Shop</Link>
             </li>
@@ -54,10 +59,7 @@ export default function NavBar() {
         <li className="text-md ml-6 " >
           <SideCart />
         </li>
-      <li className="text-md ">
-      <img src="/like.png" alt="user" className="h-3" />
-         <Link href="/checkout"> Orders </Link>
-          </li>
+      
       </ul>
 
     </div>

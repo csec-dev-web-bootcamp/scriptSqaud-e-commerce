@@ -18,6 +18,7 @@ import { Input } from "@app/client/components/ui/input";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { get } from "http";
+import Link from "next/link";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -97,6 +98,10 @@ function Login() {
             <Button className="mt-5 ml-10 text-gray-200 text-base bg-gray-600 w-64 " type="submit">
               Submit
             </Button>
+           <div className="flex gap-2 mb-4">
+           <p>Don't have account?</p>
+           <Link href="/register"><strong>Register</strong></Link>
+           </div>
           </form>
         </Form>
       </div>
