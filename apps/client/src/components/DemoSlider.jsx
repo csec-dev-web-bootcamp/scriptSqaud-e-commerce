@@ -31,7 +31,7 @@ const Carousel = ({ data }) => {
   return (
     <div className="relative m-0 ">
       {/* Carousel container */}
-      <div className="relative   w-full border overflow-hidden " style={{"height": "40rem"}}>
+      <div className="relative   w-full  overflow-hidden " style={{"height": "30rem"}}>
         {/* Image container */}
         <div
           ref={carouselRef}
@@ -49,10 +49,10 @@ const Carousel = ({ data }) => {
             >
               {/* New Collection text and Order Now button */}
               <div className="absolute mt-10 text-3xl w-full  p-10  text-white">
-                <h1 className="text-2xl font-semibold">Get up to 30% off <br />
-                New  Arrivals
+                <h1 className="text-4xl font-semibold text-gray-900 mb-4">Member Exclusive!
                 </h1>
-                <button className="mt-2 bg-black  text-white px-4 py-2 rounded-md">Shop Now</button>
+                <p className='text-xl mb-3  text-gray-900 font-semibold'>Sign up and get 10% off your first purchase</p>
+                <button className="mt-2 bg-slate-900  text-gray-50 px-4 py-2 rounded-md">Join Now!</button>
               </div>
             </div>
           ))}
@@ -60,7 +60,7 @@ const Carousel = ({ data }) => {
       </div>
 
       {/* Navigation buttons */}
-      <div className="mt-3 flex justify-center">
+      {/* <div className="mt-3 flex justify-center">
         <button
           disabled={currentImg === 0}
           onClick={() => setCurrentImg((prev) => prev - 1)}
@@ -75,7 +75,7 @@ const Carousel = ({ data }) => {
         >
           &gt;
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

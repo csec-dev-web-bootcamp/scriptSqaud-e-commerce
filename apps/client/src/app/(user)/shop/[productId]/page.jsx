@@ -1,16 +1,11 @@
-"use client";
-import { productData } from "@app/client/data/product.data";
 import { getOneProduct } from "@app/client/data/product.data";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 
-function ProductDetail(props) {
+async function ProductDetail(props) {
   const params = props.params;
-  console.log(params)
-  const [product, setProduct] = useState([]);
-  useEffect(() => {
-    setProduct(getOneProduct(params.productId));
-  }, []);
+  const product =  await getOneProduct(params.productId)
+  console.log(product)
+  
   // const product = productData?.filter((data) => {
   //   if (parseInt(data.id) === parseInt(params.productId)) console.log(data.id);
   //   return parseInt(data.id) === parseInt(params.productId);
@@ -22,7 +17,7 @@ function ProductDetail(props) {
         <div className="grid items-start grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="w-full lg:sticky top-0 sm:flex gap-2">
             <Image
-              src={`/${product.image}`}
+              src={`/${product?.image}`}
               width={500}
               height={500}
               alt="Picture of the author"

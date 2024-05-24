@@ -3,7 +3,7 @@ import NavBar from "@app/client/components/navbar";
 
 function UserLayout({ children }) {
   return (
-    <div>
+    <div className="m-0">
       <NavBar />
       <div>
       {children}

@@ -34,8 +34,7 @@ export default function SideCart() {
     <Sheet>
       <SheetTrigger asChild>
         <div>
-        <img src="/trolley.png" alt="user" className="h-3" />
-          <p>My Cart</p>
+          <p>Cart</p>
         </div>
       </SheetTrigger>
       <SheetContent className="overflow-y-auto">

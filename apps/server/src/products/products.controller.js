@@ -35,7 +35,7 @@ productsController.post(
 
 productsController.get(
   '/:id',
-  authGuard,
+  
   asyncHandler(async (req, res) => {
     const { id } = req.params;
     const product = await getOneProduct(id);
