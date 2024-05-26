@@ -27,7 +27,6 @@ export async function middleware(request) {
     pathname.startsWith(route)
   );
 
-  console.log({ authUser, isRolePath, isAuthPath });
   if (authUser?.userId && authUser.role) {
     const userRolePath = `/${authUser.role.toLowerCase()}`;
 

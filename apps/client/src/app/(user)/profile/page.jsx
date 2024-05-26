@@ -1,9 +1,6 @@
-import ProfileCard from "@app/client/components/profile";
+import ProfileCard from "@app/client/components/userComponents/profile";
 
-function Profile () {
-
-return (
-    <ProfileCard />
-);
+function Profile() {
+  return <ProfileCard />;
 }
-export default Profile
+export default Profile;

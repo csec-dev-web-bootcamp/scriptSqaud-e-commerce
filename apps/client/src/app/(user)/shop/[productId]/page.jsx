@@ -1,12 +1,11 @@
-import StarRating from "@app/client/components/starRating";
+import StarRating from "@app/client/components/userComponents/starRating";
 import { getOneProduct } from "@app/client/data/product.data";
 import Image from "next/image";
 
 async function ProductDetail(props) {
   const params = props.params;
-  const product =  await getOneProduct(params.productId)
- 
-  
+  const product = await getOneProduct(params.productId);
+
   return (
     <div className="font-sans">
       <div className="p-6 lg:max-w-6xl max-w-2xl mx-auto">
@@ -31,7 +30,7 @@ async function ProductDetail(props) {
             </div>
 
             <div className="flex space-x-2 mt-4">
-             <StarRating />
+              <StarRating />
             </div>
 
             <div className="mt-4">

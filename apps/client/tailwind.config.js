@@ -57,6 +57,12 @@ module.exports = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      fontFamily: {
+        redditSans: ["Reddit Sans", "Open Sans", "sans-serif"],
+        openSans: ["Open Sans", "sans-serif"],
+
+        // Add more custom font families as needed
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },

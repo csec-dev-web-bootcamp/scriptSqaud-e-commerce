@@ -48,14 +48,14 @@ function Login() {
 
   return (
     <div
-      className="bg-cover  bg-center h-screen"
+      className="bg-cover bg-center h-screen"
       style={{ backgroundImage: "url('/login.jpg')" }}
     >
-      <div className="py-48 " style={{"padding-left":"60rem"}}>
+      <div className="py-48  " style={{"padding-left":"60rem"}}>
         <Form {...form} className="">
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="text-white font-semibold text-lg  rounded-lg  w-fit p-10"
+            className="text-stone-700 font-semibold text-lg  border-gray-500 border-2 rounded-lg  w-fit p-10"
           >
             <p className="mb-4 font-semibold text-3xl border-b-2 py-4 border-b-gray-500 ">
               Login{" "}
@@ -67,7 +67,7 @@ function Login() {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input className="w-96" placeholder="" {...field} />
+                    <Input className="w-96 border-b-black mb-2" placeholder="" {...field} />
                   </FormControl>
                 </FormItem>
               )}
@@ -80,7 +80,7 @@ function Login() {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input className="w-96" placeholder="" {...field} />
+                    <Input className="w-96 border-b-black text-slate-900" placeholder="" type="password" {...field} />
                   </FormControl>
                 </FormItem>
               )}
@@ -93,7 +93,7 @@ function Login() {
             >
               Submit
             </Button>
-            <div className="py-5">
+            <div className="py-5 text-sm">
               If you don't have account
               <Link href="/register" className="underline text-pink-700 ml-2 ">Register</Link>
             </div>

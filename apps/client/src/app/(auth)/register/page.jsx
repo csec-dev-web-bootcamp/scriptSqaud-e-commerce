@@ -74,24 +74,28 @@ export default function ProfileForm() {
   }
 
   return (
-    <div className="grid grid-cols-2">
-      <div>
+      
+      <div className=" bg-cover bg-center h-screen" 
+      style={{ backgroundImage: "url('/register.jpg')" }}
+      
+      >
+      {/* <div>
         <Image
           className="w-full"
           width="500"
           height="100"
-          src="/store.jpg"
+          src="/register.jpg"
           alt="register"
         />
-      </div>
-      <div className="container w-full ">
-        <p className="mt-10 mb-4 font-semibold text-3xl text-blue-600 ">
+      </div> */}
+      <div className="container w-full pt-8 pl-[60rem] ">
+        <p className="mt-10 mb-4 font-semibold text-3xl text-pink-900 ">
           Create Account{" "}
         </p>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="text-slate-600 font-semibold text-lg"
+            className="text-slate-600 pl-1 font-semibold text-lg"
           >
             <FormField
               control={form.control}
@@ -100,7 +104,7 @@ export default function ProfileForm() {
                 <FormItem>
                   <FormLabel>First Name</FormLabel>
                   <FormControl>
-                    <Input className="w-96" placeholder="" {...field} />
+                    <Input className="w-96 bg-inherit border-b-black border-b-2" placeholder="" {...field} />
                   </FormControl>
                 </FormItem>
               )}
@@ -112,7 +116,7 @@ export default function ProfileForm() {
                 <FormItem>
                   <FormLabel>Last Name</FormLabel>
                   <FormControl>
-                    <Input className="w-96" placeholder="" {...field} />
+                    <Input className="w-96 bg-inherit text-slate-900 border-b-black border-b-2" placeholder="" {...field} />
                   </FormControl>
                 </FormItem>
               )}
@@ -124,7 +128,7 @@ export default function ProfileForm() {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input className="w-96" placeholder="" {...field} />
+                    <Input className="w-96 bg-inherit text-slate-900 border-b-black border-b-2" placeholder="" {...field} />
                   </FormControl>
                 </FormItem>
               )}
@@ -136,7 +140,7 @@ export default function ProfileForm() {
                 <FormItem>
                   <FormLabel>Street</FormLabel>
                   <FormControl>
-                    <Input className="w-96" placeholder="" {...field} />
+                    <Input className="w-96 bg-inherit text-slate-900 border-b-black border-b-2" placeholder="" {...field} />
                   </FormControl>
                 </FormItem>
               )}
@@ -148,7 +152,7 @@ export default function ProfileForm() {
                 <FormItem>
                   <FormLabel>City</FormLabel>
                   <FormControl>
-                    <Input className="w-96" placeholder="" {...field} />
+                    <Input className="w-96 bg-inherit text-slate-900 border-b-black border-b-2" placeholder="" {...field} />
                   </FormControl>
                 </FormItem>
               )}
@@ -160,7 +164,7 @@ export default function ProfileForm() {
                 <FormItem>
                   <FormLabel>State</FormLabel>
                   <FormControl>
-                    <Input className="w-96" placeholder="" {...field} />
+                    <Input className="w-96 bg-inherit text-slate-900 border-b-black border-b-2" placeholder="" {...field} />
                   </FormControl>
                 </FormItem>
               )}
@@ -172,7 +176,7 @@ export default function ProfileForm() {
                 <FormItem>
                   <FormLabel>Zip</FormLabel>
                   <FormControl>
-                    <Input className="w-96" placeholder="" {...field} />
+                    <Input className="w-96 bg-inherit text-slate-900 border-b-black border-b-2" placeholder="" {...field} />
                   </FormControl>
                 </FormItem>
               )}
@@ -186,7 +190,7 @@ export default function ProfileForm() {
                   <FormControl>
                     <Input
                       type="password"
-                      className="w-96"
+                      className="w-96 bg-inherit text-slate-900 border-b-black border-b-2"
                       placeholder=""
                       {...field}
                     />
@@ -203,7 +207,7 @@ export default function ProfileForm() {
                   <FormControl>
                     <Input
                       type="password"
-                      className="w-96"
+                      className="w-96 bg-inherit text-slate-900 border-b-black border-b-2"
                       placeholder=""
                       {...field}
                     />
@@ -211,7 +215,7 @@ export default function ProfileForm() {
                 </FormItem>
               )}
             />
-            <Button className="mt-3  bg-blue-600 w-64 " type="submit">
+            <Button className="mt-3  bg-pink-900 w-64 " type="submit">
               Submit
             </Button>
           </form>

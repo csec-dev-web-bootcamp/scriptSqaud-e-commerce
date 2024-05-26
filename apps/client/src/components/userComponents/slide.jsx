@@ -1,6 +1,6 @@
-import { Button } from "./ui/button"
-import { Input } from "./ui/input"
-import { Label } from "./ui/label"
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
 import {
   Sheet,
   SheetClose,
@@ -10,7 +10,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "./ui/sheet"
+} from "../ui/sheet";
 
 export default function Slide() {
   return (
@@ -46,5 +46,5 @@ export default function Slide() {
         </SheetFooter>
       </SheetContent>
     </Sheet>
-  )
+  );
 }
