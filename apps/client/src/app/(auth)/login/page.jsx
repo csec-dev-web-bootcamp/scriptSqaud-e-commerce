@@ -95,7 +95,7 @@ function Login() {
             </Button>
             <div className="py-5 text-sm">
               If you don't have account
-              <Link href="/register" className="underline text-pink-700 ml-2 ">Register</Link>
+              <Link href="/register" className="underline text-pink-700 ml-2 ">register here</Link>
             </div>
           </form>
         </Form>

@@ -1,15 +1,22 @@
 "use client";
-import { getManyProducts } from "../../data/product.data";
+
 import { useCart } from "../../data/state";
-import { useGlobalState } from "../admincomponent/globalcontext/DataContext";
 import StarRating from "./starRating";
 import { Button } from "../ui/button";
 import { FaRegHeart } from "react-icons/fa";
+import { useState } from "react";
 
 function ProductCard({ product, width }) {
+  const addToWishList = useCart((state) => state.addToWishList);
   const addToCart = useCart((state) => state.addToCart);
-  function setCart(id) {
+
+  function setCart() {
     addToCart(product);
+  }
+  const [color, setColor] = useState(false)
+  function setAddToCart()  {
+    setColor((prev) => !prev);
+    addToWishList(product)
   }
   return (
     <div
@@ -32,8 +39,8 @@ function ProductCard({ product, width }) {
             {product.name}
           </h5>
         </a>
-        <Button className="bg-inherit hover:bg-inherit  rounded-r-md px-5 ">
-          <FaRegHeart color="black" size={20} fill="red" />
+        <Button  className="bg-inherit hover:bg-inherit  rounded-r-md px-5 " onClick={() => setAddToCart()}>
+          <FaRegHeart color="black" size={20} fill={color && "red"} />
         </Button>
         </div>
         <div className=" mb-1 flex items-center justify-between">

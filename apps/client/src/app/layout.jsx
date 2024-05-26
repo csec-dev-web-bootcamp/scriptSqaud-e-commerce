@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
         <link
           href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Reddit+Sans:ital,wght@0,200..900;1,200..900&display=swap"
           rel="stylesheet"
@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
       </head>
       <body
         className={cn(
-          "min-h-screen h-screen m-0 font-sans antialiased font-openSans ",
+          "min-h-screen h-screen m-0 antialiased font-openSans ",
           fontSans.variable
         )}
       >

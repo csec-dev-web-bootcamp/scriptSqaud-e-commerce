@@ -16,7 +16,7 @@ function CheckOut() {
           <div className="mt-8 space-y-3   bg-white px-2 py-4 sm:px-6">
             {cartData.map((data) => (
               <div className="flex flex-col border-b-2 bg-white sm:flex-row">
-                <img
+                <Image
                   className="m-2 h-24 w-28 "
                   src={data.image}
                   alt={data.image}

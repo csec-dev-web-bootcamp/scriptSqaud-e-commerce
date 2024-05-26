@@ -18,7 +18,7 @@ function Cart() {
   const minusAmount = useCart((state) => state.minusProductAmount);
   const removefromCart = useCart((state) => state.removeFromCart);
   const total = cartData.map((data) => data.price * data.amount).reduce((total, val)=> (total + val), 0)
-  console.log(total);
+  
   return (
     <div className="container h-full ">
       <h1 className="text-5xl m-5 p-4 border-b border-b-slate-500">Cart</h1>
@@ -30,10 +30,12 @@ function Cart() {
             className="flex  flex-col justify-between items-center m-5 bg-white border-b border-gray-200   md:flex-row md:max-w-xl  sm:flex-row sm:max-w-xl  dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
           >
             <div className=" ">
-              <img
+            <Image
+              width="1000"
+              height="1000"
                 className="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg sm:h-auto sm:w-48 sm:rounded-none sm:rounded-s-lg "
-                src="vintage.jpg"
-                alt=""
+                src={product.image}
+                alt={product.image}
               />
               <div className="flex flex-col justify-between p-4 leading-normal">
                 <h5 className="mb-1 text-2xl font-bold tracking-tight text-slate-700 dark:text-white">

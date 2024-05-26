@@ -31,36 +31,36 @@ export default function SideCart() {
   }
 
   return (
-    <Sheet className="bg-[#fdfbf9]">
+    <Sheet className="bg-[#fdfbf9] p-96">
       <SheetTrigger asChild>
         <div>
           <FaCartShopping size={22} />
         </div>
       </SheetTrigger>
-      <SheetContent className="overflow-y-auto bg-[#fff2df]">
+      <SheetContent className="overflow-y-auto bg-[#fff2df] w-96 ">
         <SheetHeader>
-          <SheetTitle className="text-5xl border-b-2 border-b-slate-950 py-5">
+          <SheetTitle className="text-4xl border-b-2 border-b-slate-950 py-5">
             Cart
           </SheetTitle>
-          <SheetDescription className=" mb-10 text-lg border-b-2 border-b-black p-3">You have {cartData.length} item{cartData.length > 0 ? "s" : ""} in your cart</SheetDescription>
+          <SheetDescription className=" mb-10 text-base border-b-2 border-b-black p-3">You have {cartData.length} item{cartData.length > 0 ? "s" : ""} in your cart</SheetDescription>
         </SheetHeader>
         {cartData?.map((product) => (
           <div key={product.id}>
-            <Card className="flex mt-10 border-b-2 border-b-pink-950 shadow-xl bg-[#fff2de] flex-row overflow-y-auto w-full">
+            <Card className="flex mt-10 border-b-2 pb-4 border-b-pink-950 shadow-xl bg-[#fff2de] flex-row overflow-y-auto w-full">
               <CardHeader className="flex flex-row">
-                <img className="w-24 h-24 " src={product.image} alt="" />
+                <img className="w-20 h-20 rounded-sm" src={product.image} alt="" />
                 <div className="flex flex-col px-4">
                   <div className="flex flex-row items-center justify-between w-full">
-                    <CardTitle>{product.name}</CardTitle>
+                    <CardTitle className="text-base">{product.name}</CardTitle>
                     <button
                       onClick={() => delCart(product.id)}
-                      className=" ml-24  mt-1"
+                      className=" ml-36  mt-1"
                     >
                       X
                     </button>
                   </div>
-                  <CardDescription>{product.description}</CardDescription>
-                  <p>{product.price}</p>
+                  <CardDescription className="text-sm">{product.description}</CardDescription>
+                  <p className="text-xs">{product.price}</p>
                 </div>
               </CardHeader>
             </Card>
