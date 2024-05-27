@@ -2,8 +2,39 @@ import { create } from "zustand";
 
 export const useCart = create((set) => ({
   cartProducts: [],
+  wishListProducts: [],
+  
+  addToWishList: (product) =>
+    set((state) => {
+      const currentState = JSON.parse(JSON.stringify(state));
+      const newProduct = {
+        ...product,
+        totalPrice: product.price,
+        amount: 1,
+      }
+      const inWishList = currentState.wishListProducts.find((data) => data.id == newProduct.id)
+      
+      if (!inWishList)
+        currentState.wishListProducts.push(newProduct);
+      else {
+        currentState.wishListProducts = currentState.wishListProducts.filter(
+          (data) => data.id !== product.id
+        )
+      }
+      return currentState;
+    }),
 
-  addToCart: (product) =>
+  removeFromWishList: (id) =>
+    set((state) => {
+      const currentState = JSON.parse(JSON.stringify(state));
+
+      currentState.wishListProducts = currentState.wishListProducts.filter(
+        (product) => product.id !== id
+      );
+
+      return currentState;
+    }),
+    addToCart: (product) =>
     set((state) => {
       const currentState = JSON.parse(JSON.stringify(state));
       const newProduct = {

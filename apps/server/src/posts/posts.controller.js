@@ -9,8 +9,7 @@ import {
 import { createPostPipe, updatePostPipe } from "./post.pipe";
 
 const postsController = express.Router();
-
-postsController.get("/", async (req, res) => {
+postsController.get("/",  async (req, res) => {
   const posts = await getManyPosts();
   return res.json(posts);
 });

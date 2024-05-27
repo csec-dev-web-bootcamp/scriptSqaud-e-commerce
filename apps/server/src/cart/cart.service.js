@@ -1,4 +1,4 @@
-import { HttpException } from '../helpers/http-exception';
+import { HttpException } from '../constants/http-exception';
 import prisma from '../helpers/prisma-client';
 
 export const createEmptyCart = async () => {

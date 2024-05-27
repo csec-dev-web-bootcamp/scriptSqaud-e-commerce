@@ -1,5 +1,5 @@
 import * as argon2 from "argon2";
-import { HttpException } from "../helpers/http-exception";
+import { HttpException } from "../constants/http-exception";
 import prisma from "../helpers/prisma-client";
 
 export async function createUser(data) {
@@ -16,9 +16,11 @@ export async function createUser(data) {
   const hash = await argon2.hash(data.password);
   const user = await prisma.user.create({
     data: {
-      name: data.name,
+      firstName: data.firstName,
+      lastName: data.lastName,
       email: data.email,
       password: hash,
+      role: data.role || "CUSTOMER"
     },
   });
 
@@ -36,8 +38,8 @@ export async function loginUser(data) {
     throw new HttpException("User not found", 404);
   }
 
-  // const valid = await argon2.verify(user.password, data.password);
-  const valid = user.password == data.password ? true : false;
+  const valid = await argon2.verify(user.password, data.password);
+  // const valid = user.password == data.password ? true : false;
 
   if (!valid) {
     throw new HttpException("Invalid password", 401);

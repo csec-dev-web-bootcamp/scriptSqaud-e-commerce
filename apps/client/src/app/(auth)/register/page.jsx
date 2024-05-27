@@ -16,34 +16,25 @@ import {
 } from "@app/client/components/ui/form";
 import { Input } from "@app/client/components/ui/input";
 import Image from "next/image";
+import { register } from "@app/client/data/auth/auth";
+import { useRouter } from "next/navigation";
+import useMutation from "@app/client/hooks/use-mutation";
 
 const formSchema = z
   .object({
-    username: z.string().min(2, {
+    firstName: z.string().min(2, {
+      message: "Username must be at least 2 characters.",
+    }),
+    lastName: z.string().min(2, {
       message: "Username must be at least 2 characters.",
     }),
     email: z.string().email({
       message: "Wrong email ",
     }),
-    street: z
-      .string()
-      .min(3, { message: "Wrong Street address " })
-      .max(50, { message: "String exceded 50 characters" }),
-
-    city: z
-      .string()
-      .min(3, { message: "Wrong Street address " })
-      .max(50, { message: "String exceded 50 characters" }),
-    state: z
-      .string()
-      .min(3, { message: "Wrong Street address " })
-      .max(50, { message: "String exceded 50 characters" }),
-    zip: z.string(),
-
-    password: z.string().min(8, {
+    password: z.string().min(6, {
       message: "Password must be 8 characters long",
     }),
-    confirmPassword: z.string().min(8, {
+    confirmPassword: z.string().min(6, {
       message: "Password must be 8 characters long",
     }),
   })
@@ -60,38 +51,72 @@ export default function ProfileForm() {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      firstName: "",
+      lastName: "",
       email: "",
-      street: "",
-      city: "",
-      state: "",
-      zip: "",
       password: "",
-      confirmPassword: "",
     },
   });
+  const route = useRouter();
+  const { isMutating, startMutation } = useMutation();
 
   function onSubmit(values) {
-    console.log(values);
+    const { confirmPassword, ...rest } = values;
+    startMutation(async () => {
+      const res = await register(rest);
+      console.log({ res });
+      if (res.error) {
+        alert(JSON.stringify(res.error));
+        return;
+      }
+      route.push("/dashboard");
+    });
   }
 
   return (
-    <div className="grid grid-cols-2">
-      <div>
-        <Image className="w-full" width="500" height="100" src="/store.jpg" alt="register" />
-      </div>
-      <div className="container w-full ">
-        <p className="mt-10 mb-4 font-semibold text-3xl text-blue-600 ">Create Account </p>
+      
+      <div className=" bg-cover bg-center h-screen" 
+      style={{ backgroundImage: "url('/register.jpg')" }}
+      
+      >
+      {/* <div>
+        <Image
+          className="w-full"
+          width="500"
+          height="100"
+          src="/register.jpg"
+          alt="register"
+        />
+      </div> */}
+      <div className="container w-full pt-8 pl-[60rem] ">
+        <p className="mt-10 mb-4 font-semibold text-3xl text-pink-900 ">
+          Create Account{" "}
+        </p>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="text-slate-600 font-semibold text-lg">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="text-slate-600 pl-1 font-semibold text-lg"
+          >
             <FormField
               control={form.control}
-              name="username"
+              name="firstName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel>First Name</FormLabel>
                   <FormControl>
-                    <Input className="w-96"placeholder="" {...field} />
+                    <Input className="w-96 bg-inherit border-b-black border-b-2" placeholder="" {...field} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="lastName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Last Name</FormLabel>
+                  <FormControl>
+                    <Input className="w-96 bg-inherit text-slate-900 border-b-black border-b-2" placeholder="" {...field} />
                   </FormControl>
                 </FormItem>
               )}
@@ -100,22 +125,22 @@ export default function ProfileForm() {
               control={form.control}
               name="email"
               render={({ field }) => (
-                <FormItem >
-                  <FormLabel >Email</FormLabel>
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input className="w-96" placeholder="" {...field} />
-                  </FormControl>                 
+                    <Input className="w-96 bg-inherit text-slate-900 border-b-black border-b-2" placeholder="" {...field} />
+                  </FormControl>
                 </FormItem>
               )}
             />
-            <FormField
+            {/* <FormField
               control={form.control}
               name="street"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Street</FormLabel>
                   <FormControl>
-                    <Input className="w-96" placeholder="" {...field} />
+                    <Input className="w-96 bg-inherit text-slate-900 border-b-black border-b-2" placeholder="" {...field} />
                   </FormControl>
                 </FormItem>
               )}
@@ -127,7 +152,7 @@ export default function ProfileForm() {
                 <FormItem>
                   <FormLabel>City</FormLabel>
                   <FormControl>
-                    <Input className="w-96" placeholder="" {...field} />
+                    <Input className="w-96 bg-inherit text-slate-900 border-b-black border-b-2" placeholder="" {...field} />
                   </FormControl>
                 </FormItem>
               )}
@@ -139,7 +164,7 @@ export default function ProfileForm() {
                 <FormItem>
                   <FormLabel>State</FormLabel>
                   <FormControl>
-                    <Input className="w-96" placeholder="" {...field} />
+                    <Input className="w-96 bg-inherit text-slate-900 border-b-black border-b-2" placeholder="" {...field} />
                   </FormControl>
                 </FormItem>
               )}
@@ -151,11 +176,11 @@ export default function ProfileForm() {
                 <FormItem>
                   <FormLabel>Zip</FormLabel>
                   <FormControl>
-                    <Input className="w-96" placeholder="" {...field} />
+                    <Input className="w-96 bg-inherit text-slate-900 border-b-black border-b-2" placeholder="" {...field} />
                   </FormControl>
                 </FormItem>
               )}
-            />
+            /> */}
             <FormField
               control={form.control}
               name="password"
@@ -163,7 +188,12 @@ export default function ProfileForm() {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input className="w-96" placeholder="" {...field} />
+                    <Input
+                      type="password"
+                      className="w-96 bg-inherit text-slate-900 border-b-black border-b-2"
+                      placeholder=""
+                      {...field}
+                    />
                   </FormControl>
                 </FormItem>
               )}
@@ -175,12 +205,19 @@ export default function ProfileForm() {
                 <FormItem>
                   <FormLabel>Confirm Password</FormLabel>
                   <FormControl>
-                    <Input className="w-96" placeholder="" {...field} />
+                    <Input
+                      type="password"
+                      className="w-96 bg-inherit text-slate-900 border-b-black border-b-2"
+                      placeholder=""
+                      {...field}
+                    />
                   </FormControl>
                 </FormItem>
               )}
             />
-            <Button className="mt-3  bg-blue-600 w-64 " type="submit">Submit</Button>
+            <Button className="mt-3  bg-pink-900 w-64 " type="submit">
+              Submit
+            </Button>
           </form>
         </Form>
       </div>

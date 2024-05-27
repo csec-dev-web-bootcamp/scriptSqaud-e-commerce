@@ -1,43 +1,28 @@
-"use server";
+import axios from 'axios';
+import { cookies } from 'next/headers';
 
-import { redirect } from "next/navigation";
-import { server_host } from "../constants/host.config";
-// import { getAuthentication } from "./auth/authentications";
+const fetcher = axios.create();
 
-export default async function fetcher(pathname, options) {
-  const headers = {
-    "Content-Type": "application/json",
-    ...options?.headers,
-  };
+fetcher.defaults.baseURL = 'http://localhost:8000'
 
-  // const accessToken = await getAuthentication();
-  // if (accessToken) {
-  //   headers["Authorization"] = `Bearer ${accessToken}`;
-  // }
+fetcher.interceptors.request.use(async (request) => {
+    const cookieStore = cookies()
+    const accessToken = cookieStore.get('accessToken')?.value
+    if (accessToken) {
+        request.headers.Authorization = `Bearer ${accessToken}`;
+    }
+    return request;
+});
 
-  const url = `${server_host}${pathname}`;
 
-  let response = await fetch(url, {
-    ...options,
-    headers: headers,
-
-    next: {
-      ...options?.next,
-      tags: [...(options?.next?.tags ?? []), "ALL"],
+fetcher.interceptors.response.use(
+    (response) => {
+        return response;
     },
-  });
+    async (error) => {
+        return Promise.resolve(error.response);
+    },
+);
 
-  if (!response.ok) {
-    if (response.status === 404) {
-      return redirect("/not-found");
-    }
-    if (response.status === 403) {
-      return redirect("/forbidden");
-    }
-    const error = await response.json();
-    return { error: error, success: false };
-  }
 
-  const data = await response.json();
-  return { data, success: true };
-}
+export default fetcher;
