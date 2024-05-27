@@ -11,7 +11,7 @@ function WishList() {
   const total = wishListData.length
   const addToCart = useCart((state) => state.addToCart);
 
-  function setCart() {
+  function setCart(product) {
     setColor((prev) => !prev)
     addToCart(product);
   }
@@ -51,7 +51,7 @@ function WishList() {
               <p className=" font-sans font-semibold text-lg  text-gray-700 dark:text-gray-400">
                 ${product.price}
               </p>
-              <BsCartPlus size={24} color={color && "red"} onClick={() => setCart()}/>
+              <BsCartPlus size={24} color={color && "red"} onClick={() => setCart(product)}/>
               <button
                 className="mr-16 text-xl "
                 onClick={() => removeFromWishList(product.id)}

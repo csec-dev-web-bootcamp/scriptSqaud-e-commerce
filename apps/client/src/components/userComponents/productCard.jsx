@@ -9,7 +9,8 @@ import { useState } from "react";
 function ProductCard({ product, width }) {
   const addToWishList = useCart((state) => state.addToWishList);
   const addToCart = useCart((state) => state.addToCart);
-
+  const removefromCart = useCart((state) => state.removeFromCart)
+ const cartData = useCart((state) => state.cartProducts)
   function setCart() {
     addToCart(product);
   }
@@ -56,12 +57,22 @@ function ProductCard({ product, width }) {
         <StarRating keys={product.id} />
       </div>
       <div className="flex  w-full justify-center items-center">
+        {!cartData.find((data) => data.id === product.id) ? ( 
         <Button
           onClick={() => setCart(product.id)}
           className="flex items-center justify-center   flex-grow rounded-md  bg-pink-950 px-1 py-2.5 text-center text-sm font-medium text-white hover:bg-pink-900 focus:outline-none"
         >
           Add to cart
         </Button>
+
+        ) : (
+          <Button
+          onClick={() => removefromCart(product.id)}
+          className="flex items-center justify-center   flex-grow rounded-md  bg-pink-950 px-1 py-2.5 text-center text-sm font-medium text-white hover:bg-pink-900 focus:outline-none"
+        >
+          Remove from cart
+        </Button>
+        )}
         
       </div>
     </div>

@@ -12,6 +12,7 @@ import {
   TableRow,
 } from "@app/client/components/ui/table";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 function Cart() {
   const cartData = useCart((state) => state.cartProducts);
   const addAmount = useCart((state) => state.addProductAmount);
@@ -24,6 +25,11 @@ function Cart() {
       <h1 className="text-5xl m-5 p-4 border-b border-b-slate-500">Cart</h1>
       <div className="grid gap-5  xl:grid-cols-2 lg:grid-cols-2md:px-20  ">
         <div>
+        {cartData.length > 0 ? (<div> you have { cartData.length } items in your wish list</div>) : (
+            <div className="text-lg p-4 m-5">
+              You have no items in your wish list
+            </div>
+          )}
         {cartData.map((product) => (
           <div
             key={product.id}
@@ -80,7 +86,7 @@ function Cart() {
         <div className="container h-screen">
           <p className="text-3xl ml-3 border-b-2 border-b-gray-400 rounded-t-md p-3 xl:mt-3 bg-blue-100">Order Summary</p>
           <Table>
-            <TableCaption><Button className="w-full bg-pink-950  h-full py-5">Proceed To Checkout</Button></TableCaption>
+            <TableCaption><Link href="./checkout"><Button className="w-full bg-pink-950  h-full py-5">Proceed To Checkout</Button></Link></TableCaption>
             <TableHeader>
               <TableRow>
                 <TableHead className="w-[100px] text-slate-800">data</TableHead>
