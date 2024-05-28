@@ -11,6 +11,8 @@ CREATE TABLE "users" (
     "lastName" VARCHAR(100) NOT NULL,
     "email" TEXT NOT NULL,
     "password" VARCHAR(120) NOT NULL,
+    "phone" VARCHAR(50) NOT NULL,
+    "address" VARCHAR(100) NOT NULL,
     "role" "UserRole" NOT NULL DEFAULT 'customer',
     "blocked" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -18,16 +20,6 @@ CREATE TABLE "users" (
     "image" VARCHAR(255),
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "profile" (
-    "id" TEXT NOT NULL,
-    "phone" TEXT NOT NULL,
-    "address" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
-
-    CONSTRAINT "profile_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -74,20 +66,17 @@ CREATE TABLE "products" (
     CONSTRAINT "products_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "Post" (
+    "id" SERIAL NOT NULL,
+    "title" TEXT NOT NULL,
+    "content" TEXT,
+
+    CONSTRAINT "Post_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
-
--- CreateIndex
-CREATE UNIQUE INDEX "profile_id_key" ON "profile"("id");
-
--- CreateIndex
-CREATE UNIQUE INDEX "profile_phone_key" ON "profile"("phone");
-
--- CreateIndex
-CREATE UNIQUE INDEX "profile_userId_key" ON "profile"("userId");
-
--- AddForeignKey
-ALTER TABLE "profile" ADD CONSTRAINT "profile_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "orderItems" ADD CONSTRAINT "orderItems_orderId_fkey" FOREIGN KEY ("orderId") REFERENCES "orders"("id") ON DELETE SET NULL ON UPDATE CASCADE;

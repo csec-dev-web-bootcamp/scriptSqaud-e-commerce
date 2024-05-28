@@ -14,25 +14,16 @@ model User {
   lastName  String   @db.VarChar(100)
   email     String   @unique
   password  String   @db.VarChar(120)
+  phone     String   @db.VarChar(50)
+  address   String   @db.VarChar(100)
   role      UserRole @default(CUSTOMER)
   blocked   Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   image     String?  @db.VarChar(255)
-  profile   Profile?
   order     Order[]
 
   @@map("users")
-}
-
-model Profile {
-  id      String @id @unique @default(uuid())
-  phone   String @unique
-  address String
-  user    User   @relation(fields: [userId], references: [id])
-  userId  String @unique
-
-  @@map("profile")
 }
 
 model Category {
@@ -78,6 +69,12 @@ model products {
   orderItems  OrderItem[]
   categories  Category?   @relation(fields: [categoryId], references: [id])
   image       String      @db.VarChar(255)
+}
+
+model Post {
+  id      Int     @id @default(autoincrement())
+  title   String
+  content String? @db.Text
 }
 
 enum UserRole {
