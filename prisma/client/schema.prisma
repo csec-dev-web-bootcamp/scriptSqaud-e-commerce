@@ -77,14 +77,13 @@ model products {
   categoryId  String?
   orderItems  OrderItem[]
   categories  Category?   @relation(fields: [categoryId], references: [id])
-  image       String      @db.VarChar(255)
+  image       String?     @db.VarChar(255)
 }
 
 model Post {
   id      Int     @id @default(autoincrement())
   title   String
   content String? @db.Text
-
 }
 
 enum UserRole {
