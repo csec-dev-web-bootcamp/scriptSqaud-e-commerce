@@ -19,9 +19,20 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   image     String?  @db.VarChar(255)
+  profile   Profile?
   order     Order[]
 
   @@map("users")
+}
+
+model Profile {
+  id            String @default(uuid()) @unique @id
+  phone         String @unique
+  address       String
+  user          User @relation(fields: [userId], references: [id])
+  userId        String  @unique 
+
+   @@map("profile")
 }
 
 model Category {
@@ -67,6 +78,12 @@ model products {
   orderItems  OrderItem[]
   categories  Category?   @relation(fields: [categoryId], references: [id])
   image       String?      @db.VarChar(255)
+}
+model Post {
+  id      Int     @id @default(autoincrement())
+  title   String
+  content String? @db.Text
+  
 }
 
 enum UserRole {
