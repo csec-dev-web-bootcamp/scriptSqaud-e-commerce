@@ -80,6 +80,12 @@ model products {
   image       String      @db.VarChar(255)
 }
 
+model Post {
+  id      Int     @id @default(autoincrement())
+  title   String
+  content String? @db.Text
+}
+
 enum UserRole {
   ADMIN    @map("admin")
   CUSTOMER @map("customer")

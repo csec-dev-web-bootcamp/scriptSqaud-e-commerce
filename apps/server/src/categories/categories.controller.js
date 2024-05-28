@@ -8,6 +8,8 @@ import {
   updateCategory,
 } from "./categories.service";
 
+
+
 const categoriesController = express.Router();
 
 categoriesController.get("/", async (eq, res) => {

@@ -171,6 +171,12 @@ exports.Prisma.ProductsScalarFieldEnum = {
   image: 'image'
 };
 
+exports.Prisma.PostScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -204,7 +210,8 @@ exports.Prisma.ModelName = {
   Category: 'Category',
   OrderItem: 'OrderItem',
   Order: 'Order',
-  products: 'products'
+  products: 'products',
+  Post: 'Post'
 };
 
 /**
