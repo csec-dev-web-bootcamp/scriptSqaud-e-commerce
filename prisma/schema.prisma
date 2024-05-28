@@ -70,14 +70,14 @@ model Order {
 }
 
 model products {
-  id          String      @id
+  id          String      @id @default(uuid())
   name        String      @db.VarChar(255)
   price       Float       @default(0)
   description String?
   categoryId  String?
   orderItems  OrderItem[]
   categories  Category?   @relation(fields: [categoryId], references: [id])
-  image       String      @db.VarChar(255)
+  image       String?      @db.VarChar(255)
 }
 model Post {
   id      Int     @id @default(autoincrement())

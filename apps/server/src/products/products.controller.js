@@ -1,67 +1,68 @@
-import express from 'express';
-import { asyncHandler } from '../helpers/async-handler';
-import { authGuard } from '../auth/auth.guard';
-import { roleGuard } from '../auth/role.guard';
-import { createProductPipe, updateProductPipe } from './products.pipe';
+import express from "express";
+import { asyncHandler } from "../helpers/async-handler";
+import { authGuard } from "../auth/auth.guard";
+import { roleGuard } from "../auth/role.guard";
+import { createProductPipe, updateProductPipe } from "./products.pipe";
 import {
   createProduct,
   deleteProduct,
   getManyProducts,
   getOneProduct,
   updateProduct,
-} from './products.service';
+} from "./products.service";
 
 const productsController = express.Router();
 
 productsController.get(
-  '/',
+  "/",
   asyncHandler(async (req, res) => {
     const products = await getManyProducts();
-    console.log(products)
     return res.json(products);
-  }),
+  })
 );
 
 productsController.post(
-  '/',
+  "/",
   authGuard,
-  roleGuard(['CUSTOMER', 'OWNER']),
+  roleGuard(["CUSTOMER", "ADMIN"]),
   createProductPipe,
   asyncHandler(async (req, res) => {
     const data = req.body;
+    console.log({ data });
     const product = await createProduct(data);
     return res.json(product);
-  }),
+  })
 );
 
 productsController.get(
-  '/:id',
-  authGuard,
+  "/:id",
+
   asyncHandler(async (req, res) => {
     const { id } = req.params;
     const product = await getOneProduct(id);
     return res.json(product);
-  }),
+  })
 );
 
 productsController.put(
-  '/:id',
+  "/:id",
   updateProductPipe,
   asyncHandler(async (req, res) => {
     const data = req.body;
+
     const { id } = req.params;
     const product = await updateProduct(id, data);
     return res.json(product);
-  }),
+  })
 );
 
 productsController.delete(
-  '/:id',
+  "/:id",
   asyncHandler(async (req, res) => {
     const { id } = req.params;
     const product = await deleteProduct(id);
     return res.json(product);
-  }),
+  })
 );
 
 export default productsController;

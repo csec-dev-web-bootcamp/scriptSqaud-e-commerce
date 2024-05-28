@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import CatagoryCard from '@app/client/components/admincomponent/catagorycard/catagoryCard'
-import DataContext from '@app/client/components/admincomponent/globalcontext/DataContext'
+import  { useGlobalState } from '@app/client/components/admincomponent/globalcontext/DataContext'
 
 import { useContext } from 'react'
 
@@ -10,15 +10,16 @@ import { useContext } from 'react'
 
 export default function Catagory() {
 
-  const { categoryData } = useContext(DataContext);
-
+  // const { categoryData } = useContext(DataContext);
+  const categoryData = useGlobalState((state) => state.categories)
+  console.log(categoryData)
   const products=categoryData.map((catagory)=>{
     return(
       <CatagoryCard
         id={catagory.id}
-        image={catagory.image}
+        // image={catagory.image}
         name={catagory.name}
-        discription={catagory.description}
+        // discription={catagory.description}
       />
     )
   })

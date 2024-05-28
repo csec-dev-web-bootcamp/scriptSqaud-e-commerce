@@ -70,7 +70,7 @@ model Order {
 }
 
 model products {
-  id          String      @id
+  id          String      @id @default(uuid())
   name        String      @db.VarChar(255)
   price       Float       @default(0)
   description String?
@@ -84,6 +84,7 @@ model Post {
   id      Int     @id @default(autoincrement())
   title   String
   content String? @db.Text
+
 }
 
 enum UserRole {
