@@ -32,10 +32,11 @@ ordersController.post(
     // });
     const secretKey = process.env.CHAPA_SECRET_KEY;
     console.log(user);
+    console.log(data);
 
     try {
       const order = await createOrder({
-        orderItems: data.orderItems,
+        orderItems: data,
         paymentRef: tx_ref,
         userId: user.id,
       });

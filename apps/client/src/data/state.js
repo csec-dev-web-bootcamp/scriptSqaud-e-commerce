@@ -11,7 +11,7 @@ export const useCart = create((set) => ({
       const newProduct = {
         ...product,
         totalPrice: product.price,
-        amount: 1,
+        quantity: 1,
       }
       const inWishList = currentState.wishListProducts.find((data) => data.id == newProduct.id)
       
@@ -41,7 +41,7 @@ export const useCart = create((set) => ({
       const newProduct = {
         ...product,
         totalPrice: product.price,
-        amount: 1,
+        quantity: 1,
       }
       const inCartProduct = currentState.cartProducts.find((data) => data.id == newProduct.id)
       
@@ -70,8 +70,8 @@ export const useCart = create((set) => ({
         product.id === id
           ? {
               ...product,
-              amount: product.amount + 1,
-              totalPrice: product.price * (product.amount + 1),
+              quantity: product.quantity + 1,
+              totalPrice: product.price * (product.quantity + 1),
             }
           : product
       );
@@ -84,11 +84,11 @@ export const useCart = create((set) => ({
       const currentState = JSON.parse(JSON.stringify(state));
 
       currentState.cartProducts = currentState.cartProducts.map((product) =>
-        product.id === id && product.amount > 1
+        product.id === id && product.quantity > 1
           ? {
               ...product,
-              amount: product.amount - 1,
-              totalPrice: product.price * (product.amount - 1),
+              quantity: product.quantity - 1,
+              totalPrice: product.price * (product.quantity - 1),
             }
           : product
       );
