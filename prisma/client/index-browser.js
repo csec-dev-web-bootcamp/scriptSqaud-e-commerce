@@ -125,6 +125,8 @@ exports.Prisma.UserScalarFieldEnum = {
   lastName: 'lastName',
   email: 'email',
   password: 'password',
+  phone: 'phone',
+  address: 'address',
   role: 'role',
   blocked: 'blocked',
   createdAt: 'createdAt',
@@ -132,11 +134,13 @@ exports.Prisma.UserScalarFieldEnum = {
   image: 'image'
 };
 
-exports.Prisma.ProfileScalarFieldEnum = {
+exports.Prisma.ProductScalarFieldEnum = {
   id: 'id',
-  phone: 'phone',
-  address: 'address',
-  userId: 'userId'
+  name: 'name',
+  price: 'price',
+  description: 'description',
+  image: 'image',
+  categoryId: 'categoryId'
 };
 
 exports.Prisma.CategoryScalarFieldEnum = {
@@ -148,27 +152,24 @@ exports.Prisma.OrderItemScalarFieldEnum = {
   id: 'id',
   quantity: 'quantity',
   totalPrice: 'totalPrice',
-  orderId: 'orderId',
-  productId: 'productId'
+  productId: 'productId',
+  orderId: 'orderId'
 };
 
 exports.Prisma.OrderScalarFieldEnum = {
   id: 'id',
+  userId: 'userId',
   paymentRef: 'paymentRef',
   totalPrice: 'totalPrice',
   paymentStatus: 'paymentStatus',
-  userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.ProductsScalarFieldEnum = {
+exports.Prisma.PostScalarFieldEnum = {
   id: 'id',
-  name: 'name',
-  price: 'price',
-  description: 'description',
-  categoryId: 'categoryId',
-  image: 'image'
+  title: 'title',
+  content: 'content'
 };
 
 exports.Prisma.PostScalarFieldEnum = {
@@ -206,7 +207,7 @@ exports.PaymentStatus = exports.$Enums.PaymentStatus = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Profile: 'Profile',
+  Product: 'Product',
   Category: 'Category',
   OrderItem: 'OrderItem',
   Order: 'Order',

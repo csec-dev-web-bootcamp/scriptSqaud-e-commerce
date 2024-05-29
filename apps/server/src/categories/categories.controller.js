@@ -8,16 +8,14 @@ import {
   updateCategory,
 } from "./categories.service";
 
-
-
 const categoriesController = express.Router();
 
-categoriesController.get("/", async (eq, res) => {
+categoriesController.get("/", async (req, res) => {
   const categories = await getManyCategories();
   return res.json(categories);
 });
 
-categoriesController.post("/",  async (eq, res) => {
+categoriesController.post("/", createCategoryPipe, async (req, res) => {
   const data = req.body;
   const category = await createCategory(data);
   return res.json(category);
@@ -29,14 +27,14 @@ categoriesController.get("/:id", async (eq, res) => {
   return res.json(category);
 });
 
-categoriesController.put("/:id",  async (eq, res) => {
+categoriesController.put("/:id", updateCategoryPipe, async (req, res) => {
   const data = req.body;
   const { id } = req.params;
   const category = await updateCategory(id, data);
   return res.json(category);
 });
 
-categoriesController.delete("/:id", async (eq, res) => {
+categoriesController.delete("/:id", async (req, res) => {
   const { id } = req.params;
   const category = await deleteCategory(id);
   return res.json(category);
