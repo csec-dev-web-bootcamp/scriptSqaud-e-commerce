@@ -11,6 +11,26 @@ Content-Type: application/json
 ###
 GET http://localhost:8000/category
 
+
+
+### Create Order
+POST http://localhost:8000/orders
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5OTAxODExYS0xODk4LTQ1OGMtOWE2Yi04NDlmYTNkZjk5YTciLCJyb2xlIjoiQ1VTVE9NRVIiLCJpYXQiOjE3MTY1NjI4NTMsImV4cCI6MTcxNjY0OTI1M30.OzcE5dxVsZdRYZS0lVapK9cE5OaA_ijKqjqFy3nS938
+Content-Type: application/json
+
+{
+  "orderItems": [
+    {
+      "productId": "product-456",
+      "quantity": 2
+    },
+    {
+      "productId": "product-789",
+      "quantity": 1
+    }
+  ]
+}
+
 ###
 POST   http://localhost:8000/auth/login
 Content-Type: application/json
@@ -50,3 +70,4 @@ GET http://localhost:8000/products/1
 ###
 GET http://localhost:8000/users/me
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwNDZmZWEzZC1iMWU0LTRmNTQtOTk2Ny1hMzhlNDc2OGI1YTQiLCJyb2xlIjoiQ1VTVE9NRVIiLCJpYXQiOjE3MTY1NTIxNDcsImV4cCI6MTcxNjYzODU0N30.VgnA8Jgqzv8WA5UKN331PM590TNgfT-L9bVcMbrnX_c
+

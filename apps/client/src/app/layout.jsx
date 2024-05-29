@@ -1,11 +1,8 @@
 import "./globals.css";
-import { Inter as FontSans } from "next/font/google";
+
 import { cn } from "@app/client/lib/utils";
 
-const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
+
 
 export const metadata = {
   title: "Create Next App",
@@ -25,8 +22,7 @@ export default function RootLayout({ children }) {
       </head>
       <body
         className={cn(
-          "min-h-screen h-screen m-0 antialiased font-openSans ",
-          fontSans.variable
+          "min-h-screen h-screen m-0 antialiased font-openSans "
         )}
       >
         {children}
