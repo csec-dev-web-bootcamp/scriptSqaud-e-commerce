@@ -1,6 +1,6 @@
 import { getManyCategories } from "@app/client/data/catagory.data";
 import { getManyProducts } from "../../../data/product.data";
-import ProductCard from "@app/client/components/userComponents/productCard";
+
 import CategoryList from "@app/client/components/userComponents/categorList";
 import ShopList from "@app/client/components/userComponents/shoplist";
 const products = await getManyProducts();

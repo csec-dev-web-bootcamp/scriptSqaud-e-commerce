@@ -4,6 +4,7 @@ export const useCart = create((set) => ({
   cartProducts: [],
   wishListProducts: [],
   
+  
   addToWishList: (product) =>
     set((state) => {
       const currentState = JSON.parse(JSON.stringify(state));
