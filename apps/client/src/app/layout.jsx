@@ -1,15 +1,8 @@
 import "./globals.css";
 
-import { Inter as FontSans } from "next/font/google";
-
 import { cn } from "@app/client/lib/utils";
-import NavBar from "../components/navbar";
-import Footer from "../components/footer";
 
-const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
+
 
 export const metadata = {
   title: "Create Next App",
@@ -19,17 +12,20 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Reddit+Sans:ital,wght@0,200..900;1,200..900&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body
         className={cn(
-          "min-h-screen h-screen font-sans antialiased ",
-          fontSans.variable
+          "min-h-screen h-screen m-0 antialiased font-openSans "
         )}
       >
-         <NavBar />
-
-
         {children}
-       <Footer />
       </body>
     </html>
   );

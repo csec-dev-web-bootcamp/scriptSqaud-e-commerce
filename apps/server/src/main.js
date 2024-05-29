@@ -6,10 +6,11 @@ import cors from "cors";
 import { corsOptions } from "./constants/cors-options";
 
 import authController from "./auth/auth.controller";
-import productsController from './products/products.controller';
-import usersController from './users/users.controller';
+import productsController from "./products/products.controller";
+import usersController from "./users/users.controller";
 import postsController from "./posts/posts.controller";
 import categoriesController from "./categories/categories.controller";
+
 
 
 const app = express();
@@ -18,8 +19,8 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  const token = req.headers["jwt-token"]
-  console.log(token)
+  const token = req.headers["jwt-token"];
+  console.log(token);
   return res.json({
     message: "Hello",
   });

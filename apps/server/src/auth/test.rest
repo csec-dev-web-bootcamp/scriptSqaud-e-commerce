@@ -2,9 +2,72 @@ POST   http://localhost:8000/auth/register
 Content-Type: application/json
  
 {
-    "firstName": "lemma",
-    "lastName": "Tariku",
-    "email": "lematariu@gmail.com",
-    "password":"tarikuuuu"
+    "firstName": "admin",
+    "lastName": "admin",
+    "email": "adminn@gmail.com",
+    "password":"tarikuuuu",
+    "role": "ADMIN"
 }
+###
+GET http://localhost:8000/category
+
+
+
+### Create Order
+POST http://localhost:8000/orders
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5OTAxODExYS0xODk4LTQ1OGMtOWE2Yi04NDlmYTNkZjk5YTciLCJyb2xlIjoiQ1VTVE9NRVIiLCJpYXQiOjE3MTY1NjI4NTMsImV4cCI6MTcxNjY0OTI1M30.OzcE5dxVsZdRYZS0lVapK9cE5OaA_ijKqjqFy3nS938
+Content-Type: application/json
+
+{
+  "orderItems": [
+    {
+      "productId": "product-456",
+      "quantity": 2
+    },
+    {
+      "productId": "product-789",
+      "quantity": 1
+    }
+  ]
+}
+
+###
+POST   http://localhost:8000/auth/login
+Content-Type: application/json
+ 
+{
+    
+    "email": "waquma@gmail.com",
+    "password":"12345678"
+}
+### 
+PUT    http://localhost:8000/products/7
+Content-Type: application/json
+ 
+{
+  "name": "Product 3",
+  "description": "Descr",
+  "price": 50.0
+ }
+###
+ 
+POST     http://localhost:8000/products
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNWFiYWIxNi1iMDhjLTQwMDItOTc1Zi03ZWI4MzM0NGRmZTUiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MTYzODAzMDIsImV4cCI6MTcxNjQ2NjcwMn0.s6knV-RBLdy_sPy94ANR6FLYCc-6OIGxMrA1scWo7Po
+
+{
+  "id": "1659",
+  "name": "Product 5",
+  "description": "Descr",
+  "price": 50.0,
+  "categoryId": "5",
+  "image": "test.jpg"
+}
+
+###
+GET http://localhost:8000/products/1
+
+###
+GET http://localhost:8000/users/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwNDZmZWEzZC1iMWU0LTRmNTQtOTk2Ny1hMzhlNDc2OGI1YTQiLCJyb2xlIjoiQ1VTVE9NRVIiLCJpYXQiOjE3MTY1NTIxNDcsImV4cCI6MTcxNjYzODU0N30.VgnA8Jgqzv8WA5UKN331PM590TNgfT-L9bVcMbrnX_c
 

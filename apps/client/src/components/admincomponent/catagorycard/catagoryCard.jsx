@@ -5,7 +5,7 @@ import Link from 'next/link'
 export default function CatagoryCard(props) {
   return (
     <div className='catagory_editcard'> 
-      <img src={props.image} alt="" />
+      {/* <img src={props.image} alt="" /> */}
       <div className='editcard_discriptions'>  
         <h3>Catagory: {props.name}</h3>
     </div>

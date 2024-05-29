@@ -3,14 +3,15 @@
 import './styles.css'
 import Editcard from '@app/client/components/admincomponent/editCard/editcard'
 import Link from 'next/link'
-import DataContext from '@app/client/components/admincomponent/globalcontext/DataContext'
+import DataContext, { useGlobalState } from '@app/client/components/admincomponent/globalcontext/DataContext'
 import { useContext } from 'react'
 
 
 
 export default function Product() {
 
-  const { productdata } = useContext(DataContext);
+  const productdata = useGlobalState((state) => state.products)
+
 
   const products=productdata.map((product)=>{
     return(

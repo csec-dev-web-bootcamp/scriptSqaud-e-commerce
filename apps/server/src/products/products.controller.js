@@ -1,15 +1,15 @@
-import express from 'express';
-import { asyncHandler } from '../helpers/async-handler';
-import { authGuard } from '../auth/auth.guard';
-import { roleGuard } from '../auth/role.guard';
-import { createProductPipe, updateProductPipe } from './products.pipe';
+import express from "express";
+import { asyncHandler } from "../helpers/async-handler";
+import { authGuard } from "../auth/auth.guard";
+import { roleGuard } from "../auth/role.guard";
+import { createProductPipe, updateProductPipe } from "./products.pipe";
 import {
   createProduct,
   deleteProduct,
   getManyProducts,
   getOneProduct,
   updateProduct,
-} from './products.service';
+} from "./products.service";
 
 const productsController = express.Router();
 
@@ -17,7 +17,6 @@ productsController.get(
   '/',
   asyncHandler(async (req, res) => {
     const products = await getManyProducts();
-    console.log(products)
     return res.json(products);
   }),
 );
@@ -25,12 +24,12 @@ productsController.get(
 productsController.post(
   '/',
   authGuard,
-  roleGuard(['CUSTOMER', 'OWNER']),
+  roleGuard(['CUSTOMER', 'ADMIN']),
   createProductPipe,
   asyncHandler(async (req, res) => {
     const data = req.body;
-    const product = await createProduct(data);
-    return res.json(product);
+    const products = await createProduct(data);
+    return res.json(products);
   }),
 );
 
@@ -39,8 +38,8 @@ productsController.get(
   authGuard,
   asyncHandler(async (req, res) => {
     const { id } = req.params;
-    const product = await getOneProduct(id);
-    return res.json(product);
+    const products = await getOneProduct(id);
+    return res.json(products);
   }),
 );
 
@@ -50,8 +49,8 @@ productsController.put(
   asyncHandler(async (req, res) => {
     const data = req.body;
     const { id } = req.params;
-    const product = await updateProduct(id, data);
-    return res.json(product);
+    const products = await updateProduct(id, data);
+    return res.json(products);
   }),
 );
 
@@ -59,8 +58,8 @@ productsController.delete(
   '/:id',
   asyncHandler(async (req, res) => {
     const { id } = req.params;
-    const product = await deleteProduct(id);
-    return res.json(product);
+    const products = await deleteProduct(id);
+    return res.json(products);
   }),
 );
 

@@ -4,7 +4,7 @@ import Link from 'next/link'
 export default function Editcard(props) {
   return (
     <div className='editcard'> 
-         <img className='product_img_editcard' src={props.image} alt="" />
+         <img className='product_img_editcard' src={`/${props.image}`} alt="" />
          <div className='editcard_discriptions'>  
             <h3>Name: {props.name}</h3>
             <p><span>Price : </span>{props.price}$</p>
