@@ -1,5 +1,5 @@
 import express from "express";
-import { createCategoryPipe, updateCategoryPipe } from "./categories.pipe";
+// import { createCategoryPipe, updateCategoryPipe } from "./categories.pipe";
 import {
   createCategory,
   deleteCategory,
@@ -7,8 +7,6 @@ import {
   getOneCategory,
   updateCategory,
 } from "./categories.service";
-
-
 
 const categoriesController = express.Router();
 

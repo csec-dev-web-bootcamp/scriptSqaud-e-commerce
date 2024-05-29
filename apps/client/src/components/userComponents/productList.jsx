@@ -2,9 +2,13 @@
 import { useFilter } from "@app/client/data/filter";
 import ProductCard from "./productCard";
 import { useEffect } from "react";
+import { useGlobalState } from "@app/client/data/globalState";
 
 const ProductsPage = ({ products }) => {
-
+  const setProducts = useGlobalState((state) => state.setProducts);
+  useEffect(() => {
+    setProducts(products);
+  });
   return (
     <div className="   ">
       <h1 className="text-3xl text-pink-950 font-semibold p-10 ml-16 ">

@@ -22,6 +22,7 @@ export async function createUser(data) {
       password: hash,
       phone: data.phone,
       address: data.address,
+      role: data.role || "CUSTOMER",
     },
   });
 
