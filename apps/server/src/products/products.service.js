@@ -20,13 +20,25 @@ export async function createProduct(data) {
 }
 
 export async function getManyProducts(category, search) {
-  console.log({ category });
+  console.log({ category, search });
+
+  const whereClause = {
+    OR: [
+      { name: { contains: search, mode: "insensitive" } },
+      { description: { contains: search, mode: "insensitive" } },
+    ],
+  };
+
+  if (category) {
+    whereClause.category = {
+        id: category
+    };
+  }
+
   const products = await prisma.product.findMany({
-    where: {
-      category: category,
-      OR: [
-        { category: { contains: search, mode: "insensitive" } },
-      ],
+    where: whereClause,
+    include: {
+      category: true,
     },
   });
   return products;

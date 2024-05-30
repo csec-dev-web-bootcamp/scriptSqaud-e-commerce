@@ -1,5 +1,5 @@
 import express from "express";
-// import { createCategoryPipe, updateCategoryPipe } from "./categories.pipe";
+import { createCategoryPipe, updateCategoryPipe } from "./categories.pipe";
 import {
   createCategory,
   deleteCategory,
