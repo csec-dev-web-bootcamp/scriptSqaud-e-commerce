@@ -1,7 +1,7 @@
 import express from 'express';
 import { authGuard } from '../auth/auth.guard';
 import { asyncHandler } from '../helpers/async-handler';
-import { deleteUser, getOneUser,updateUser } from '../users/users.service';
+import { deleteUser, getOneUser,updateUser, findUserByName } from '../users/users.service';
 
 const usersController = express.Router();
 
@@ -58,4 +58,18 @@ usersController.delete(
     return res.json({ message: 'User deleted successfully' });
   }),
 );
+
+usersController.get(
+  "/search",
+  authGuard,
+  asyncHandler(async (req, res) => {
+    const { name } = req.query;
+    if (!name) {
+      return res.status(400).json({ error: "Name query parameter is required" });
+    }
+    const users = await findUserByName(name);
+    return res.json(users);
+  })
+);
+
 export default usersController;
