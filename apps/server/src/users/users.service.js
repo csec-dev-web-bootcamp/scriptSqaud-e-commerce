@@ -44,3 +44,25 @@ export async function deleteUser(id) {
 
   return { message: 'User deleted successfully' };
 }
+
+export async function findUserByName(name) {
+  const users = await prisma.user.findMany({
+    where: {
+      OR: [
+        {
+          firstName: {
+            contains: name,
+            mode: 'insensitive',
+          },
+        },
+        {
+          lastName: {
+            contains: name,
+            mode: 'insensitive',
+          },
+        },
+      ],
+    },
+  });
+  return users;
+}
