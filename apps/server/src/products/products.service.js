@@ -1,44 +1,76 @@
-import { HttpException } from '../constants/http-exception';
 import prisma from '../helpers/prisma-client';
 
 export async function createProduct(data) {
-  const product = await prisma.products.create({
-    data: data,
+  const { name, price, description, image, categoryId } = data;
+
+  const product = await prisma.product.create({
+    data: {
+      name,
+      price,
+      description,
+      image,
+      category: categoryId ? { connect: { id: categoryId } } : undefined,
+    },
+    include: {
+      category: true,
+    },
   });
+
   return product;
 }
 
-export async function getManyProducts(query) {
-  const products = await prisma.products.findMany();
+export async function getManyProducts(category, search) {
+  console.log({ category, search });
+
+  const whereClause = {
+    OR: [
+      { name: { contains: search, mode: "insensitive" } },
+      { description: { contains: search, mode: "insensitive" } },
+    ],
+  };
+
+  if (category) {
+    whereClause.category = {
+        id: category
+    };
+  }
+
+  const products = await prisma.product.findMany({
+    where: whereClause,
+    include: {
+      category: true,
+    },
+  });
   return products;
 }
 
 export async function getOneProduct(id) {
-  const product = await prisma.products.findFirst({ where: { id } });
-  if (!product) {
-    throw new HttpException('Product not found', 404);
-  }
+  const product = await prisma.product.findFirst({
+    where: { id },
+    include: {
+      category: true,
+    },
+  });
   return product;
 }
 
 export async function updateProduct(id, data) {
-  const productExist = await prisma.products.findFirst({ where: { id } });
-  if (!productExist) {
-    throw new HttpException('Product not found', 404);
-  }
-  const product = await prisma.products.update({
+  const product = await prisma.product.update({
     where: { id },
     data: data,
+    include: {
+      category: true,
+    },
   });
-
   return product;
 }
 
 export async function deleteProduct(id) {
-  const productExist = await prisma.products.findFirst({ where: { id } });
-  if (!productExist) {
-    throw new HttpException('Product not found', 404);
-  }
-  const product = await prisma.products.findFirst({ where: { id } });
+  const product = await prisma.product.delete({
+    where: { id },
+    include: {
+      category: true,
+    },
+  });
   return product;
 }

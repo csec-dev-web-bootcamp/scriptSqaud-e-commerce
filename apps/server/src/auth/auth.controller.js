@@ -1,7 +1,8 @@
 import express from "express";
 import { asyncHandler } from "../helpers/async-handler";
-import { createUser, loginUser } from "./auth.service";
+import { createUser, findUserById, loginUser } from "./auth.service";
 import generateJwtToken from "./jwt/generate-jwt-token";
+
 
 const authController = express.Router();
 
@@ -27,5 +28,4 @@ authController.post(
     return res.json({ user, token, message });
   })
 );
-
 export default authController;

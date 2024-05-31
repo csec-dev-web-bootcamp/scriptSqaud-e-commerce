@@ -10,9 +10,7 @@ import productsController from "./products/products.controller";
 import usersController from "./users/users.controller";
 import postsController from "./posts/posts.controller";
 import categoriesController from "./categories/categories.controller";
-
-import profileController from "./profile/profile.controller";
-import ordersController from "./order/orders.controller";
+import wishlistController from "./wishlist/wishlist.controller";
 
 
 const app = express();
@@ -33,8 +31,7 @@ app.use("/auth", authController);
 app.use("/products", productsController);
 app.use("/categories", categoriesController);
 app.use("/users", usersController);
-app.use("/profile", profileController);
-app.use("/orders", ordersController);
+app.use("/wishlist", wishlistController);
 
 
 app.all("*", (req, res) => {

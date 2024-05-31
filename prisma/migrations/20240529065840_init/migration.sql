@@ -11,6 +11,8 @@ CREATE TABLE "users" (
     "lastName" VARCHAR(100) NOT NULL,
     "email" TEXT NOT NULL,
     "password" VARCHAR(120) NOT NULL,
+    "phone" VARCHAR(50) NOT NULL,
+    "address" VARCHAR(100) NOT NULL,
     "role" "UserRole" NOT NULL DEFAULT 'customer',
     "blocked" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -21,13 +23,15 @@ CREATE TABLE "users" (
 );
 
 -- CreateTable
-CREATE TABLE "profile" (
+CREATE TABLE "products" (
     "id" TEXT NOT NULL,
-    "phone" TEXT NOT NULL,
-    "address" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "price" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "description" TEXT,
+    "image" VARCHAR(255) NOT NULL,
+    "categoryId" TEXT NOT NULL,
 
-    CONSTRAINT "profile_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "products_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -43,8 +47,8 @@ CREATE TABLE "orderItems" (
     "id" TEXT NOT NULL,
     "quantity" INTEGER NOT NULL DEFAULT 1,
     "totalPrice" DOUBLE PRECISION DEFAULT 0,
-    "orderId" TEXT,
     "productId" TEXT NOT NULL,
+    "orderId" TEXT,
 
     CONSTRAINT "orderItems_pkey" PRIMARY KEY ("id")
 );
@@ -52,10 +56,10 @@ CREATE TABLE "orderItems" (
 -- CreateTable
 CREATE TABLE "orders" (
     "id" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
     "paymentRef" VARCHAR(255),
     "totalPrice" DOUBLE PRECISION NOT NULL,
     "paymentStatus" "PaymentStatus" NOT NULL DEFAULT 'PENDING',
-    "userId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -63,40 +67,25 @@ CREATE TABLE "orders" (
 );
 
 -- CreateTable
-CREATE TABLE "products" (
-    "id" TEXT NOT NULL,
-    "name" VARCHAR(255) NOT NULL,
-    "price" DOUBLE PRECISION NOT NULL DEFAULT 0,
-    "description" TEXT,
-    "categoryId" TEXT,
-    "image" VARCHAR(255) NOT NULL,
+CREATE TABLE "Post" (
+    "id" SERIAL NOT NULL,
+    "title" TEXT NOT NULL,
+    "content" TEXT,
 
-    CONSTRAINT "products_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Post_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
--- CreateIndex
-CREATE UNIQUE INDEX "profile_id_key" ON "profile"("id");
-
--- CreateIndex
-CREATE UNIQUE INDEX "profile_phone_key" ON "profile"("phone");
-
--- CreateIndex
-CREATE UNIQUE INDEX "profile_userId_key" ON "profile"("userId");
-
 -- AddForeignKey
-ALTER TABLE "profile" ADD CONSTRAINT "profile_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "orderItems" ADD CONSTRAINT "orderItems_orderId_fkey" FOREIGN KEY ("orderId") REFERENCES "orders"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "products" ADD CONSTRAINT "products_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "categories"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "orderItems" ADD CONSTRAINT "orderItems_productId_fkey" FOREIGN KEY ("productId") REFERENCES "products"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "orders" ADD CONSTRAINT "orders_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "orderItems" ADD CONSTRAINT "orderItems_orderId_fkey" FOREIGN KEY ("orderId") REFERENCES "orders"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "products" ADD CONSTRAINT "products_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "categories"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "orders" ADD CONSTRAINT "orders_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

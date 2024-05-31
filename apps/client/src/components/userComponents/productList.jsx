@@ -7,6 +7,7 @@ import { useGlobalState } from "@app/client/data/globalState";
 
 const ProductsPage = ({ products }) => {
   const setProducts = useGlobalState((state) => state.setProducts);
+
   // const load = useCart((state) => state.loadCart)
 
   useEffect(() => {
@@ -16,6 +17,7 @@ const ProductsPage = ({ products }) => {
     //   load(cart)
     // }
     // handleLoad()
+
   });
   return (
     <div className="   ">

@@ -11,12 +11,14 @@ import {
   updateProduct,
 } from "./products.service";
 
+
 const productsController = express.Router();
 
 productsController.get(
   "/",
   asyncHandler(async (req, res) => {
-    const products = await getManyProducts();
+    const query = req.query;
+    const products = await getManyProducts(query.category, query.search ?? "");
     return res.json(products);
   })
 );
@@ -24,14 +26,13 @@ productsController.get(
 productsController.post(
   "/",
   authGuard,
-  roleGuard(["CUSTOMER", "ADMIN"]),
+  roleGuard(['CUSTOMER', 'ADMIN']),
   createProductPipe,
   asyncHandler(async (req, res) => {
     const data = req.body;
-    console.log({ data });
-    const product = await createProduct(data);
-    return res.json(product);
-  })
+    const products = await createProduct(data);
+    return res.json(products);
+  }),
 );
 
 productsController.get(
@@ -39,9 +40,9 @@ productsController.get(
 
   asyncHandler(async (req, res) => {
     const { id } = req.params;
-    const product = await getOneProduct(id);
-    return res.json(product);
-  })
+    const products = await getOneProduct(id);
+    return res.json(products);
+  }),
 );
 
 productsController.put(
@@ -49,20 +50,19 @@ productsController.put(
   updateProductPipe,
   asyncHandler(async (req, res) => {
     const data = req.body;
-
     const { id } = req.params;
-    const product = await updateProduct(id, data);
-    return res.json(product);
-  })
+    const products = await updateProduct(id, data);
+    return res.json(products);
+  }),
 );
 
 productsController.delete(
   "/:id",
   asyncHandler(async (req, res) => {
     const { id } = req.params;
-    const product = await deleteProduct(id);
-    return res.json(product);
-  })
+    const products = await deleteProduct(id);
+    return res.json(products);
+  }),
 );
 
 export default productsController;

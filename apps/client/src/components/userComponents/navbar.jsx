@@ -13,14 +13,21 @@ export default function NavBar({ session, categories }) {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const searchQuery = useGlobalState((state) => state.searchQuery);
   const setSearchQuery = useGlobalState((state) => state.setSearchQuery);
+
   const change = useCart((state) => state.wishListLength);
   const [length, setLength] = useState(0);
+
+  // const [searchQuery, setSearchQuery] = useState("")
+
   const route = useRouter();
   const toggleProfile = () => {
     setIsProfileOpen(!isProfileOpen);
   };
   const { isMutating, startMutation } = useMutation();
   const cartData = useCart((state) => state.cartProducts);
+
+  //const wishListData = useCart((state) => state.wishListProducts);
+
   function setSearch(e) {
     setSearchQuery(e.target.value);
   }
@@ -52,10 +59,12 @@ export default function NavBar({ session, categories }) {
           <select className=" bg-gray-200 text-gray-500 border-slate-200  text-base py-2 px-5   focus:outline-none">
             <option value="">All Category</option>
             {categories.map((data) => (
+
               <option key={data.id} value={data.id}>
                 {" "}
                 {data.name}
               </option>
+
             ))}
           </select>
           <button
