@@ -4,21 +4,51 @@ import { useCart } from "../../data/state";
 import StarRating from "./starRating";
 import { Button } from "../ui/button";
 import { FaRegHeart } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { addToWishList, getWishList } from "@app/client/data/wishHandler";
+import { addToCartList, reloadCart } from "@app/client/data/cartHandler";
 
 function ProductCard({ product, width }) {
-  const addToWishList = useCart((state) => state.addToWishList);
+  // const addToWishList = useCart((state) => state.addToWishList);
+  const addWishList = async (product) => await addToWishList(product);
+  const addCart = async (product) => await addToCartList(product);
   const addToCart = useCart((state) => state.addToCart);
   const removefromCart = useCart((state) => state.removeFromCart);
   const cartData = useCart((state) => state.cartProducts);
-  function setCart() {
+  const increaseWLength = useCart((state) => state.increaseLength);
+  const [clicked, setClicked] = useState(false)
+  
+
+  function setCart(product) {
     addToCart(product);
+    addCart(product);
+    setClicked((prev) => !prev)
+    
   }
   const [color, setColor] = useState(false);
-  function setAddToCart() {
+  useEffect(() => {
+    const handleColor = async () => {
+      const data = await getWishList();
+      if (data.find((data) => data.id === product.id)) {
+        setColor(true);
+      } else {
+        setColor(false);
+      }
+    };
+    handleColor();
+  }, []);
+  function setAddToWish() {
     setColor((prev) => !prev);
-    addToWishList(product);
+    increaseWLength();
+    addWishList(product);
   }
+  // useEffect(() => {
+  //   const reload = async() => {
+  //     console.log("I'm called")
+  //     await reloadCart(cartData)
+  //   }
+  //   reload()
+  // },[clicked])
   return (
     <div
       className={`group ${width} flex  flex-col  overflow-hidden hover:bg-gray-100  bg-[#fffbf5] shadow-md `}
@@ -42,9 +72,13 @@ function ProductCard({ product, width }) {
           </a>
           <Button
             className="bg-inherit hover:bg-inherit  rounded-r-md px-5 "
-            onClick={() => setAddToCart()}
+            onClick={() => setAddToWish()}
           >
-            <FaRegHeart color="black" size={20} fill={color && "red"} />
+            <FaRegHeart
+              color="black"
+              size={20}
+              fill={color ? "red" : undefined}
+            />
           </Button>
         </div>
         <div className=" mb-1 flex items-center justify-between">
@@ -62,7 +96,7 @@ function ProductCard({ product, width }) {
       <div className="flex  w-full justify-center items-center">
         {!cartData.find((data) => data.id === product.id) ? (
           <Button
-            onClick={() => setCart(product.id)}
+            onClick={() => setCart(product)}
             className="flex items-center justify-center   flex-grow rounded-md  bg-pink-950 px-1 py-2.5 text-center text-sm font-medium text-white hover:bg-pink-900 focus:outline-none"
           >
             Add to cart

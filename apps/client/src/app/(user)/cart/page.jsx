@@ -14,15 +14,30 @@ import {
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { reloadCart } from "@app/client/data/cartHandler";
 function Cart() {
+
   const cartData = useCart((state) => state.cartProducts);
   const addAmount = useCart((state) => state.addProductAmount);
   const minusAmount = useCart((state) => state.minusProductAmount);
   const removefromCart = useCart((state) => state.removeFromCart);
+  const [clicked, setClicked] = useState(false)
   const total = cartData
     .map((data) => data.price * data.amount)
     .reduce((total, val) => total + val, 0);
-
+  
+  
+  function handleOperation (e, product) {
+    
+    if (e.target.name === '-'){
+       minusAmount(product.id)
+    }
+    else {
+      addAmount(product)
+    }
+    setClicked((prev) => !prev)
+    
+  }
   return (
     <div className="container h-full ">
       <h1 className="text-5xl m-5 p-4 border-b border-b-slate-500">Cart</h1>
@@ -60,17 +75,19 @@ function Cart() {
 
               <div className=" ml-2 mr-10 flex flex-row justify-between items-center">
                 <button
+                name="-"
                   className="mr-3 text-gray-400 text-md"
-                  onClick={() => minusAmount(product.id)}
+                  onClick={(e) => handleOperation(e, product)}
                 >
                   -
                 </button>
                 <p className="text-lg  border px-5 py-2 rounded-lg font-semibold">
-                  {product.amount}
+                  {product.quantity}
                 </p>
                 <button
+                  name="+"
                   className="ml-3 text-gray-400 text-md"
-                  onClick={() => addAmount(product.id)}
+                  onClick={(e) => handleOperation(e, product)}
                 >
                   +
                 </button>
@@ -80,7 +97,7 @@ function Cart() {
               </p>
               <button
                 className="mx-5 text-xl"
-                onClick={() => removefromCart(product.id)}
+                onClick={(e) => removefromCart(product.id)}
               >
                 X
               </button>
@@ -127,7 +144,7 @@ function Cart() {
                     {data.price.toPrecision(4)}
                   </TableCell>
                   <TableCell className="text-right font-semibold text-slate-500">
-                    {data.amount * data.price}
+                    {data.quantity * data.price}
                   </TableCell>
                 </TableRow>
               ))}

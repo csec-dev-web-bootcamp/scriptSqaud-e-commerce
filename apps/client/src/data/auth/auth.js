@@ -48,4 +48,8 @@ export async function register(formData) {
 export async function deleteAuthentication() {
   const cookieStore = cookies();
   cookieStore.delete("accessToken");
+  cookieStore.delete("wishList");
+  cookieStore.delete("cartList");
+
+
 }

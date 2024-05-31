@@ -1,52 +1,29 @@
 import { create } from "zustand";
+const storage = window != null ? window.localStorage : localStorage;
 
 export const useCart = create((set) => ({
-  cartProducts: [],
-  wishListProducts: [],
-  
-  
-  addToWishList: (product) =>
+  cartProducts: storage.getItem("cartList"),
+  wishListLength: 0,
+
+  increaseLength: () =>
+    set((state) => {
+      console.log( { ...state, wishListLength: state.wishListLength + 1 })
+      return { ...state, wishListLength: state.wishListLength + 1 };
+    }),
+
+  addToCart: (product) =>
     set((state) => {
       const currentState = JSON.parse(JSON.stringify(state));
       const newProduct = {
         ...product,
         totalPrice: product.price,
         quantity: 1,
-      }
-      const inWishList = currentState.wishListProducts.find((data) => data.id == newProduct.id)
-      
-      if (!inWishList)
-        currentState.wishListProducts.push(newProduct);
-      else {
-        currentState.wishListProducts = currentState.wishListProducts.filter(
-          (data) => data.id !== product.id
-        )
-      }
-      return currentState;
-    }),
-
-  removeFromWishList: (id) =>
-    set((state) => {
-      const currentState = JSON.parse(JSON.stringify(state));
-
-      currentState.wishListProducts = currentState.wishListProducts.filter(
-        (product) => product.id !== id
+      };
+      const inCartProduct = currentState.cartProducts.find(
+        (data) => data.id == newProduct.id
       );
 
-      return currentState;
-    }),
-    addToCart: (product) =>
-    set((state) => {
-      const currentState = JSON.parse(JSON.stringify(state));
-      const newProduct = {
-        ...product,
-        totalPrice: product.price,
-        quantity: 1,
-      }
-      const inCartProduct = currentState.cartProducts.find((data) => data.id == newProduct.id)
-      
-      if (!inCartProduct)
-        currentState.cartProducts.push(newProduct);
+      if (!inCartProduct) currentState.cartProducts.push(newProduct);
 
       return currentState;
     }),
@@ -78,6 +55,11 @@ export const useCart = create((set) => ({
 
       return currentState;
     }),
+  loadCart: (cart) => set((state) => {
+    const currentState = JSON.parse(JSON.stringify(state));
+
+    return {...currentState, cartProducts: cart}
+  }),
 
   minusProductAmount: (id) =>
     set((state) => {
