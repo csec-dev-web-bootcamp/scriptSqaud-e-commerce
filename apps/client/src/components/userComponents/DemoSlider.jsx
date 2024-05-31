@@ -29,7 +29,7 @@ const Carousel = ({ data }) => {
   }, [data.length]);
 
   return (
-    <div className="relative p-16 ">
+    <div className="relative  ">
       {/* Carousel container */}
       <div className="relative   w-full  overflow-hidden " style={{"height": "35rem"}}>
         {/* Image container */}

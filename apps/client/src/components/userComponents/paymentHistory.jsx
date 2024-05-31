@@ -37,7 +37,7 @@ const PaymentHistory = ({ paymentData }) => {
 
   return (
     <div className="p-6 bg-gray-100">
-      <h2 className="text-2xl font-semibold mb-6">Payment History</h2>
+      <h2 className="text-2xl font-semibold mb-6">Order History</h2>
       <div className="mb-6 flex flex-col sm:flex-row gap-4">
         <input
           type="text"
@@ -57,7 +57,7 @@ const PaymentHistory = ({ paymentData }) => {
           onChange={(e) => setFilterStatus(e.target.value)}
           className="border border-gray-300 p-2 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
-          <option value="">All Statuses</option>
+          <option value="">Status</option>
           <option value="completed">Completed</option>
           <option value="pending">Pending</option>
           <option value="failed">Failed</option>
@@ -67,7 +67,7 @@ const PaymentHistory = ({ paymentData }) => {
           onChange={(e) => setFilterPaymentMethod(e.target.value)}
           className="border border-gray-300 p-2 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
-          <option value="">All Payment Methods</option>
+          <option value="">All Orders</option>
           <option value="credit_card">Credit Card</option>
           <option value="paypal">PayPal</option>
           <option value="bank_transfer">Bank Transfer</option>
