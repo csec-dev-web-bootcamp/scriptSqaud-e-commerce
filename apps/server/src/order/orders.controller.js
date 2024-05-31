@@ -8,8 +8,20 @@ import { asyncHandler } from "../helpers/async-handler.js";
 import { v4 as uuidv4 } from "uuid";
 import request from "request";
 import "dotenv/config";
+import { getAllOrders } from "./orders.service";
 
 const ordersController = express.Router();
+
+ordersController.get(
+  "/",
+  authGuard,
+
+  asyncHandler(async (req, res) => {
+    const query = req.query;
+    const orders = await getAllOrders();
+    return res.json(orders);
+  })
+);
 
 ordersController.post(
   "",
@@ -24,12 +36,6 @@ ordersController.post(
       console.log();
       return res.status(400).json({ message: "User ID is required" });
     }
-
-    // const order = await createOrder({
-    //   orderItems: data.orderItems,
-    //   paymentRef: tx_ref,
-    //   userId: user.id,
-    // });
     const secretKey = process.env.CHAPA_SECRET_KEY;
     console.log(user);
     console.log(data);
