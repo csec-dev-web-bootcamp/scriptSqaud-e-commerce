@@ -12,7 +12,7 @@ async function UserLayout({ children }) {
   const categories  = await getManyCategories()
   console.log("The category", categories)
   return (
-    <div className="m-0 bg-[#fffbf5]">
+    <div className="  min-h-screen m-0">
       <NavBar session={user} categories={categories} />
       <main>{children}</main>
       <Footer />

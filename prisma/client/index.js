@@ -194,7 +194,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "D:\\scriptSqaud-e-commerce\\prisma\\client",
+      "value": "C:\\Users\\8\\Desktop\\scriptSquad-e-commerce\\scriptSqaud-e-commerce\\prisma\\client",
       "fromEnvVar": null
     },
     "config": {
@@ -221,6 +221,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
