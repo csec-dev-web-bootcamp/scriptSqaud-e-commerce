@@ -194,7 +194,9 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\8\\Desktop\\scriptSquad-e-commerce\\scriptSqaud-e-commerce\\prisma\\client",
+
+      "value": "C:\\Users\\Admin\\Documents\\code\\bootcamp\\scriptSqaud-e-commerce\\prisma\\client",
+
       "fromEnvVar": null
     },
     "config": {

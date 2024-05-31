@@ -8,11 +8,23 @@ import { asyncHandler } from "../helpers/async-handler.js";
 import { v4 as uuidv4 } from "uuid";
 import request from "request";
 import "dotenv/config";
+import { getAllOrders } from "./orders.service";
 
 const ordersController = express.Router();
 
+ordersController.get(
+  "/",
+  authGuard,
+
+  asyncHandler(async (req, res) => {
+    
+    const orders = await getAllOrders();
+    return res.json(orders);
+  })
+);
+
 ordersController.post(
-  "",
+  "/",
   authGuard,
   // createOrderPipe,
   asyncHandler(async (req, res) => {
@@ -21,17 +33,12 @@ ordersController.post(
     const tx_ref = uuidv4();
 
     if (!user.id) {
-      console.log();
+      console.log("user id required");
       return res.status(400).json({ message: "User ID is required" });
     }
-
-    // const order = await createOrder({
-    //   orderItems: data.orderItems,
-    //   paymentRef: tx_ref,
-    //   userId: user.id,
-    // });
     const secretKey = process.env.CHAPA_SECRET_KEY;
     console.log(user);
+    console.log(data);
 
     try {
       const order = await createOrder({
@@ -99,6 +106,7 @@ export async function createOrder(data) {
       },
     },
   };
+  console.log(order)
 
   let order = await prisma.order.create({
     data: orderData,

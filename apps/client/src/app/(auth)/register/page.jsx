@@ -15,7 +15,7 @@ import {
   FormMessage,
 } from "@app/client/components/ui/form";
 import { Input } from "@app/client/components/ui/input";
-import Image from "next/image";
+
 import { register } from "@app/client/data/auth/auth";
 import { useRouter } from "next/navigation";
 import useMutation from "@app/client/hooks/use-mutation";

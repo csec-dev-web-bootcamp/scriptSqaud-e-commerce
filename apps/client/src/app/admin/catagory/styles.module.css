@@ -39,7 +39,7 @@
 }
 
 .products .add::after {
-  content: "ADD PRODUCTS";
+  content: "ADD CATAGORY";
   display: none; /* Initially hide the content */
 }
 

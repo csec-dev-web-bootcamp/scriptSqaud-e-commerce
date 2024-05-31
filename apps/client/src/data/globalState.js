@@ -17,11 +17,11 @@ export const useGlobalState = create((set) => ({
       return { ...state, products };
     }),
   setCatagories: (categories) =>
-    set(() => {
+    set((state) => {
       return { ...state, categories };
     }),
   setUsers: (users) =>
-    set(() => {
+    set((state) => {
       return { ...state, users };
     }),
 }));
