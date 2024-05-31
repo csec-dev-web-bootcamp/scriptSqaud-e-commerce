@@ -16,28 +16,26 @@ import Link from "next/link";
 import Image from "next/image";
 import { reloadCart } from "@app/client/data/cartHandler";
 function Cart() {
-
   const cartData = useCart((state) => state.cartProducts);
   const addAmount = useCart((state) => state.addProductAmount);
   const minusAmount = useCart((state) => state.minusProductAmount);
   const removefromCart = useCart((state) => state.removeFromCart);
-  const [clicked, setClicked] = useState(false)
+  const [clicked, setClicked] = useState(false);
   const total = cartData
     .map((data) => data.price * data.amount)
     .reduce((total, val) => total + val, 0);
-  
-  
-  function handleOperation (e, product) {
-    
-    if (e.target.name === '-'){
-       minusAmount(product.id)
-    }
-    else {
-      addAmount(product)
-    }
-    setClicked((prev) => !prev)
-    
-  }
+
+  // function handleOperation (e, product) {
+
+  //   if (e.target.name === '-'){
+  //      minusAmount(product.id)
+  //   }
+  //   else {
+  //     addAmount(product)
+  //   }
+  //   setClicked((prev) => !prev)
+
+  // }
   return (
     <div className="container h-full ">
       <h1 className="text-5xl m-5 p-4 border-b border-b-slate-500">Cart</h1>
@@ -75,9 +73,10 @@ function Cart() {
 
               <div className=" ml-2 mr-10 flex flex-row justify-between items-center">
                 <button
-                name="-"
+                  name="-"
                   className="mr-3 text-gray-400 text-md"
-                  onClick={(e) => handleOperation(e, product)}
+                  // onClick={(e) => handleOperation(e, product)}
+                  onClick={() => minusAmount(product.id)}
                 >
                   -
                 </button>
@@ -87,7 +86,8 @@ function Cart() {
                 <button
                   name="+"
                   className="ml-3 text-gray-400 text-md"
-                  onClick={(e) => handleOperation(e, product)}
+                  // onClick={(e) => handleOperation(e, product)}
+                  onClick={() => addAmount(product.id)}
                 >
                   +
                 </button>

@@ -6,24 +6,22 @@ import { Button } from "../ui/button";
 import { FaRegHeart } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { addToWishList, getWishList } from "@app/client/data/wishHandler";
-import { addToCartList, reloadCart } from "@app/client/data/cartHandler";
+// import { addToCartList, reloadCart } from "@app/client/data/cartHandler";
 
 function ProductCard({ product, width }) {
   // const addToWishList = useCart((state) => state.addToWishList);
   const addWishList = async (product) => await addToWishList(product);
-  const addCart = async (product) => await addToCartList(product);
+  // const addCart = async (product) => await addToCartList(product);
   const addToCart = useCart((state) => state.addToCart);
   const removefromCart = useCart((state) => state.removeFromCart);
   const cartData = useCart((state) => state.cartProducts);
   const increaseWLength = useCart((state) => state.increaseLength);
-  const [clicked, setClicked] = useState(false)
-  
+  const [clicked, setClicked] = useState(false);
 
   function setCart(product) {
     addToCart(product);
-    addCart(product);
-    setClicked((prev) => !prev)
-    
+    // addCart(product);
+    setClicked((prev) => !prev);
   }
   const [color, setColor] = useState(false);
   useEffect(() => {

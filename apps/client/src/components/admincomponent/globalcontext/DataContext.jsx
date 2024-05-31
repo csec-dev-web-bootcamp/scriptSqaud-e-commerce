@@ -6,7 +6,7 @@ import { useEffect } from "react";
 
 export const DataProvider = ({ products, categories }) => {
   const globalState = useGlobalState();
-  useEffectt(() => {
+  useEffect(() => {
     globalState.setProducts(products);
     globalState.setCatagories(categories);
   }, [products]);

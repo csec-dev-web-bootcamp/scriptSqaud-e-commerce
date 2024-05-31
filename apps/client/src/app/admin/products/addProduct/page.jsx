@@ -2,11 +2,10 @@
 
 import { useRouter } from "next/navigation";
 import React, { useContext, useState } from "react";
-import DataContext, {
-  useGlobalState,
-} from "@app/client/components/admincomponent/globalcontext/DataContext";
+
 import EditcardModified from "@app/client/components/admincomponent/editcardmodified/editcardmod";
 import { createProduct } from "@app/client/data/product.data";
+import { useGlobalState } from "@app/client/data/globalState";
 
 export default function AddProduct() {
   const [formData, setFormData] = useState({
@@ -15,38 +14,25 @@ export default function AddProduct() {
     prize: "",
     quantity: "",
     image: "",
-    preview: "",
   });
 
   const router = useRouter();
-  // const { productdata, updateproductData } = useContext(DataContext);
   const productdata = useGlobalState((state) => state.products);
   const updateproductData = useGlobalState((state) => state.setProducts);
 
   const handleSubmit = async (event) => {
-      event.preventDefault();
+    event.preventDefault();
 
-      const newProductData = {
-        name: formData.name,
-        price: parseFloat(formData.prize),
-        description: formData.description,
-        quantity: formData.quantity,
-      };
+    const newProductData = {
+      name: formData.name,
+      price: parseFloat(formData.prize),
+      description: formData.description,
+      quantity: formData.quantity,
+      image: formData.image,
+    };
 
-      await createProduct(newProductData);
-      router.back();
-   
-  };
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setFormData({
-        ...formData,
-        image: file,
-        preview: URL.createObjectURL(file),
-      });
-    }
+    await createProduct(newProductData);
+    router.back();
   };
 
   return (
@@ -100,14 +86,20 @@ export default function AddProduct() {
           </div>
           <div>
             <label htmlFor="image">Product Image :</label>
-            <input type="file" name="image" onChange={handleImageChange} />
+            <input
+              type="text"
+              name="image"
+              onChange={(e) =>
+                setFormData({ ...formData, image: e.target.value })
+              }
+            />
           </div>
           <button type="submit">Add Product</button>
         </form>
         <EditcardModified
           name={formData.name}
           price={formData.prize}
-          image={formData.preview}
+          image={formData.image}
           description={formData.description}
         />
       </div>

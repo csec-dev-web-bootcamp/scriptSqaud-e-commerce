@@ -21,9 +21,8 @@ export default function EditProduct() {
       const foundproduct = productdata.find((o) => o.id.toString() === id);
       setFormData({
         name: foundproduct?.name,
-        // description: foundproduct.description,
-        // image: foundproduct.image,
-        // preview: "",
+        description: foundproduct.description,
+        image: foundproduct.image,
       });
     }
   }, [id]);
@@ -36,25 +35,13 @@ export default function EditProduct() {
 
     const newProductData = {
       name: formData.name,
-      price: formData.prize,
       description: formData.description,
-      quantity: formData.quantity,
+      image: formData.image,
     };
 
     const updatedProductData = [...productdata, newProductData];
     updateproductData(updatedProductData);
     router.back();
-  };
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setFormData({
-        ...formData,
-        image: file,
-        preview: URL.createObjectURL(file),
-      });
-    }
   };
 
   return (
@@ -63,7 +50,7 @@ export default function EditProduct() {
       <div className="from_product">
         <form className="form" onSubmit={handleSubmit} action="">
           <div>
-            <label htmlFor="name">Name of Product :</label>
+            <label htmlFor="name">Name of Catagory :</label>
             <input
               type="text"
               name="name"
@@ -87,14 +74,20 @@ export default function EditProduct() {
           </div>
 
           <div>
-            <label htmlFor="image">Product Image :</label>
-            <input type="file" name="image" onChange={handleImageChange} />
+            <label htmlFor="image">Catagory Image :</label>
+            <input
+              type="file"
+              name="image"
+              onChange={(e) =>
+                setFormData({ ...formData, image: e.target.value })
+              }
+            />
           </div>
           <button type="submit">Edit Catagory</button>
         </form>
         <EditCatagoryModified
           name={formData.name}
-          image={formData.preview}
+          image={formData.image}
           description={formData.description}
         />
       </div>

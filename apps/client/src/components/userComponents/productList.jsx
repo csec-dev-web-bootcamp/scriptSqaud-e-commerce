@@ -2,21 +2,21 @@
 import ProductCard from "./productCard";
 import { useEffect } from "react";
 import { useGlobalState } from "@app/client/data/globalState";
-import { useCart } from "@app/client/data/state";
-import { getcartList } from "@app/client/data/cartHandler";
+// import { useCart } from "@app/client/data/state";
+// import { getcartList } from "@app/client/data/cartHandler";
 
 const ProductsPage = ({ products }) => {
-  const setProducts = useGlobalState((state) => state.setProducts)
-  const load = useCart((state) => state.loadCart)
+  const setProducts = useGlobalState((state) => state.setProducts);
+  // const load = useCart((state) => state.loadCart)
 
-  useEffect(()=> {
-    setProducts(products)
-    const handleLoad = async () => {
-      const cart = await getcartList()
-      load(cart)
-    }
-    handleLoad()
-  })
+  useEffect(() => {
+    setProducts(products);
+    // const handleLoad = async () => {
+    //   const cart = await getcartList()
+    //   load(cart)
+    // }
+    // handleLoad()
+  });
   return (
     <div className="   ">
       <h1 className="text-3xl text-pink-950 font-semibold p-10 ml-16 ">

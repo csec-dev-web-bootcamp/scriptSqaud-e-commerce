@@ -1,80 +1,65 @@
 import { create } from "zustand";
-const storage = window != null ? window.localStorage : localStorage;
+import { persist, createJSONStorage } from "zustand/middleware";
 
-export const useCart = create((set) => ({
-  cartProducts: storage.getItem("cartList"),
-  wishListLength: 0,
+export const useCart = create(
+  persist(
+    (set, get) => ({
+      cartProducts: [],
+      wishListLength: 0,
 
-  increaseLength: () =>
-    set((state) => {
-      console.log( { ...state, wishListLength: state.wishListLength + 1 })
-      return { ...state, wishListLength: state.wishListLength + 1 };
+      increaseLength: () => set({ wishListLength: get().wishListLength + 1 }),
+
+      addToCart: (product) => {
+        const cp = get().cartProducts;
+        const cartProducts = [...cp];
+        const existingProduct = cartProducts.find((e) => e.id === product.id);
+        if (existingProduct) {
+          existingProduct.quantity++;
+          existingProduct.totalPrice =
+            existingProduct.quantity * existingProduct.price;
+        } else {
+          product.quantity = 1;
+          cartProducts.push(product);
+        }
+        set({ cartProducts });
+      },
+
+      removeFromCart: (id) => {
+        const cp = get().cartProducts;
+        const cartProducts = [...cp];
+        const newCartProducts = cartProducts.filter((e) => e.id !== id);
+        set({ cartProducts: newCartProducts });
+      },
+      // set
+      addProductAmount: (id) => {
+        const cp = get().cartProducts;
+        const cartProducts = [...cp];
+        const existingProduct = cartProducts.find((e) => e.id === id);
+        if (existingProduct) {
+          existingProduct.quantity = Math.max(existingProduct.quantity + 1, 1);
+          existingProduct.totalPrice =
+            existingProduct.quantity * existingProduct.price;
+          set({ cartProducts });
+        }
+      },
+
+      minusProductAmount: (id) => {
+        const cp = get().cartProducts;
+        const cartProducts = [...cp];
+        const existingProduct = cartProducts.find((e) => e.id === id);
+        if (existingProduct) {
+          existingProduct.quantity = Math.max(existingProduct.quantity - 1, 1);
+          existingProduct.totalPrice =
+            existingProduct.quantity * existingProduct.price;
+
+          console.log("exis", existingProduct, "cart", cartProducts);
+          set({ cartProducts });
+        }
+      },
     }),
-
-  addToCart: (product) =>
-    set((state) => {
-      const currentState = JSON.parse(JSON.stringify(state));
-      const newProduct = {
-        ...product,
-        totalPrice: product.price,
-        quantity: 1,
-      };
-      const inCartProduct = currentState.cartProducts.find(
-        (data) => data.id == newProduct.id
-      );
-
-      if (!inCartProduct) currentState.cartProducts.push(newProduct);
-
-      return currentState;
-    }),
-
-  removeFromCart: (id) =>
-    set((state) => {
-      const currentState = JSON.parse(JSON.stringify(state));
-
-      currentState.cartProducts = currentState.cartProducts.filter(
-        (product) => product.id !== id
-      );
-
-      return currentState;
-    }),
-
-  addProductAmount: (id) =>
-    set((state) => {
-      const currentState = JSON.parse(JSON.stringify(state));
-
-      currentState.cartProducts = currentState.cartProducts.map((product) =>
-        product.id === id
-          ? {
-              ...product,
-              quantity: product.quantity + 1,
-              totalPrice: product.price * (product.quantity + 1),
-            }
-          : product
-      );
-
-      return currentState;
-    }),
-  loadCart: (cart) => set((state) => {
-    const currentState = JSON.parse(JSON.stringify(state));
-
-    return {...currentState, cartProducts: cart}
-  }),
-
-  minusProductAmount: (id) =>
-    set((state) => {
-      const currentState = JSON.parse(JSON.stringify(state));
-
-      currentState.cartProducts = currentState.cartProducts.map((product) =>
-        product.id === id && product.quantity > 1
-          ? {
-              ...product,
-              quantity: product.quantity - 1,
-              totalPrice: product.price * (product.quantity - 1),
-            }
-          : product
-      );
-
-      return currentState;
-    }),
-}));
+    {
+      name: "cart-storage",
+      storage: createJSONStorage(() => sessionStorage),
+    }
+  )
+);

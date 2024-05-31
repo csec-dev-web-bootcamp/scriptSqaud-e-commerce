@@ -2,8 +2,8 @@
 
 import './styles.css'
 import Editcard from '@app/client/components/admincomponent/editCard/editcard'
+import { useGlobalState } from '@app/client/data/globalState'
 import Link from 'next/link'
-import DataContext, { useGlobalState } from '@app/client/components/admincomponent/globalcontext/DataContext'
 import { useContext } from 'react'
 
 
