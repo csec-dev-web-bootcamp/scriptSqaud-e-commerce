@@ -2,17 +2,38 @@
 import { useCart } from "@app/client/data/state";
 import { BsCartPlus } from "react-icons/bs";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {
+  addToWishList,
+  getWishList,
+  removeFromWishList,
+} from "@app/client/data/wishHandler";
 
 function WishList() {
-  const wishListData = useCart((state) => state.wishListProducts);
+  // const wishListData = useCart((state) => state.wishListProducts);
+  const [wishListData, setWishListData] = useState([]);
+  useEffect(() => {
+    const fetchWishListData = async () => {
+      try {
+        const data = await getWishList();
+        console.log("Fetched wish list:", data);
+        setWishListData(data);
+      } catch (error) {
+        console.error("Error fetching wish list data:", error);
+      }
+    };
+
+    fetchWishListData();
+  }, []);
+
   const [color, setColor] = useState(false);
-  const removeFromWishList = useCart((state) => state.removeFromWishList);
-  const total = wishListData.length
+  // const removeFromWishList = useCart((state) => state.removeFromWishList);
+  const removeWishList = () => removeFromWishList();
+  const total = wishListData.length;
   const addToCart = useCart((state) => state.addToCart);
 
   function setCart(product) {
-    setColor((prev) => !prev)
+    setColor((prev) => !prev);
     addToCart(product);
   }
 
@@ -22,7 +43,9 @@ function WishList() {
         Wishlist
       </h1>
       <div className="h-screen">
-        {total > 0 ? (<div> you have { total } items in your wish list</div>) : (
+        {total > 0 ? (
+          <div> you have {total} items in your wish list</div>
+        ) : (
           <div className="text-lg p-4 m-5">
             You have no items in your wish list
           </div>
@@ -51,10 +74,14 @@ function WishList() {
               <p className=" font-sans font-semibold text-lg  text-gray-700 dark:text-gray-400">
                 ${product.price}
               </p>
-              <BsCartPlus size={24} color={color && "red"} onClick={() => setCart(product)}/>
+              <BsCartPlus
+                size={24}
+                color={color ? "red" : undefined}
+                onClick={() => setCart(product)}
+              />
               <button
                 className="mr-16 text-xl "
-                onClick={() => removeFromWishList(product.id)}
+                onClick={() => removeWishList(product.id)}
               >
                 X
               </button>

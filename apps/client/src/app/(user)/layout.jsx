@@ -10,7 +10,7 @@ import { getUser } from "@app/client/data/user.data";
 async function UserLayout({ children }) {
   const user = await getUser();
   const categories  = await getManyCategories()
-  console.log("The category", categories)
+  
   return (
     <div className="m-0 bg-[#fffbf5]">
       <NavBar session={user} categories={categories} />

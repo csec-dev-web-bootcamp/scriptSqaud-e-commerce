@@ -1,99 +1,122 @@
 import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
 
-export const useCart = create((set) => ({
-  cartProducts: [],
-  wishListProducts: [],
 
-  addToWishList: (product) =>
-    set((state) => {
-      const currentState = JSON.parse(JSON.stringify(state));
-      const newProduct = {
-        ...product,
-        totalPrice: product.price,
-        amount: 1,
-      };
-      const inWishList = currentState.wishListProducts.find(
-        (data) => data.id == newProduct.id
-      );
+export const useCart = create(
+  persist(
+    (set, get) => ({
+      cartProducts: [],
+      wishListLength: 0,
 
-      if (!inWishList) currentState.wishListProducts.push(newProduct);
-      else {
-        currentState.wishListProducts = currentState.wishListProducts.filter(
-          (data) => data.id !== product.id
-        );
-      }
-      return currentState;
+// export const useCart = create((set) => ({
+//   cartProducts: [],
+//   wishListProducts: [],
+
+//   addToWishList: (product) =>
+//     set((state) => {
+//       const currentState = JSON.parse(JSON.stringify(state));
+//       const newProduct = {
+//         ...product,
+//         totalPrice: product.price,
+//         amount: 1,
+//       };
+//       const inWishList = currentState.wishListProducts.find(
+//         (data) => data.id == newProduct.id
+//       );
+
+//       if (!inWishList) currentState.wishListProducts.push(newProduct);
+//       else {
+//         currentState.wishListProducts = currentState.wishListProducts.filter(
+//           (data) => data.id !== product.id
+//         );
+//       }
+//       return currentState;
+//     }),
+
+//   removeFromWishList: (id) =>
+//     set((state) => {
+//       const currentState = JSON.parse(JSON.stringify(state));
+
+//       currentState.wishListProducts = currentState.wishListProducts.filter(
+//         (product) => product.id !== id
+//       );
+
+//       return currentState;
+//     }),
+//   addToCart: (product) =>
+//     set((state) => {
+//       const currentState = JSON.parse(JSON.stringify(state));
+//       const newProduct = {
+//         ...product,
+//         totalPrice: product.price,
+//         amount: 1,
+//       };
+//       const inCartProduct = currentState.cartProducts.find(
+//         (data) => data.id == newProduct.id
+//       );
+
+//       if (!inCartProduct) currentState.cartProducts.push(newProduct);
+
+//       return currentState;
+//     }),
+
+
+      increaseLength: () => set({ wishListLength: get().wishListLength + 1 }),
+
+      addToCart: (product) => {
+        const cp = get().cartProducts;
+        const cartProducts = [...cp];
+        const existingProduct = cartProducts.find((e) => e.id === product.id);
+        if (existingProduct) {
+          existingProduct.quantity++;
+          existingProduct.totalPrice =
+            existingProduct.quantity * existingProduct.price;
+        } else {
+          product.quantity = 1;
+          cartProducts.push(product);
+        }
+        set({ cartProducts });
+      },
+
+      removeFromCart: (id) => {
+        const cp = get().cartProducts;
+        const cartProducts = [...cp];
+        const newCartProducts = cartProducts.filter((e) => e.id !== id);
+        set({ cartProducts: newCartProducts });
+      },
+      // set
+      addProductAmount: (id) => {
+        const cp = get().cartProducts;
+        const cartProducts = [...cp];
+        const existingProduct = cartProducts.find((e) => e.id === id);
+        if (existingProduct) {
+          existingProduct.quantity = Math.max(existingProduct.quantity + 1, 1);
+          existingProduct.totalPrice =
+            existingProduct.quantity * existingProduct.price;
+          set({ cartProducts });
+        }
+      },
+
+      minusProductAmount: (id) => {
+        const cp = get().cartProducts;
+        const cartProducts = [...cp];
+        const existingProduct = cartProducts.find((e) => e.id === id);
+        if (existingProduct) {
+          existingProduct.quantity = Math.max(existingProduct.quantity - 1, 1);
+          existingProduct.totalPrice =
+            existingProduct.quantity * existingProduct.price;
+
+          console.log("exis", existingProduct, "cart", cartProducts);
+          set({ cartProducts });
+        }
+      },
     }),
 
-  removeFromWishList: (id) =>
-    set((state) => {
-      const currentState = JSON.parse(JSON.stringify(state));
+    {
+      name: "cart-storage",
+      storage: createJSONStorage(() => sessionStorage),
+    }
+  )
+);
 
-      currentState.wishListProducts = currentState.wishListProducts.filter(
-        (product) => product.id !== id
-      );
-
-      return currentState;
-    }),
-  addToCart: (product) =>
-    set((state) => {
-      const currentState = JSON.parse(JSON.stringify(state));
-      const newProduct = {
-        ...product,
-        totalPrice: product.price,
-        amount: 1,
-      };
-      const inCartProduct = currentState.cartProducts.find(
-        (data) => data.id == newProduct.id
-      );
-
-      if (!inCartProduct) currentState.cartProducts.push(newProduct);
-
-      return currentState;
-    }),
-
-  removeFromCart: (id) =>
-    set((state) => {
-      const currentState = JSON.parse(JSON.stringify(state));
-
-      currentState.cartProducts = currentState.cartProducts.filter(
-        (product) => product.id !== id
-      );
-
-      return currentState;
-    }),
-
-  addProductAmount: (id) =>
-    set((state) => {
-      const currentState = JSON.parse(JSON.stringify(state));
-
-      currentState.cartProducts = currentState.cartProducts.map((product) =>
-        product.id === id
-          ? {
-              ...product,
-              amount: product.amount + 1,
-              totalPrice: product.price * (product.amount + 1),
-            }
-          : product
-      );
-
-      return currentState;
-    }),
-
-  minusProductAmount: (id) =>
-    set((state) => {
-      const currentState = JSON.parse(JSON.stringify(state));
-
-      currentState.cartProducts = currentState.cartProducts.map((product) =>
-        product.id === id && product.amount > 1
-          ? {
-              ...product,
-              amount: product.amount - 1,
-              totalPrice: product.price * (product.amount - 1),
-            }
-          : product
-      );
-
-      return currentState;
-    }),
-}));
+// }));

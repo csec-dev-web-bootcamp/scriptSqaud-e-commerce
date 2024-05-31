@@ -11,7 +11,7 @@ const StarRating = ({keys}) => {
         const ratingValue =  i + 1;
 
         return (
-          <label key={keys}>
+          <label key={keys + i}>
             
             <CiStar
               

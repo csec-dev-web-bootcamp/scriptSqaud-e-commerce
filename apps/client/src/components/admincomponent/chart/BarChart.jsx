@@ -1,16 +1,26 @@
-"use client"
-import React from 'react';
-import { Bar } from 'react-chartjs-2';
-import { Chart, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js/auto';
+"use client";
+import React from "react";
+import { Bar } from "react-chartjs-2";
+import {
+  Chart,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js/auto";
 
 Chart.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const OrdersBarChart = ({ orders }) => {
   // Group the orders by week of the month and calculate the total amount for each week
-    const ordersByWeek = orders.reduce((acc, order) => {
+  const ordersByWeek = orders.reduce((acc, order) => {
     const date = new Date(order.order_date);
     const weekOfMonth = Math.ceil((date.getDate() + 6 - date.getDay()) / 7);
-    const monthYear = `${date.toLocaleString('default', { month: 'short' })} ${date.getFullYear()}`;
+    const monthYear = `${date.toLocaleString("default", {
+      month: "short",
+    })} ${date.getFullYear()}`;
     const label = `Week ${weekOfMonth} (${monthYear})`;
 
     if (!acc[label]) {
@@ -26,17 +36,21 @@ const OrdersBarChart = ({ orders }) => {
     labels: Object.keys(ordersByWeek).reverse(),
     datasets: [
       {
-        label: 'Total Amount',
-        data: Object.values(ordersByWeek).map((order) => order.totalAmount).reverse(),
-        backgroundColor: '#f1a80b',
-        borderColor: 'black',
+        label: "Total Amount",
+        data: Object.values(ordersByWeek)
+          .map((order) => order.totalAmount)
+          .reverse(),
+        backgroundColor: "#f1a80b",
+        borderColor: "black",
         borderWidth: 1,
       },
       {
-        label: 'Order Count',
-        data: Object.values(ordersByWeek).map((order) => order.count).reverse(),
-        backgroundColor: 'red',
-        borderColor: 'black',
+        label: "Order Count",
+        data: Object.values(ordersByWeek)
+          .map((order) => order.count)
+          .reverse(),
+        backgroundColor: "red",
+        borderColor: "black",
         borderWidth: 1,
       },
     ],
@@ -63,7 +77,7 @@ const OrdersBarChart = ({ orders }) => {
     plugins: {
       title: {
         display: true,
-        text: 'Sales/Revenue Metrics',
+        text: "Sales/Revenue Metrics",
         font: {
           size: 16, // Increase the font size for the chart title
         },

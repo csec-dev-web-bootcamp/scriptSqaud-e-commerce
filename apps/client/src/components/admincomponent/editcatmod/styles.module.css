@@ -46,6 +46,7 @@
   font-size: 15px;
   border-radius: 8px;
   border: none;
+  background-color: rgb(255, 255, 255);
 }
 .editcard-btn-container button:hover {
   cursor: pointer;

@@ -2,10 +2,10 @@ POST   http://localhost:8000/auth/register
 Content-Type: application/json
  
 {
-    "firstName": "admin",
-    "lastName": "admin",
-    "email": "adminn@gmail.com",
-    "password":"tarikuuuu",
+    "firstName": "nihanf",
+    "lastName": "nihan",
+    "email": "nihanf@gmail.com",
+    "password":"123456",
     "role": "ADMIN"
 }
 ###
@@ -15,17 +15,17 @@ GET http://localhost:8000/category
 
 ### Create Order
 POST http://localhost:8000/orders
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5OTAxODExYS0xODk4LTQ1OGMtOWE2Yi04NDlmYTNkZjk5YTciLCJyb2xlIjoiQ1VTVE9NRVIiLCJpYXQiOjE3MTY1NjI4NTMsImV4cCI6MTcxNjY0OTI1M30.OzcE5dxVsZdRYZS0lVapK9cE5OaA_ijKqjqFy3nS938
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0MmQzOWQxYS1jOGM0LTRkOGEtOTUwOC0yMjQyNDQ5ZDMxOTAiLCJyb2xlIjoiQ1VTVE9NRVIiLCJpYXQiOjE3MTcwMDg5MjcsImV4cCI6MTcxNzA5NTMyN30.2OaKs7TPVViWS74pNUGsxGyCOZbUiyDBzydI_Uo8PdU
 Content-Type: application/json
 
 {
   "orderItems": [
     {
-      "productId": "product-456",
+      "productId": "1",
       "quantity": 2
     },
     {
-      "productId": "product-789",
+      "productId": "2",
       "quantity": 1
     }
   ]
@@ -37,8 +37,8 @@ Content-Type: application/json
  
 {
     
-    "email": "waquma@gmail.com",
-    "password":"12345678"
+    "email": "nihann@gmail.com",
+    "password":"tarikuuuu"
 }
 ### 
 PUT    http://localhost:8000/products/7
@@ -65,9 +65,24 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNWFiY
 }
 
 ###
-GET http://localhost:8000/products/1
+GET http://localhost:8000/products
 
 ###
 GET http://localhost:8000/users/me
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwNDZmZWEzZC1iMWU0LTRmNTQtOTk2Ny1hMzhlNDc2OGI1YTQiLCJyb2xlIjoiQ1VTVE9NRVIiLCJpYXQiOjE3MTY1NTIxNDcsImV4cCI6MTcxNjYzODU0N30.VgnA8Jgqzv8WA5UKN331PM590TNgfT-L9bVcMbrnX_c
 
+###
+POST http://localhost:8000/orders
+Content-Type: application/json
+Authorization: Barear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGRmNzBkMi03ZDA3LTQ1MzEtYWE1Mi0xYzhjYjU5ZDc3MDUiLCJyb2xlIjoiQ1VTVE9NRVIiLCJpYXQiOjE3MTY5OTMzMDAsImV4cCI6MTcxNzA3OTcwMH0.ZG_nGs1AROQq7RPya1WDAkKTriuWVt-jA6IbXDSBT68
+
+{
+    
+  "orderItems": [
+    {
+      "productId": "6ee9d1fc-f9e7-424b-b516-2afb433e3ea0",
+      "quantity": 2
+    }
+    
+  ]
+}

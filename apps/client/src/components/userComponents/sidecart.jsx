@@ -11,20 +11,29 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "../ui/sheet";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
+import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { useCart } from "../../data/state";
 import { FaCartShopping } from "react-icons/fa6";
 import Link from "next/link";
 
 export default function SideCart() {
+  // const loadCart = useCart((state) => state.loadCart);
+  // useEffect(() => {
+  //   const fetchCartListData = async () => {
+  //     try {
+  //       const data = await getcartList();
+  //       console.log(data)
+  //       loadCart(data)
+  //     } catch (error) {
+  //       console.error("Error fetching Cart list data:", error);
+  //     }
+  //   };
+
+  //   fetchCartListData();
+  // }, []);
+
   const cartData = useCart((state) => state.cartProducts);
+  console.log("cartData", cartData);
   const removeFromCart = useCart((state) => state.removeFromCart);
   function delCart(id) {
     removeFromCart(id);
@@ -42,30 +51,43 @@ export default function SideCart() {
           <SheetTitle className="text-4xl border-b-2 border-b-slate-950 py-5">
             Cart
           </SheetTitle>
-          <SheetDescription className=" mb-10 text-base border-b-2 border-b-black p-3">You have {cartData.length} item{cartData.length > 0 ? "s" : ""} in your cart</SheetDescription>
+          <SheetDescription className=" mb-10 text-base border-b-2 border-b-black p-3">
+            You have {cartData.length} item{cartData.length > 0 ? "s" : ""} in
+            your cart
+          </SheetDescription>
         </SheetHeader>
-        {cartData?.map((product) => (
-          <div key={product.id}>
-            <Card className="flex mt-10 border-b-2 pb-4 border-b-pink-950 shadow-xl bg-[#fff2de] flex-row overflow-y-auto w-full">
-              <CardHeader className="flex flex-row">
-                <img className="w-20 h-20 rounded-sm" src={product.image} alt="" />
-                <div className="flex flex-col px-4">
-                  <div className="flex flex-row items-center justify-between w-full">
-                    <CardTitle className="text-base">{product.name}</CardTitle>
-                    <button
-                      onClick={() => delCart(product.id)}
-                      className=" ml-36  mt-1"
-                    >
-                      X
-                    </button>
+        {cartData.map((product) => {
+          return (
+            <div key={product.id}>
+              <Card className="flex mt-10 border-b-2 pb-4 border-b-pink-950 shadow-xl bg-[#fff2de] flex-row overflow-y-auto w-full">
+                <CardHeader className="flex flex-row">
+                  <img
+                    className="w-20 h-20 rounded-sm"
+                    src={product.image}
+                    alt=""
+                  />
+                  <div className="flex flex-col px-4">
+                    <div className="flex flex-row items-center justify-between w-full">
+                      <CardTitle className="text-base">
+                        {product.name}
+                      </CardTitle>
+                      <button
+                        onClick={() => delCart(product.id)}
+                        className=" ml-36  mt-1"
+                      >
+                        X
+                      </button>
+                    </div>
+                    <CardDescription className="text-sm">
+                      {product.description}
+                    </CardDescription>
+                    <p className="text-xs">{product.price}</p>
                   </div>
-                  <CardDescription className="text-sm">{product.description}</CardDescription>
-                  <p className="text-xs">{product.price}</p>
-                </div>
-              </CardHeader>
-            </Card>
-          </div>
-        ))}
+                </CardHeader>
+              </Card>
+            </div>
+          );
+        })}
 
         <SheetFooter>
           <div className="flex flex-col items-center w-full m-5">
