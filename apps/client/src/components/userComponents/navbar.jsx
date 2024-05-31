@@ -42,9 +42,9 @@ export default function NavBar({ session, categories }) {
     handleFavorite();
   }, [change]);
   return (
-    <nav className=" flex flex-col top-0 bg-slate-50 m-0 items-center  justify-between ">
-      <div className="flex flex-row justify-between  bg-orange-50 items-center w-full py-3">
-        <div className="font-extrabold text-pink-950 font-openSans text-xl mx-10">
+    <nav className=" fixed top-0 left-0  z-50 min-w-full flex flex-col  justify-between ">
+      <div className="flex flex-row justify-between  m-0 bg-orange-50 items-center w-full ">
+        <div className="font-extrabold text-pink-950 font-openSans text-xl ">
           <Link href="/dashboard">SSECOMMERCE</Link>
         </div>
         <div className=" flex items-center justify-center   ">
