@@ -3,20 +3,24 @@ import styles from "./styles.module.css";
 import Link from "next/link";
 import CatagoryCard from "@app/client/components/admincomponent/catagorycard/catagoryCard";
 
-import { useContext } from "react";
-import { useGlobalState } from "@app/client/data/globalState";
+import {  useEffect, useState } from "react";
+import { getManyCategories } from "@app/client/data/catagory.data";
 
 export default function Catagory() {
-  // const { categoryData } = useContext(DataContext);
-  const categoryData = useGlobalState((state) => state.categories);
-  console.log(categoryData);
-  const products = categoryData.map((catagory) => {
+  const [categoryData, setCategoryData] = useState([])
+  useEffect(() => {
+    const categoryHandler = async () => {
+      const categories  = await getManyCategories()
+      setCategoryData(categories)
+    }
+    categoryHandler()
+  })
+ 
+  const products = categoryData?.map((catagory) => {
     return (
       <CatagoryCard
         id={catagory.id}
-        // image={catagory.image}
         name={catagory.name}
-        // discription={catagory.description}
       />
     );
   });

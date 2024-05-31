@@ -6,6 +6,8 @@ Content-Type: application/json
     "lastName": "nihan",
     "email": "nihanf@gmail.com",
     "password":"123456",
+    "phone": "09684679",
+    "address": "some city",
     "role": "ADMIN"
 }
 ###
@@ -37,8 +39,8 @@ Content-Type: application/json
  
 {
     
-    "email": "nihann@gmail.com",
-    "password":"tarikuuuu"
+    "email": "nihanf@gmail.com",
+    "password":"123456"
 }
 ### 
 PUT    http://localhost:8000/products/7
