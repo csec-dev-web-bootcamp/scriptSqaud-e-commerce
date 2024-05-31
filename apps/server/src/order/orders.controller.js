@@ -17,29 +17,25 @@ ordersController.get(
   authGuard,
 
   asyncHandler(async (req, res) => {
-    const query = req.query;
+    
     const orders = await getAllOrders();
     return res.json(orders);
   })
 );
 
 ordersController.post(
-  "",
+  "/",
   authGuard,
-  // createOrderPipe,
+  
   asyncHandler(async (req, res) => {
     const user = req.user;
     const data = req.body;
     const tx_ref = uuidv4();
-
+    console.log(data)
     if (!user.id) {
-      console.log();
       return res.status(400).json({ message: "User ID is required" });
     }
-    const secretKey = process.env.CHAPA_SECRET_KEY;
-    console.log(user);
-    console.log(data);
-
+    const secretKey = process.env.CHAPA_SECRET_KEY; 
     try {
       const order = await createOrder({
         orderItems: data,
@@ -72,15 +68,12 @@ ordersController.post(
 
       request(options, function (error, response, body) {
         if (error) {
-          console.error(error);
+          
           return res
             .status(500)
             .json({ message: "Payment initialization failed" });
         }
-
         const responseData = JSON.parse(body);
-        console.log(responseData);
-
         return res.json(responseData);
       });
     } catch (error) {
@@ -90,7 +83,7 @@ ordersController.post(
 );
 
 export async function createOrder(data) {
-  console.log("this ", data);
+  
   const orderData = {
     paymentRef: data.paymentRef,
     totalPrice: 0,
@@ -106,6 +99,7 @@ export async function createOrder(data) {
       },
     },
   };
+  
 
   let order = await prisma.order.create({
     data: orderData,
@@ -122,7 +116,7 @@ export async function createOrder(data) {
   order.orderItems.forEach((item) => {
     totalPrice += item.product.price * item.quantity;
   });
-  console.log("this is total price" + totalPrice);
+  
 
   order = await prisma.order.update({
     where: { id: order.id },

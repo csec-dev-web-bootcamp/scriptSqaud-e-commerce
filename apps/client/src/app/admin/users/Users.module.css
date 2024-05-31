@@ -1,7 +1,7 @@
 .users_table {
   padding-top: 120px;
   margin-left: 200px;
-  width: 950px;
+  width: 550px;
 }
 .name_header {
   background-color: white;
@@ -37,9 +37,9 @@
   display: flex;
 }
 .users_table {
-  padding-top: 120px;
+  padding: 10rem, 50rem;
   margin-left: 200px;
-  width: 950px;
+  width: 45rem;
 }
 
 .search_users,
@@ -75,6 +75,8 @@
 .users_table .table > p {
   width: 130px;
   overflow: hidden;
+  
+
 }
 
 .table .small {

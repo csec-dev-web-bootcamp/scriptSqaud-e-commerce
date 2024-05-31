@@ -1,5 +1,4 @@
 "use client"
-import Image from 'next/image'
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -30,7 +29,7 @@ const Carousel = ({ data }) => {
   }, [data.length]);
 
   return (
-    <div className="relative m-0 ">
+    <div className="relative  ">
       {/* Carousel container */}
       <div className="relative   w-full  overflow-hidden " style={{"height": "35rem"}}>
         {/* Image container */}

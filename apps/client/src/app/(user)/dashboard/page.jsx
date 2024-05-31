@@ -4,7 +4,7 @@ import Carousel from "../../../components/userComponents/DemoSlider";
 import Image from "next/image";
 
 const products = await getManyProducts();
-
+console.log(products)
 export default function Page() {
   return (
     <main className="">

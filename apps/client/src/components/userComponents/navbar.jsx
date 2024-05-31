@@ -42,9 +42,9 @@ export default function NavBar({ session, categories }) {
     handleFavorite();
   }, [change]);
   return (
-    <nav className=" flex flex-col top-0 bg-slate-50 m-0 items-center  justify-between ">
-      <div className="flex flex-row justify-between  bg-orange-50 items-center w-full py-3">
-        <div className="font-extrabold text-pink-950 font-openSans text-xl mx-10">
+    <nav className="  z-50 min-w-full flex flex-col  justify-between ">
+      <div className="flex flex-row justify-between p-3 m-0 bg-orange-50 items-center w-full ">
+        <div className="font-extrabold text-pink-950 font-openSans text-xl ">
           <Link href="/dashboard">SSECOMMERCE</Link>
         </div>
         <div className=" flex items-center justify-center   ">
@@ -59,12 +59,10 @@ export default function NavBar({ session, categories }) {
           <select className=" bg-gray-200 text-gray-500 border-slate-200  text-base py-2 px-5   focus:outline-none">
             <option value="">All Category</option>
             {categories.map((data) => (
-
               <option key={data.id} value={data.id}>
                 {" "}
                 {data.name}
               </option>
-
             ))}
           </select>
           <button
@@ -80,13 +78,15 @@ export default function NavBar({ session, categories }) {
             onMouseLeave={toggleProfile}
             className=" flex flex-col items-center justify-center cursor-pointer"
           >
-            <Profile user={session} />
+            <Link href="/profile">
+              <Profile user={session} />
+            </Link>
           </li>
 
           <li className=" flex flex-col items-center justify-center cursor-pointer">
             <SideCart />
             {cartData && (
-              <div className="absolute top-4 right-14 w-3 h-3 p-[0.4rem] rounded-full flex items-center justify-center bg-pink-800 text-white text-xs">
+              <div className="absolute top-4 right-16 w-3 h-3 p-[0.4rem] rounded-full flex items-center justify-center bg-pink-800 text-white text-xs">
                 {cartData.length}
               </div>
             )}
@@ -95,7 +95,7 @@ export default function NavBar({ session, categories }) {
             <Link href="/wishlist">
               <img src="/like.png" alt="user" className="h-[1.4rem]" />
             </Link>
-            <div className="absolute top-4 right-4 w-3 h-3 p-[0.4rem] rounded-full flex items-center justify-center bg-pink-800 text-white text-xs">
+            <div className="absolute top-4 right-6 w-3 h-3 p-[0.4rem] rounded-full flex items-center justify-center bg-pink-800 text-white text-xs">
               {length}
             </div>
           </li>
@@ -145,7 +145,7 @@ export default function NavBar({ session, categories }) {
           </div>
         ) : (
           <button
-            className="text-white font-semibold =text-base p-4 hover:text-white hover:bg-slate-900 transition"
+            className="text-white font-semibold =text-base px-6 hover:text-white hover:bg-slate-900 transition"
             onClick={() =>
               startMutation(async () => {
                 await deleteAuthentication();
