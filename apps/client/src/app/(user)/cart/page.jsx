@@ -22,7 +22,7 @@ function Cart() {
   const removefromCart = useCart((state) => state.removeFromCart);
   const [clicked, setClicked] = useState(false);
   const total = cartData
-    .map((data) => data.price * data.amount)
+    .map((data) => data.price * data.quantity)
     .reduce((total, val) => total + val, 0);
 
   // function handleOperation (e, product) {

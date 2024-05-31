@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 function CheckOutForm({ user }) {
+  const clearCart = useCart((state) => state.clearCart)
   const { isMutating, startMutation } = useMutation();
   const cartData = useCart((state) => state.cartProducts);
   const route = useRouter()
@@ -19,6 +20,7 @@ function CheckOutForm({ user }) {
       quantity,
     }));
     startMutation(async () => {
+      console.log("The data", newData)
       const res = await makeOrder(newData);
       console.log({ res });
       if (res.error) {
@@ -28,6 +30,7 @@ function CheckOutForm({ user }) {
       route.push(res.data.checkout_url);
       
     });
+    clearCart()
   }
   return (
     <div className="mt-10 px-4 pt-8 lg:mt-0">
@@ -36,7 +39,7 @@ function CheckOutForm({ user }) {
         Complete your order by providing your payment details.
       </p>
       <div className=" ">
-        <label for="email" className="mt-4 mb-2 block text-sm font-medium">
+        <label htmlFor="email" className="mt-4 mb-2 block text-sm font-medium">
           Email
         </label>
         <div className="flex flex-row border-b-2 border-b-gray-200 items-center">
@@ -51,7 +54,7 @@ function CheckOutForm({ user }) {
             disabled
           />
         </div>
-        <label for="fullName" className="mt-4 mb-2 block text-sm font-medium">
+        <label htmlFor="fullName" className="mt-4 mb-2 block text-sm font-medium">
           Full Name
         </label>
         <div className="flex flex-row items-center border-b-2 border-gray-200 ">
@@ -73,7 +76,7 @@ function CheckOutForm({ user }) {
         </div>
 
         <label
-          for="billing-address"
+          htmlFor="billing-address"
           className="mt-4 mb-2 block text-sm font-medium"
         >
           Billing Address
