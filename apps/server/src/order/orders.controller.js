@@ -17,14 +17,14 @@ ordersController.get(
   authGuard,
 
   asyncHandler(async (req, res) => {
-    const query = req.query;
+    
     const orders = await getAllOrders();
     return res.json(orders);
   })
 );
 
 ordersController.post(
-  "",
+  "/",
   authGuard,
   // createOrderPipe,
   asyncHandler(async (req, res) => {
@@ -33,7 +33,7 @@ ordersController.post(
     const tx_ref = uuidv4();
 
     if (!user.id) {
-      console.log();
+      console.log("user id required");
       return res.status(400).json({ message: "User ID is required" });
     }
     const secretKey = process.env.CHAPA_SECRET_KEY;
@@ -42,7 +42,7 @@ ordersController.post(
 
     try {
       const order = await createOrder({
-        orderItems: data,
+        orderItems: data.orderItems,
         paymentRef: tx_ref,
         userId: user.id,
       });
@@ -106,6 +106,7 @@ export async function createOrder(data) {
       },
     },
   };
+  console.log(order)
 
   let order = await prisma.order.create({
     data: orderData,

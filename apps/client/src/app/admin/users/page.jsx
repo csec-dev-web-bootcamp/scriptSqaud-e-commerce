@@ -1,19 +1,34 @@
 "use client";
 import User from "@app/client/components/admincomponent/user/user";
 import { UserData } from "@app/client/data/admindata/userdata";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Users.module.css";
+import { getUsers } from "@app/client/data/user.data";
 
 export default function Users() {
-  const [Users, setUsers] = useState(UserData);
+  const [Users, setUsers] = useState([]);
   const [searchVal, setSearchVal] = useState("");
-
+  useEffect(() => {
+    const usersFetcher = async () => {
+      const users = await getUsers()
+      console.log(users)
+      const modifiedUser = users.map((data) => ({
+        id: data.id,
+        fullname: `${data.firstName} ${data.lastName}`,
+        email: data.email,
+        phone: data.phone,
+        createdAt: data.createdAt
+      }))
+      setUsers(modifiedUser)
+    }
+    usersFetcher()
+  },[])
   function handleSearchClick() {
     if (searchVal === "") {
       setUsers(UserData);
       return;
     }
-    const filterBySearch = UserData.filter((item) => {
+    const filterBySearch = UserData?.filter((item) => {
       if (item.fullname.toLowerCase().includes(searchVal.toLowerCase())) {
         return item;
       }
@@ -21,7 +36,7 @@ export default function Users() {
     setUsers(filterBySearch);
   }
 
-  const users = Users.map((user) => {
+  const users = Users?.map((user) => {
     return (
       <User
         key={user.id}
@@ -53,11 +68,11 @@ export default function Users() {
         <div className={styles.table}>
           <div className={styles.users_information_contatiner_light}>
             <p className={styles.small}>Number</p>
-            <p>User Name</p>
+            
             <p>Full Name</p>
             <p>Email Address</p>
             <p>Phone Number</p>
-            <p>Total Spending</p>
+            
           </div>
           {users}
         </div>

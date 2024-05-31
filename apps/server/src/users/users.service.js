@@ -1,6 +1,11 @@
 import { HttpException } from '../constants/http-exception';
 import prisma from '../helpers/prisma-client';
 
+export async function getUsers() {
+  const users = await prisma.user.findMany()
+  return users
+}
+
 export async function getOneUser(id) {
   const user = await prisma.user.findFirst({ where: { id } });
   return user;
